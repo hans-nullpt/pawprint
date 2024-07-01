@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B3BB2F22C2D4DBB00488386 /* DrawingCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3BB2F12C2D4DBB00488386 /* DrawingCanvasView.swift */; };
+		4B3BB2F42C2D4E1D00488386 /* DrawingCanvasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3BB2F32C2D4E1D00488386 /* DrawingCanvasViewController.swift */; };
 		E763DBA12C2AFEF80087EA5B /* pawprintApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E763DBA02C2AFEF80087EA5B /* pawprintApp.swift */; };
 		E763DBA32C2AFEF80087EA5B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E763DBA22C2AFEF80087EA5B /* ContentView.swift */; };
 		E763DBA52C2AFEF90087EA5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E763DBA42C2AFEF90087EA5B /* Assets.xcassets */; };
@@ -14,6 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4B3BB2F12C2D4DBB00488386 /* DrawingCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingCanvasView.swift; sourceTree = "<group>"; };
+		4B3BB2F32C2D4E1D00488386 /* DrawingCanvasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingCanvasViewController.swift; sourceTree = "<group>"; };
 		E763DB9D2C2AFEF70087EA5B /* pawprint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pawprint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E763DBA02C2AFEF80087EA5B /* pawprintApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pawprintApp.swift; sourceTree = "<group>"; };
 		E763DBA22C2AFEF80087EA5B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -32,6 +36,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4B3BB2EE2C2D4D5700488386 /* PracticeView */ = {
+			isa = PBXGroup;
+			children = (
+				4B3BB2F12C2D4DBB00488386 /* DrawingCanvasView.swift */,
+				4B3BB2F32C2D4E1D00488386 /* DrawingCanvasViewController.swift */,
+			);
+			path = PracticeView;
+			sourceTree = "<group>";
+		};
 		E763DB942C2AFEF70087EA5B = {
 			isa = PBXGroup;
 			children = (
@@ -51,6 +64,7 @@
 		E763DB9F2C2AFEF70087EA5B /* pawprint */ = {
 			isa = PBXGroup;
 			children = (
+				4B3BB2EE2C2D4D5700488386 /* PracticeView */,
 				E763DBA02C2AFEF80087EA5B /* pawprintApp.swift */,
 				E763DBA22C2AFEF80087EA5B /* ContentView.swift */,
 				E763DBA42C2AFEF90087EA5B /* Assets.xcassets */,
@@ -138,7 +152,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E763DBA32C2AFEF80087EA5B /* ContentView.swift in Sources */,
+				4B3BB2F42C2D4E1D00488386 /* DrawingCanvasViewController.swift in Sources */,
 				E763DBA12C2AFEF80087EA5B /* pawprintApp.swift in Sources */,
+				4B3BB2F22C2D4DBB00488386 /* DrawingCanvasView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
