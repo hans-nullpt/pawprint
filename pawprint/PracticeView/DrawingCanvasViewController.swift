@@ -9,6 +9,8 @@ import SwiftUI
 import PencilKit
 
 class DrawingCanvasViewController: UIViewController {
+    let imgRect = CGRect(x: 0, y: 0, width: 400.0, height: 100.0)
+    
     lazy var canvas: PKCanvasView = {
         let view = PKCanvasView()
         view.drawingPolicy = .pencilOnly
@@ -25,7 +27,7 @@ class DrawingCanvasViewController: UIViewController {
     }()
     
     var drawingData = Data()
-    var drawingChanged: (Data) -> Void = {_ in}
+    var drawingChanged: (Data, UIImage) -> Void = {_,_ in}
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +48,7 @@ class DrawingCanvasViewController: UIViewController {
 //        canvas.delegate = context.coordinator
         canvas.becomeFirstResponder()
         
-//        let imageView = UIImageView(image: UIImage(named: "canvas-bg"))
+//        let imageView = UIImageView(image: UIImage(named: "logo"))
 //
 //        let subView = self.canvas.subviews[0]
 //            subView.addSubview(imageView)
@@ -61,7 +63,7 @@ class DrawingCanvasViewController: UIViewController {
 
 extension DrawingCanvasViewController:PKToolPickerObserver, PKCanvasViewDelegate{
     func canvasViewDrawingDidChange(_ canvasView: PKCanvasView) {
-        drawingChanged(canvasView.drawing.dataRepresentation())
+        drawingChanged(canvasView.drawing.dataRepresentation(), canvas.drawing.image(from: imgRect, scale: 1.0))
     }
 }
 

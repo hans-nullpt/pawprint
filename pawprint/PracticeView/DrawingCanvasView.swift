@@ -24,7 +24,9 @@ struct DrawingCanvasView: UIViewControllerRepresentable {
         viewController.drawingData = data
         
         ///SAVE DATA WITH COREDATA
-//        viewController.drawingChanged = {data in
+        viewController.drawingChanged = {data, image in
+            print("check data", data)
+            print("check image", image)
 //            let request: NSFetchRequest<Drawing> = Drawing.fetchRequest()
 //            let predicate = NSPredicate(format: "id == %@", id as CVarArg)
 //            request.predicate = predicate
@@ -42,7 +44,7 @@ struct DrawingCanvasView: UIViewControllerRepresentable {
 //            catch{
 //                print(error)
 //            }
-//        }
+        }
         return viewController
     }
 }
