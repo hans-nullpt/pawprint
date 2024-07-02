@@ -12,6 +12,8 @@
 		79C2A1D42C330CAB007D16D3 /* FirstOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C2A1D32C330CAB007D16D3 /* FirstOnboarding.swift */; };
 		79C2A1D62C330D43007D16D3 /* SecondOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C2A1D52C330D43007D16D3 /* SecondOnboarding.swift */; };
 		79C2A1D82C330D65007D16D3 /* ThirdOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C2A1D72C330D65007D16D3 /* ThirdOnboarding.swift */; };
+		E75D61E32C33E5D30067A9E3 /* PreviewCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75D61E22C33E5D30067A9E3 /* PreviewCameraView.swift */; };
+		E75D61E52C33EE690067A9E3 /* CustomCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75D61E42C33EE690067A9E3 /* CustomCameraView.swift */; };
 		79EF2A312C33EE6400B35FA2 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF2A302C33EE6400B35FA2 /* HomeView.swift */; };
 		E763DBA12C2AFEF80087EA5B /* pawprintApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E763DBA02C2AFEF80087EA5B /* pawprintApp.swift */; };
 		E763DBA32C2AFEF80087EA5B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E763DBA22C2AFEF80087EA5B /* ContentView.swift */; };
@@ -21,6 +23,8 @@
 		E7B00C532C328E3A00FAEF87 /* WordResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C522C328E3A00FAEF87 /* WordResult.swift */; };
 		E7B00C552C328EF800FAEF87 /* WhiteboardAssessmentResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C542C328EF800FAEF87 /* WhiteboardAssessmentResultView.swift */; };
 		E7B00C582C3293B500FAEF87 /* PawPrintButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C572C3293B500FAEF87 /* PawPrintButtonStyle.swift */; };
+		E7B00C5A2C33E11000FAEF87 /* WhiteboardCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C592C33E11000FAEF87 /* WhiteboardCameraView.swift */; };
+		E7B00C5D2C33E36900FAEF87 /* CameraHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C5C2C33E36900FAEF87 /* CameraHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +33,8 @@
 		79C2A1D32C330CAB007D16D3 /* FirstOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstOnboarding.swift; sourceTree = "<group>"; };
 		79C2A1D52C330D43007D16D3 /* SecondOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondOnboarding.swift; sourceTree = "<group>"; };
 		79C2A1D72C330D65007D16D3 /* ThirdOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdOnboarding.swift; sourceTree = "<group>"; };
+		E75D61E22C33E5D30067A9E3 /* PreviewCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewCameraView.swift; sourceTree = "<group>"; };
+		E75D61E42C33EE690067A9E3 /* CustomCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCameraView.swift; sourceTree = "<group>"; };
 		79EF2A302C33EE6400B35FA2 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		E763DB9D2C2AFEF70087EA5B /* pawprint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pawprint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E763DBA02C2AFEF80087EA5B /* pawprintApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pawprintApp.swift; sourceTree = "<group>"; };
@@ -39,6 +45,8 @@
 		E7B00C522C328E3A00FAEF87 /* WordResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordResult.swift; sourceTree = "<group>"; };
 		E7B00C542C328EF800FAEF87 /* WhiteboardAssessmentResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteboardAssessmentResultView.swift; sourceTree = "<group>"; };
 		E7B00C572C3293B500FAEF87 /* PawPrintButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawPrintButtonStyle.swift; sourceTree = "<group>"; };
+		E7B00C592C33E11000FAEF87 /* WhiteboardCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteboardCameraView.swift; sourceTree = "<group>"; };
+		E7B00C5C2C33E36900FAEF87 /* CameraHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +79,7 @@
 		E763DB9F2C2AFEF70087EA5B /* pawprint */ = {
 			isa = PBXGroup;
 			children = (
+				E7B00C5B2C33E35600FAEF87 /* Handlers */,
 				E7B00C4F2C328DDA00FAEF87 /* Views */,
 				E7B00C4E2C328DBE00FAEF87 /* Models */,
 				E7B00C4D2C328DA400FAEF87 /* ViewModels */,
@@ -111,8 +120,10 @@
 			children = (
 				E7B00C562C3293A300FAEF87 /* Components */,
 				E7B00C542C328EF800FAEF87 /* WhiteboardAssessmentResultView.swift */,
+				E7B00C592C33E11000FAEF87 /* WhiteboardCameraView.swift */,
 				7960B39C2C32605300F32B06 /* OnBoardingView.swift */,
 				7960B3962C32591E00F32B06 /* SplashView.swift */,
+				E75D61E42C33EE690067A9E3 /* CustomCameraView.swift */,
 				79EF2A302C33EE6400B35FA2 /* HomeView.swift */,
 			);
 			path = Views;
@@ -125,8 +136,17 @@
 				79C2A1D52C330D43007D16D3 /* SecondOnboarding.swift */,
 				79C2A1D72C330D65007D16D3 /* ThirdOnboarding.swift */,
 				E7B00C572C3293B500FAEF87 /* PawPrintButtonStyle.swift */,
+				E75D61E22C33E5D30067A9E3 /* PreviewCameraView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		E7B00C5B2C33E35600FAEF87 /* Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				E7B00C5C2C33E36900FAEF87 /* CameraHandler.swift */,
+			);
+			path = Handlers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,11 +219,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7B00C5A2C33E11000FAEF87 /* WhiteboardCameraView.swift in Sources */,
+				E75D61E52C33EE690067A9E3 /* CustomCameraView.swift in Sources */,
+				E75D61E32C33E5D30067A9E3 /* PreviewCameraView.swift in Sources */,
 				79C2A1D82C330D65007D16D3 /* ThirdOnboarding.swift in Sources */,
 				E7B00C582C3293B500FAEF87 /* PawPrintButtonStyle.swift in Sources */,
 				E7B00C512C328DF900FAEF87 /* WhiteboardAnalyzeResultViewModel.swift in Sources */,
 				E763DBA32C2AFEF80087EA5B /* ContentView.swift in Sources */,
 				E7B00C532C328E3A00FAEF87 /* WordResult.swift in Sources */,
+				E7B00C5D2C33E36900FAEF87 /* CameraHandler.swift in Sources */,
 				E7B00C552C328EF800FAEF87 /* WhiteboardAssessmentResultView.swift in Sources */,
 				79C2A1D42C330CAB007D16D3 /* FirstOnboarding.swift in Sources */,
 				79C2A1D62C330D43007D16D3 /* SecondOnboarding.swift in Sources */,
@@ -344,13 +368,15 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"pawprint/Preview Content\"";
-				DEVELOPMENT_TEAM = WHG3N2U8WV;
+				DEVELOPMENT_TEAM = 57BYB3NG56;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) need access to use camera";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationLandscapeRight;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -376,13 +402,15 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"pawprint/Preview Content\"";
-				DEVELOPMENT_TEAM = WHG3N2U8WV;
+				DEVELOPMENT_TEAM = 57BYB3NG56;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) need access to use camera";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationLandscapeRight;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

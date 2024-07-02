@@ -11,7 +11,8 @@ import SwiftUI
 struct pawprintApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CustomCameraView()
+                .environmentObject(WhiteboardAnalyzeResultViewModel())
         }
     }
 }
