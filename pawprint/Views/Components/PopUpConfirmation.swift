@@ -11,10 +11,12 @@ struct PopUpConfirmation<Content: View>: View {
     let message: String
     let showCloseButton: Bool
     let content: () -> Content
+    @Binding var isPresented: Bool
     
-    init(message: String, showCloseButton: Bool = false, @ViewBuilder content: @escaping () -> Content) {
+    init(message: String, showCloseButton: Bool = false, isPresented: Binding<Bool>, @ViewBuilder content: @escaping () -> Content) {
         self.message = message
         self.showCloseButton = showCloseButton
+        self._isPresented = isPresented
         self.content = content
     }
     
@@ -29,15 +31,23 @@ struct PopUpConfirmation<Content: View>: View {
                     content()
                 }
                 .padding(.all, 48)
-                .padding(.top, 60)
+                .padding(.top, showCloseButton ? 60 : 0)
                 .padding(.leading, 60)
                 .background(.white)
                 .clipShape(RoundedRectangle(cornerRadius: 60))
                 
-                Image(systemName: "xmark.circle.fill")
-                    .foregroundColor(.gray)
-                    .font(.system(size: 44))
-                    .offset(x: -24, y: 24)
+                if showCloseButton {
+                    Button(action: {
+                        withAnimation {
+                            isPresented.toggle()
+                        }
+                    }) {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.gray)
+                            .font(.system(size: 44))
+                            .offset(x: -24, y: 24)
+                    }
+                }
             }
             
             Image(.catAngry)
@@ -51,7 +61,7 @@ struct PopUpConfirmation<Content: View>: View {
 }
 
 #Preview {
-    PopUpConfirmation(message: "Your Size is too small, Please make it bigger", showCloseButton: true) {
+    PopUpConfirmation(message: "Your Size is too small, Please make it bigger", showCloseButton: true, isPresented: .constant(false)) {
         Button("ABC Test \(Image(systemName: "abc"))") {
             
         }
