@@ -27,13 +27,17 @@ struct PopUpConfirmation<Content: View>: View {
                     Text(message)
                         .font(.system(size: 30).bold())
                         .multilineTextAlignment(.center)
-                        .frame(maxWidth: 450)
+                        .frame(maxWidth: 500)
                     content()
                 }
                 .padding(.all, 48)
-                .padding(.top, showCloseButton ? 60 : 0)
+                .padding(.top, showCloseButton ? 72 : 0)
                 .padding(.leading, 60)
-                .background(.white)
+                .foregroundStyle(.white)
+                .background {
+                    Image(.scratchBackground)
+                        .resizable()
+                }
                 .clipShape(RoundedRectangle(cornerRadius: 60))
                 
                 if showCloseButton {
@@ -43,15 +47,16 @@ struct PopUpConfirmation<Content: View>: View {
                         }
                     }) {
                         Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.gray)
+                            .foregroundColor(.white)
                             .font(.system(size: 44))
-                            .offset(x: -24, y: 24)
+                            .offset(x: -40, y: 40)
                     }
                 }
             }
+            .offset(x: 100)
             
             Image(.catAngry)
-                .offset(x: -330, y: -20)
+                .offset(x: -300, y: -20)
             
             
         }
@@ -61,8 +66,8 @@ struct PopUpConfirmation<Content: View>: View {
 }
 
 #Preview {
-    PopUpConfirmation(message: "Your Size is too small, Please make it bigger", showCloseButton: true, isPresented: .constant(false)) {
-        Button("ABC Test \(Image(systemName: "abc"))") {
+    PopUpConfirmation(message: "Your size is too small, please make it bigger!", showCloseButton: true, isPresented: .constant(false)) {
+        Button("Retry  \(Image(systemName: "repeat"))") {
             
         }
         .buttonStyle(PawPrintButtonStyle())
