@@ -23,8 +23,8 @@ struct PawPrintButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .font(.system(size: 24).bold())
-            .padding(.vertical, 12)
-            .padding(.horizontal, 24)
+            .padding(.vertical, 16)
+            .padding(.horizontal, 32)
             .background( backgroundColor ?? .white )
             .foregroundStyle( foregroundColor ?? .black )
             .clipShape(Capsule())
