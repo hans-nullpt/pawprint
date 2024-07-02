@@ -8,15 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var isSplashActive: Bool = true
     var body: some View {
-            VStack {
-                Image(systemName: "globe")
-                    .imageScale(.large)
-                    .foregroundStyle(.tint)
-                Text("Hello, world!")
-            }
-            .padding()
+        if isSplashActive {
+            SplashView()
+                .onAppear {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                        withAnimation(.easeOut) {
+                            isSplashActive.toggle()
+                        }
+                    }
+                }
+        } else {
+            HomeView()
         }
+    }
 }
 
 #Preview {
