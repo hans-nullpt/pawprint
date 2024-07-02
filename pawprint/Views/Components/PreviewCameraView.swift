@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import AVFoundation
 
-struct CameraView: UIViewControllerRepresentable {
+struct PreviewCameraView: UIViewControllerRepresentable {
     
     typealias UIViewControllerType = UIViewController
     
@@ -30,25 +30,26 @@ struct CameraView: UIViewControllerRepresentable {
         let uiViewController = UIViewController()
         
         uiViewController.view.backgroundColor = .black
+        cameraService.preview.frame = UIScreen.main.bounds
+        cameraService.preview.connection?.videoRotationAngle = 0
         uiViewController.view.layer.addSublayer(cameraService.preview)
-        cameraService.preview.frame = uiViewController.view.bounds
         
         return uiViewController
     }
     
     func updateUIViewController(_ uiView: UIViewController, context: Context) {
-        
     }
+    
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self, didFinishProccessingPhoto: didFinishProccessingPhoto)
     }
     
     class Coordinator: NSObject, AVCapturePhotoCaptureDelegate {
-        let parent: CameraView
+        let parent: PreviewCameraView
         private var didFinishProccessingPhoto: (Result<AVCapturePhoto, Error>) -> ()
         
-        init(_ parent: CameraView, didFinishProccessingPhoto: @escaping (Result<AVCapturePhoto, Error>) -> ()) {
+        init(_ parent: PreviewCameraView, didFinishProccessingPhoto: @escaping (Result<AVCapturePhoto, Error>) -> ()) {
             self.parent = parent
             self.didFinishProccessingPhoto = didFinishProccessingPhoto
         }

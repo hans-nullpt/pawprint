@@ -7,6 +7,7 @@
 
 import Foundation
 import AVFoundation
+import UIKit
 
 class CameraHandler {
     var session: AVCaptureSession?
@@ -18,6 +19,7 @@ class CameraHandler {
     func start(delegate: AVCapturePhotoCaptureDelegate, completion: @escaping (Error?) -> ()) {
         self.delegate = delegate
         
+        checkPermissions(completion: completion)
     }
     
     private func checkPermissions(completion: @escaping (Error?) -> ()) {
