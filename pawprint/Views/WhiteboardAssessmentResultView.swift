@@ -12,32 +12,41 @@ struct WhiteboardAssessmentResultView: View {
         VStack(alignment: .leading) {
             Text("How Paw see your handwriting")
                 .font(.system(size: 48).bold())
-            VStack(spacing: 16) {
-                Text("Readability")
-                    .font(.system(size: 40))
-                Text("80%")
-                    .font(.system(size: 96))
-                    .fontWeight(.heavy)
-                Text("effervessent elves swiftly sew")
-                    .font(.system(size: 60))
-                    .fontWeight(.medium)
-                    .padding(16)
-                    .overlay {
-                        RoundedRectangle(cornerRadius: 20)
-                            .stroke(
-                                .black,
-                                style: StrokeStyle(
-                                    lineWidth: 4, dash: [6]
+            ZStack(alignment: .leading) {
+                VStack(spacing: 16) {
+                    Text("Readability")
+                        .font(.system(size: 40))
+                    Text("80%")
+                        .font(.system(size: 96))
+                        .fontWeight(.heavy)
+                    Text("effervessent elves swiftly sew")
+                        .font(.system(size: 60))
+                        .fontWeight(.medium)
+                        .padding(.horizontal, 32)
+                        .padding(.vertical, 24)
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 20)
+                                .stroke(
+                                    .black,
+                                    style: StrokeStyle(
+                                        lineWidth: 4, dash: [6]
+                                    )
                                 )
-                            )
-                    }
-                Text("Others Letter  need to improve is c, m, n.")
-                    .font(.system(size: 32))
-                    .fontWeight(.medium)
+                        }
+                    Text("Others Letter need to improve is c, m, n.")
+                        .font(.system(size: 32))
+                        .fontWeight(.medium)
+                }
+                .padding(.vertical, 72)
+                .frame(maxWidth: .infinity)
+                .border(.black, width: 16)
+                
+                Image(.catTeaching)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: 256)
+                    .offset(x: -20, y: 232)
             }
-            .padding(.vertical, 72)
-            .frame(maxWidth: .infinity)
-            .border(.black, width: 16)
             
             Spacer()
             
