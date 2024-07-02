@@ -12,6 +12,8 @@
 		79C2A1D42C330CAB007D16D3 /* FirstOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C2A1D32C330CAB007D16D3 /* FirstOnboarding.swift */; };
 		79C2A1D62C330D43007D16D3 /* SecondOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C2A1D52C330D43007D16D3 /* SecondOnboarding.swift */; };
 		79C2A1D82C330D65007D16D3 /* ThirdOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C2A1D72C330D65007D16D3 /* ThirdOnboarding.swift */; };
+		79EF2A312C33EE6400B35FA2 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF2A302C33EE6400B35FA2 /* HomeView.swift */; };
+		E7436F072C345EE800C3635F /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = E7436F062C345EE800C3635F /* Lottie */; };
 		E75D61E32C33E5D30067A9E3 /* PreviewCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75D61E22C33E5D30067A9E3 /* PreviewCameraView.swift */; };
 		E75D61E52C33EE690067A9E3 /* CustomCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75D61E42C33EE690067A9E3 /* CustomCameraView.swift */; };
 		79EF2A312C33EE6400B35FA2 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF2A302C33EE6400B35FA2 /* HomeView.swift */; };
@@ -34,6 +36,7 @@
 		79C2A1D32C330CAB007D16D3 /* FirstOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstOnboarding.swift; sourceTree = "<group>"; };
 		79C2A1D52C330D43007D16D3 /* SecondOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondOnboarding.swift; sourceTree = "<group>"; };
 		79C2A1D72C330D65007D16D3 /* ThirdOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdOnboarding.swift; sourceTree = "<group>"; };
+		79EF2A302C33EE6400B35FA2 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		E75D61E22C33E5D30067A9E3 /* PreviewCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewCameraView.swift; sourceTree = "<group>"; };
 		E75D61E42C33EE690067A9E3 /* CustomCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCameraView.swift; sourceTree = "<group>"; };
 		79EF2A302C33EE6400B35FA2 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -56,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7436F072C345EE800C3635F /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,6 +172,9 @@
 			dependencies = (
 			);
 			name = pawprint;
+			packageProductDependencies = (
+				E7436F062C345EE800C3635F /* Lottie */,
+			);
 			productName = pawprint;
 			productReference = E763DB9D2C2AFEF70087EA5B /* pawprint.app */;
 			productType = "com.apple.product-type.application";
@@ -196,6 +203,9 @@
 				Base,
 			);
 			mainGroup = E763DB942C2AFEF70087EA5B;
+			packageReferences = (
+				E7436F052C345EE800C3635F /* XCRemoteSwiftPackageReference "lottie-spm" */,
+			);
 			productRefGroup = E763DB9E2C2AFEF70087EA5B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -454,6 +464,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E7436F052C345EE800C3635F /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.4.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E7436F062C345EE800C3635F /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E7436F052C345EE800C3635F /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E763DB952C2AFEF70087EA5B /* Project object */;
 }
