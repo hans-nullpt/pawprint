@@ -78,10 +78,8 @@ struct HomeView: View {
                                 Button(action: {
                                 }) {
                                     Text(label)
-                                        .frame(maxWidth: .infinity) // Make the button full width
+                                        .frame(maxWidth: .infinity)
                                         .padding()
-                                        .background(Capsule().fill(Color.white))
-                                        .foregroundColor(.black)
                                 }
                                 .buttonStyle(PawPrintButtonStyle())
                             }
@@ -101,8 +99,6 @@ struct HomeView: View {
                                     Text(label)
                                         .frame(maxWidth: .infinity) // Make the button full width
                                         .padding()
-                                        .background(Capsule().fill(Color.white))
-                                        .foregroundColor(.black)
                                 }
                                 .buttonStyle(PawPrintButtonStyle())
                             }

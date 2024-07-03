@@ -175,21 +175,15 @@ struct PracticeView: View {
             HStack (alignment: .center) {
                 Spacer()
                 Button(action: {}) {
-                    ZStack {
-                        Image(.scratchBackground)
-                            .resizable()
-                            .frame(width: 182, height: 68)
-                        HStack {
-                            Text("Next")
-                                .font(.system(size: 24, weight: .bold))
-                            Image(systemName: "arrow.right")
-                                .font(.system(size: 24, weight: .bold, design: .rounded))
-                                .foregroundColor(.white)
-                        }.frame(width: 140, height: 40)
+                    HStack {
+                        Text("Next")
+                            .font(.system(size: 24, weight: .bold))
+                        Image(systemName: "arrow.right")
+                            .font(.system(size: 24, weight: .bold, design: .rounded))
+                            .foregroundColor(.white)
                     }
                 }
-                .foregroundColor(.white)
-                .cornerRadius(.infinity)
+                .buttonStyle(PawPrintButtonStyle())
             }
             .frame(maxWidth: .infinity)
             .frame(height: 90)
