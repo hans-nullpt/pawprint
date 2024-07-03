@@ -11,7 +11,7 @@ struct CustomCameraView: View {
     let cameraService: CameraHandler = CameraHandler()
     
     @State private var isResultPresented: Bool = false
-    @EnvironmentObject private var vm: WhiteboardAnalyzeResultViewModel
+    @EnvironmentObject private var vm: HandwritingAnalyzeResultViewModel
     
     var body: some View {
         NavigationStack{
@@ -57,7 +57,7 @@ struct CustomCameraView: View {
             }
             .ignoresSafeArea()
             .navigationDestination(isPresented: $isResultPresented) {
-                WhiteboardAssessmentResultView()
+                HandwritingAssessmentResultView()
             }
         }
     }

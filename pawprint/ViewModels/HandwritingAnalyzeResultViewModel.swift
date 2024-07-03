@@ -1,5 +1,5 @@
 //
-//  WhiteboardAnalyzeResultViewModel.swift
+//  HandwritingAnalyzeResultViewModel.swift
 //  pawprint
 //
 //  Created by Ivan Nur Ilham Syah on 01/07/24.
@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import Vision
 
-class WhiteboardAnalyzeResultViewModel: ObservableObject {
+class HandwritingAnalyzeResultViewModel: ObservableObject {
     @Published var instructionSentence: String = ""
     @Published var showCameraModal = false
     @Published var scannedText: AttributedString = AttributedString()

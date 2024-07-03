@@ -12,7 +12,7 @@ struct pawprintApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(WhiteboardAnalyzeResultViewModel())
+                .environmentObject(HandwritingAnalyzeResultViewModel())
         }
     }
 }

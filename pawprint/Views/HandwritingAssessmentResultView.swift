@@ -1,5 +1,5 @@
 //
-//  WhiteboardAssessmentResultView.swift
+//  HandwritingAssessmentResultView.swift
 //  pawprint
 //
 //  Created by Ivan Nur Ilham Syah on 01/07/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct WhiteboardAssessmentResultView: View {
+struct HandwritingAssessmentResultView: View {
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading) {
@@ -80,5 +80,5 @@ struct WhiteboardAssessmentResultView: View {
 }
 
 #Preview {
-    WhiteboardAssessmentResultView()
+    HandwritingAssessmentResultView()
 }

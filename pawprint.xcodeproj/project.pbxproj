@@ -25,9 +25,9 @@
 		E763DBA32C2AFEF80087EA5B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E763DBA22C2AFEF80087EA5B /* ContentView.swift */; };
 		E763DBA52C2AFEF90087EA5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E763DBA42C2AFEF90087EA5B /* Assets.xcassets */; };
 		E763DBA82C2AFEF90087EA5B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E763DBA72C2AFEF90087EA5B /* Preview Assets.xcassets */; };
-		E7B00C512C328DF900FAEF87 /* WhiteboardAnalyzeResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C502C328DF900FAEF87 /* WhiteboardAnalyzeResultViewModel.swift */; };
+		E7B00C512C328DF900FAEF87 /* HandwritingAnalyzeResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C502C328DF900FAEF87 /* HandwritingAnalyzeResultViewModel.swift */; };
 		E7B00C532C328E3A00FAEF87 /* WordResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C522C328E3A00FAEF87 /* WordResult.swift */; };
-		E7B00C552C328EF800FAEF87 /* WhiteboardAssessmentResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C542C328EF800FAEF87 /* WhiteboardAssessmentResultView.swift */; };
+		E7B00C552C328EF800FAEF87 /* HandwritingAssessmentResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C542C328EF800FAEF87 /* HandwritingAssessmentResultView.swift */; };
 		E7B00C582C3293B500FAEF87 /* PawPrintButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C572C3293B500FAEF87 /* PawPrintButtonStyle.swift */; };
 		E7B00C5D2C33E36900FAEF87 /* CameraHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C5C2C33E36900FAEF87 /* CameraHandler.swift */; };
 /* End PBXBuildFile section */
@@ -51,9 +51,9 @@
 		E763DBA22C2AFEF80087EA5B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E763DBA42C2AFEF90087EA5B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E763DBA72C2AFEF90087EA5B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		E7B00C502C328DF900FAEF87 /* WhiteboardAnalyzeResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteboardAnalyzeResultViewModel.swift; sourceTree = "<group>"; };
+		E7B00C502C328DF900FAEF87 /* HandwritingAnalyzeResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandwritingAnalyzeResultViewModel.swift; sourceTree = "<group>"; };
 		E7B00C522C328E3A00FAEF87 /* WordResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordResult.swift; sourceTree = "<group>"; };
-		E7B00C542C328EF800FAEF87 /* WhiteboardAssessmentResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteboardAssessmentResultView.swift; sourceTree = "<group>"; };
+		E7B00C542C328EF800FAEF87 /* HandwritingAssessmentResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandwritingAssessmentResultView.swift; sourceTree = "<group>"; };
 		E7B00C572C3293B500FAEF87 /* PawPrintButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawPrintButtonStyle.swift; sourceTree = "<group>"; };
 		E7B00C5C2C33E36900FAEF87 /* CameraHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,7 +122,7 @@
 		E7B00C4D2C328DA400FAEF87 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				E7B00C502C328DF900FAEF87 /* WhiteboardAnalyzeResultViewModel.swift */,
+				E7B00C502C328DF900FAEF87 /* HandwritingAnalyzeResultViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -139,7 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				E7B00C562C3293A300FAEF87 /* Components */,
-				E7B00C542C328EF800FAEF87 /* WhiteboardAssessmentResultView.swift */,
+				E7B00C542C328EF800FAEF87 /* HandwritingAssessmentResultView.swift */,
 				7960B39C2C32605300F32B06 /* OnBoardingView.swift */,
 				7960B3962C32591E00F32B06 /* SplashView.swift */,
 				4BB489092C33F33000AF3ED1 /* PracticeView.swift */,
@@ -253,11 +253,11 @@
 				79C2A1D82C330D65007D16D3 /* ThirdOnboarding.swift in Sources */,
 				4BB4890A2C33F33000AF3ED1 /* PracticeView.swift in Sources */,
 				E7B00C582C3293B500FAEF87 /* PawPrintButtonStyle.swift in Sources */,
-				E7B00C512C328DF900FAEF87 /* WhiteboardAnalyzeResultViewModel.swift in Sources */,
+				E7B00C512C328DF900FAEF87 /* HandwritingAnalyzeResultViewModel.swift in Sources */,
 				E763DBA32C2AFEF80087EA5B /* ContentView.swift in Sources */,
 				E7B00C532C328E3A00FAEF87 /* WordResult.swift in Sources */,
 				E7B00C5D2C33E36900FAEF87 /* CameraHandler.swift in Sources */,
-				E7B00C552C328EF800FAEF87 /* WhiteboardAssessmentResultView.swift in Sources */,
+				E7B00C552C328EF800FAEF87 /* HandwritingAssessmentResultView.swift in Sources */,
 				79C2A1D42C330CAB007D16D3 /* FirstOnboarding.swift in Sources */,
 				79C2A1D62C330D43007D16D3 /* SecondOnboarding.swift in Sources */,
 				E763DBA12C2AFEF80087EA5B /* pawprintApp.swift in Sources */,
