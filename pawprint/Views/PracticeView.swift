@@ -17,6 +17,7 @@ struct PracticeView: View {
     @State private var isTracingMode = false
     @State var leftName = "Tracing"
     @State var rightName = "Line"
+    @State var showPopUp = false
 
     
     var body: some View {
@@ -39,9 +40,10 @@ struct PracticeView: View {
                         .stroke(.black, lineWidth: 2)
                         .frame(width: 300,height: 68)
                         .overlay {
-                            Image("toggle_bg")
+                            Image(.scratchBackground)
                                 .resizable()
                         }
+                        .cornerRadius(.infinity)
                         .onTapGesture {
                             withAnimation(.easeOut) {
                                 isTracingMode.toggle()
@@ -71,9 +73,11 @@ struct PracticeView: View {
                 }
                 .frame(height: 55)
                 
-                Button(action: {}) {
+                Button(action: {
+                    showPopUp.toggle()
+                }) {
                     ZStack {
-                        Image("toggle_bg")
+                        Image(.scratchBackground)
                             .resizable()
                             .frame(width: 68, height: 68)
                         Image(systemName: "xmark")
@@ -83,6 +87,10 @@ struct PracticeView: View {
                 }
                 .foregroundColor(.white)
                 .cornerRadius(.infinity)
+                .fullScreenCover(isPresented: $showPopUp) {
+                    PopUpConfirmationClosed(message: "Are you sure want to cancel this excercise?", showCloseButton: true, isPresented: $showPopUp) {
+                    }
+               }
             }
             .padding(29)
             .frame(maxWidth: .infinity)
@@ -168,7 +176,7 @@ struct PracticeView: View {
                 Spacer()
                 Button(action: {}) {
                     ZStack {
-                        Image("toggle_bg")
+                        Image(.scratchBackground)
                             .resizable()
                             .frame(width: 182, height: 68)
                         HStack {
