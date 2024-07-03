@@ -29,7 +29,6 @@
 		E7B00C532C328E3A00FAEF87 /* WordResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C522C328E3A00FAEF87 /* WordResult.swift */; };
 		E7B00C552C328EF800FAEF87 /* WhiteboardAssessmentResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C542C328EF800FAEF87 /* WhiteboardAssessmentResultView.swift */; };
 		E7B00C582C3293B500FAEF87 /* PawPrintButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C572C3293B500FAEF87 /* PawPrintButtonStyle.swift */; };
-		E7B00C5A2C33E11000FAEF87 /* WhiteboardCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C592C33E11000FAEF87 /* WhiteboardCameraView.swift */; };
 		E7B00C5D2C33E36900FAEF87 /* CameraHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C5C2C33E36900FAEF87 /* CameraHandler.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,7 +55,6 @@
 		E7B00C522C328E3A00FAEF87 /* WordResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordResult.swift; sourceTree = "<group>"; };
 		E7B00C542C328EF800FAEF87 /* WhiteboardAssessmentResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteboardAssessmentResultView.swift; sourceTree = "<group>"; };
 		E7B00C572C3293B500FAEF87 /* PawPrintButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PawPrintButtonStyle.swift; sourceTree = "<group>"; };
-		E7B00C592C33E11000FAEF87 /* WhiteboardCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteboardCameraView.swift; sourceTree = "<group>"; };
 		E7B00C5C2C33E36900FAEF87 /* CameraHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -142,7 +140,6 @@
 			children = (
 				E7B00C562C3293A300FAEF87 /* Components */,
 				E7B00C542C328EF800FAEF87 /* WhiteboardAssessmentResultView.swift */,
-				E7B00C592C33E11000FAEF87 /* WhiteboardCameraView.swift */,
 				7960B39C2C32605300F32B06 /* OnBoardingView.swift */,
 				7960B3962C32591E00F32B06 /* SplashView.swift */,
 				4BB489092C33F33000AF3ED1 /* PracticeView.swift */,
@@ -250,7 +247,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7B00C5A2C33E11000FAEF87 /* WhiteboardCameraView.swift in Sources */,
 				4BB4890C2C349B7300AF3ED1 /* PopUpConfirmationClosed.swift in Sources */,
 				E75D61E52C33EE690067A9E3 /* CustomCameraView.swift in Sources */,
 				E75D61E32C33E5D30067A9E3 /* PreviewCameraView.swift in Sources */,
