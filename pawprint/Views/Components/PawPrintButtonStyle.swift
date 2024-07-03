@@ -10,13 +10,13 @@ import SwiftUI
 
 struct PawPrintButtonStyle: ButtonStyle {
     
-    private var backgroundColor: Color?
+    private var background: Image?
     private var foregroundColor: Color?
     
     init() {}
     
-    init(backgroundColor: Color, foregroundColor: Color) {
-        self.backgroundColor = backgroundColor
+    init(background: Image, foregroundColor: Color) {
+        self.background = background
         self.foregroundColor = foregroundColor
     }
     
@@ -25,13 +25,30 @@ struct PawPrintButtonStyle: ButtonStyle {
             .font(.system(size: 24).bold())
             .padding(.vertical, 16)
             .padding(.horizontal, 32)
-            .background( backgroundColor ?? .white )
-            .foregroundStyle( foregroundColor ?? .black )
-            .clipShape(Capsule())
-            .overlay {
-                Capsule()
-                    .stroke(.black, lineWidth: 4)
+            .background {
+                (background ?? Image(.scratchBackground))
+                    .resizable()
             }
+            .foregroundStyle( foregroundColor ?? .white)
+            .clipShape(Capsule())
+//            .overlay {
+//                Capsule()
+//                    .stroke(.black, lineWidth: 4)
+//            }
     }
     
+}
+
+struct SampleButton: View {
+    var body: some View {
+        Button("Sample Button") {
+            
+        }
+        .buttonStyle(PawPrintButtonStyle())
+            
+    }
+}
+
+#Preview {
+    SampleButton()
 }
