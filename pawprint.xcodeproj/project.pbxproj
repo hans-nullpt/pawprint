@@ -7,17 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B3BB2F22C2D4DBB00488386 /* DrawingCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3BB2F12C2D4DBB00488386 /* DrawingCanvasView.swift */; };
+		4B3BB2F42C2D4E1D00488386 /* DrawingCanvasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3BB2F32C2D4E1D00488386 /* DrawingCanvasViewController.swift */; };
+		4BB4890A2C33F33000AF3ED1 /* PracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BB489092C33F33000AF3ED1 /* PracticeView.swift */; };
+		4BB4890C2C349B7300AF3ED1 /* PopUpConfirmationClosed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BB4890B2C349B7300AF3ED1 /* PopUpConfirmationClosed.swift */; };
 		7960B3972C32591E00F32B06 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7960B3962C32591E00F32B06 /* SplashView.swift */; };
 		7960B39D2C32605300F32B06 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7960B39C2C32605300F32B06 /* OnBoardingView.swift */; };
 		79C2A1D42C330CAB007D16D3 /* FirstOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C2A1D32C330CAB007D16D3 /* FirstOnboarding.swift */; };
 		79C2A1D62C330D43007D16D3 /* SecondOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C2A1D52C330D43007D16D3 /* SecondOnboarding.swift */; };
 		79C2A1D82C330D65007D16D3 /* ThirdOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C2A1D72C330D65007D16D3 /* ThirdOnboarding.swift */; };
 		79EF2A312C33EE6400B35FA2 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF2A302C33EE6400B35FA2 /* HomeView.swift */; };
+		E7436F042C342A8300C3635F /* PopUpConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7436F032C342A8300C3635F /* PopUpConfirmation.swift */; };
 		E7436F072C345EE800C3635F /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = E7436F062C345EE800C3635F /* Lottie */; };
 		E75D61E32C33E5D30067A9E3 /* PreviewCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75D61E22C33E5D30067A9E3 /* PreviewCameraView.swift */; };
 		E75D61E52C33EE690067A9E3 /* CustomCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75D61E42C33EE690067A9E3 /* CustomCameraView.swift */; };
-		79EF2A312C33EE6400B35FA2 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF2A302C33EE6400B35FA2 /* HomeView.swift */; };
-		E7436F042C342A8300C3635F /* PopUpConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7436F032C342A8300C3635F /* PopUpConfirmation.swift */; };
 		E763DBA12C2AFEF80087EA5B /* pawprintApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E763DBA02C2AFEF80087EA5B /* pawprintApp.swift */; };
 		E763DBA32C2AFEF80087EA5B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E763DBA22C2AFEF80087EA5B /* ContentView.swift */; };
 		E763DBA52C2AFEF90087EA5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E763DBA42C2AFEF90087EA5B /* Assets.xcassets */; };
@@ -31,16 +34,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4B3BB2F12C2D4DBB00488386 /* DrawingCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingCanvasView.swift; sourceTree = "<group>"; };
+		4B3BB2F32C2D4E1D00488386 /* DrawingCanvasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingCanvasViewController.swift; sourceTree = "<group>"; };
+		4BB489092C33F33000AF3ED1 /* PracticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeView.swift; sourceTree = "<group>"; };
+		4BB4890B2C349B7300AF3ED1 /* PopUpConfirmationClosed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpConfirmationClosed.swift; sourceTree = "<group>"; };
 		7960B3962C32591E00F32B06 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		7960B39C2C32605300F32B06 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		79C2A1D32C330CAB007D16D3 /* FirstOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstOnboarding.swift; sourceTree = "<group>"; };
 		79C2A1D52C330D43007D16D3 /* SecondOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondOnboarding.swift; sourceTree = "<group>"; };
 		79C2A1D72C330D65007D16D3 /* ThirdOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdOnboarding.swift; sourceTree = "<group>"; };
 		79EF2A302C33EE6400B35FA2 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		E7436F032C342A8300C3635F /* PopUpConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpConfirmation.swift; sourceTree = "<group>"; };
 		E75D61E22C33E5D30067A9E3 /* PreviewCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewCameraView.swift; sourceTree = "<group>"; };
 		E75D61E42C33EE690067A9E3 /* CustomCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCameraView.swift; sourceTree = "<group>"; };
-		79EF2A302C33EE6400B35FA2 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		E7436F032C342A8300C3635F /* PopUpConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpConfirmation.swift; sourceTree = "<group>"; };
 		E763DB9D2C2AFEF70087EA5B /* pawprint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pawprint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E763DBA02C2AFEF80087EA5B /* pawprintApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pawprintApp.swift; sourceTree = "<group>"; };
 		E763DBA22C2AFEF80087EA5B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -66,6 +72,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4B3BB2EE2C2D4D5700488386 /* PracticeView */ = {
+			isa = PBXGroup;
+			children = (
+				4B3BB2F12C2D4DBB00488386 /* DrawingCanvasView.swift */,
+				4B3BB2F32C2D4E1D00488386 /* DrawingCanvasViewController.swift */,
+			);
+			path = PracticeView;
+			sourceTree = "<group>";
+		};
 		E763DB942C2AFEF70087EA5B = {
 			isa = PBXGroup;
 			children = (
@@ -89,6 +104,7 @@
 				E7B00C4F2C328DDA00FAEF87 /* Views */,
 				E7B00C4E2C328DBE00FAEF87 /* Models */,
 				E7B00C4D2C328DA400FAEF87 /* ViewModels */,
+				4B3BB2EE2C2D4D5700488386 /* PracticeView */,
 				E763DBA02C2AFEF80087EA5B /* pawprintApp.swift */,
 				E763DBA22C2AFEF80087EA5B /* ContentView.swift */,
 				E763DBA42C2AFEF90087EA5B /* Assets.xcassets */,
@@ -129,6 +145,7 @@
 				E7B00C592C33E11000FAEF87 /* WhiteboardCameraView.swift */,
 				7960B39C2C32605300F32B06 /* OnBoardingView.swift */,
 				7960B3962C32591E00F32B06 /* SplashView.swift */,
+				4BB489092C33F33000AF3ED1 /* PracticeView.swift */,
 				E75D61E42C33EE690067A9E3 /* CustomCameraView.swift */,
 				79EF2A302C33EE6400B35FA2 /* HomeView.swift */,
 			);
@@ -144,6 +161,7 @@
 				E7B00C572C3293B500FAEF87 /* PawPrintButtonStyle.swift */,
 				E75D61E22C33E5D30067A9E3 /* PreviewCameraView.swift */,
 				E7436F032C342A8300C3635F /* PopUpConfirmation.swift */,
+				4BB4890B2C349B7300AF3ED1 /* PopUpConfirmationClosed.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -233,9 +251,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7B00C5A2C33E11000FAEF87 /* WhiteboardCameraView.swift in Sources */,
+				4BB4890C2C349B7300AF3ED1 /* PopUpConfirmationClosed.swift in Sources */,
 				E75D61E52C33EE690067A9E3 /* CustomCameraView.swift in Sources */,
 				E75D61E32C33E5D30067A9E3 /* PreviewCameraView.swift in Sources */,
 				79C2A1D82C330D65007D16D3 /* ThirdOnboarding.swift in Sources */,
+				4BB4890A2C33F33000AF3ED1 /* PracticeView.swift in Sources */,
 				E7B00C582C3293B500FAEF87 /* PawPrintButtonStyle.swift in Sources */,
 				E7B00C512C328DF900FAEF87 /* WhiteboardAnalyzeResultViewModel.swift in Sources */,
 				E763DBA32C2AFEF80087EA5B /* ContentView.swift in Sources */,
@@ -248,6 +268,9 @@
 				79EF2A312C33EE6400B35FA2 /* HomeView.swift in Sources */,
 				7960B3972C32591E00F32B06 /* SplashView.swift in Sources */,
 				7960B39D2C32605300F32B06 /* OnBoardingView.swift in Sources */,
+				4B3BB2F42C2D4E1D00488386 /* DrawingCanvasViewController.swift in Sources */,
+				E763DBA12C2AFEF80087EA5B /* pawprintApp.swift in Sources */,
+				4B3BB2F22C2D4DBB00488386 /* DrawingCanvasView.swift in Sources */,
 				E7436F042C342A8300C3635F /* PopUpConfirmation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -382,7 +405,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"pawprint/Preview Content\"";
-				DEVELOPMENT_TEAM = 57BYB3NG56;
+				DEVELOPMENT_TEAM = WHG3N2U8WV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) need access to use camera";
@@ -416,7 +439,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"pawprint/Preview Content\"";
-				DEVELOPMENT_TEAM = 57BYB3NG56;
+				DEVELOPMENT_TEAM = WHG3N2U8WV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) need access to use camera";
