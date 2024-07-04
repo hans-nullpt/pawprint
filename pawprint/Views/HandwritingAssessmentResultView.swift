@@ -86,13 +86,13 @@ struct HandwritingAssessmentResultView: View {
                     Spacer()
                     
                     HStack {
-    //                    Button(action: {}) {
-    //                        HStack {
-    //                            Text("Repeat")
-    //                            Image(systemName: "repeat")
-    //                        }
-    //                    }
-    //                    .buttonStyle(PawPrintButtonStyle())
+//                        Button(action: {}) {
+//                            HStack {
+//                                Text("Repeat")
+//                                Image(systemName: "repeat")
+//                            }
+//                        }
+//                        .buttonStyle(PawPrintButtonStyle())
                         
                         Spacer()
                         
