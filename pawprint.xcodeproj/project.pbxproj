@@ -33,6 +33,7 @@
 		E7ACC69F2C368DF70098E076 /* GroupLetterSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ACC69C2C368DF70098E076 /* GroupLetterSectionView.swift */; };
 		E7ACC6A12C368E150098E076 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ACC6A02C368E150098E076 /* HomeViewModel.swift */; };
 		E7ACC6A52C36A7F90098E076 /* WhiteboardPracticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ACC6A42C36A7F90098E076 /* WhiteboardPracticeViewModel.swift */; };
+		E7ACC6A72C36ADBE0098E076 /* WhiteboardPracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ACC6A62C36ADBE0098E076 /* WhiteboardPracticeView.swift */; };
 		E7B00C512C328DF900FAEF87 /* HandwritingAnalyzeResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C502C328DF900FAEF87 /* HandwritingAnalyzeResultViewModel.swift */; };
 		E7B00C532C328E3A00FAEF87 /* WordResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C522C328E3A00FAEF87 /* WordResult.swift */; };
 		E7B00C552C328EF800FAEF87 /* HandwritingAssessmentResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C542C328EF800FAEF87 /* HandwritingAssessmentResultView.swift */; };
@@ -67,6 +68,7 @@
 		E7ACC69C2C368DF70098E076 /* GroupLetterSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupLetterSectionView.swift; sourceTree = "<group>"; };
 		E7ACC6A02C368E150098E076 /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		E7ACC6A42C36A7F90098E076 /* WhiteboardPracticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteboardPracticeViewModel.swift; sourceTree = "<group>"; };
+		E7ACC6A62C36ADBE0098E076 /* WhiteboardPracticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteboardPracticeView.swift; sourceTree = "<group>"; };
 		E7B00C502C328DF900FAEF87 /* HandwritingAnalyzeResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandwritingAnalyzeResultViewModel.swift; sourceTree = "<group>"; };
 		E7B00C522C328E3A00FAEF87 /* WordResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordResult.swift; sourceTree = "<group>"; };
 		E7B00C542C328EF800FAEF87 /* HandwritingAssessmentResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandwritingAssessmentResultView.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				E7B00C542C328EF800FAEF87 /* HandwritingAssessmentResultView.swift */,
 				7960B3962C32591E00F32B06 /* SplashView.swift */,
 				79DCF5072C35C1D400C5A16D /* HistoryView.swift */,
+				E7ACC6A62C36ADBE0098E076 /* WhiteboardPracticeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 				E77E07122C3678B80036E9AC /* GroupLetter.swift in Sources */,
 				E7ACC6A52C36A7F90098E076 /* WhiteboardPracticeViewModel.swift in Sources */,
 				E7B00C582C3293B500FAEF87 /* PawPrintButtonStyle.swift in Sources */,
+				E7ACC6A72C36ADBE0098E076 /* WhiteboardPracticeView.swift in Sources */,
 				E7B00C512C328DF900FAEF87 /* HandwritingAnalyzeResultViewModel.swift in Sources */,
 				E7ACC69F2C368DF70098E076 /* GroupLetterSectionView.swift in Sources */,
 				E7ACC69E2C368DF70098E076 /* HomeResultView.swift in Sources */,

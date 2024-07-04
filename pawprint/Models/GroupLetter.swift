@@ -52,6 +52,10 @@ enum LowerCaseLetterType: CaseIterable {
                 ],
                 [
                     /// Sentence 2
+                    PracticeSentence(step: "Practice 1", value: "cats and"),
+                    PracticeSentence(step: "Practice 2", value: "cats and dogs often"),
+                    PracticeSentence(step: "Practice 3", value: "cats and dogs often quarrel"),
+                    PracticeSentence(step: "Practice 4", value: "cats and dogs often quarrel over food")
                 ],
                 /// dst
             ]

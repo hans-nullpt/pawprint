@@ -26,13 +26,16 @@ struct GroupLetterSectionView: View {
             
             LazyVGrid(columns: columns, spacing: 30) {
                 ForEach(items, id: \.id) { item in
-                    Button(action: {
-                    }) {
+                    
+                    NavigationLink {
+                       EmptyView()
+                    } label: {
                         Text(item.letters.joined(separator: ", "))
                             .frame(maxWidth: .infinity)
                             .padding()
                     }
                     .buttonStyle(PawPrintButtonStyle())
+                    
                 }
             }
         }
