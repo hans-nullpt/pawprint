@@ -17,7 +17,6 @@
 		79C2A1D62C330D43007D16D3 /* SecondOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C2A1D52C330D43007D16D3 /* SecondOnboarding.swift */; };
 		79C2A1D82C330D65007D16D3 /* ThirdOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C2A1D72C330D65007D16D3 /* ThirdOnboarding.swift */; };
 		79DCF5082C35C1D400C5A16D /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DCF5072C35C1D400C5A16D /* HistoryView.swift */; };
-		79EF2A312C33EE6400B35FA2 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EF2A302C33EE6400B35FA2 /* HomeView.swift */; };
 		E7436F042C342A8300C3635F /* PopUpConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7436F032C342A8300C3635F /* PopUpConfirmation.swift */; };
 		E7436F072C345EE800C3635F /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = E7436F062C345EE800C3635F /* Lottie */; };
 		E75D61E32C33E5D30067A9E3 /* PreviewCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75D61E22C33E5D30067A9E3 /* PreviewCameraView.swift */; };
@@ -29,6 +28,10 @@
 		E77E070D2C3675170036E9AC /* PracticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77E070C2C3675170036E9AC /* PracticeViewModel.swift */; };
 		E77E070F2C3675200036E9AC /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77E070E2C3675200036E9AC /* HistoryViewModel.swift */; };
 		E77E07122C3678B80036E9AC /* GroupLetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77E07112C3678B80036E9AC /* GroupLetter.swift */; };
+		E7ACC69D2C368DF70098E076 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ACC6992C368DF70098E076 /* HomeView.swift */; };
+		E7ACC69E2C368DF70098E076 /* HomeResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ACC69B2C368DF70098E076 /* HomeResultView.swift */; };
+		E7ACC69F2C368DF70098E076 /* GroupLetterSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ACC69C2C368DF70098E076 /* GroupLetterSectionView.swift */; };
+		E7ACC6A12C368E150098E076 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ACC6A02C368E150098E076 /* HomeViewModel.swift */; };
 		E7B00C512C328DF900FAEF87 /* HandwritingAnalyzeResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C502C328DF900FAEF87 /* HandwritingAnalyzeResultViewModel.swift */; };
 		E7B00C532C328E3A00FAEF87 /* WordResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C522C328E3A00FAEF87 /* WordResult.swift */; };
 		E7B00C552C328EF800FAEF87 /* HandwritingAssessmentResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C542C328EF800FAEF87 /* HandwritingAssessmentResultView.swift */; };
@@ -47,7 +50,6 @@
 		79C2A1D52C330D43007D16D3 /* SecondOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondOnboarding.swift; sourceTree = "<group>"; };
 		79C2A1D72C330D65007D16D3 /* ThirdOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdOnboarding.swift; sourceTree = "<group>"; };
 		79DCF5072C35C1D400C5A16D /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
-		79EF2A302C33EE6400B35FA2 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		E7436F032C342A8300C3635F /* PopUpConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpConfirmation.swift; sourceTree = "<group>"; };
 		E75D61E22C33E5D30067A9E3 /* PreviewCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewCameraView.swift; sourceTree = "<group>"; };
 		E75D61E42C33EE690067A9E3 /* CustomCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCameraView.swift; sourceTree = "<group>"; };
@@ -59,6 +61,10 @@
 		E77E070C2C3675170036E9AC /* PracticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeViewModel.swift; sourceTree = "<group>"; };
 		E77E070E2C3675200036E9AC /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
 		E77E07112C3678B80036E9AC /* GroupLetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupLetter.swift; sourceTree = "<group>"; };
+		E7ACC6992C368DF70098E076 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		E7ACC69B2C368DF70098E076 /* HomeResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeResultView.swift; sourceTree = "<group>"; };
+		E7ACC69C2C368DF70098E076 /* GroupLetterSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupLetterSectionView.swift; sourceTree = "<group>"; };
+		E7ACC6A02C368E150098E076 /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		E7B00C502C328DF900FAEF87 /* HandwritingAnalyzeResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandwritingAnalyzeResultViewModel.swift; sourceTree = "<group>"; };
 		E7B00C522C328E3A00FAEF87 /* WordResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordResult.swift; sourceTree = "<group>"; };
 		E7B00C542C328EF800FAEF87 /* HandwritingAssessmentResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandwritingAssessmentResultView.swift; sourceTree = "<group>"; };
@@ -180,9 +186,28 @@
 			path = SubViews;
 			sourceTree = "<group>";
 		};
+		E7ACC6982C368DF70098E076 /* HomeViews */ = {
+			isa = PBXGroup;
+			children = (
+				E7ACC6992C368DF70098E076 /* HomeView.swift */,
+				E7ACC69A2C368DF70098E076 /* SubViews */,
+			);
+			path = HomeViews;
+			sourceTree = "<group>";
+		};
+		E7ACC69A2C368DF70098E076 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				E7ACC69B2C368DF70098E076 /* HomeResultView.swift */,
+				E7ACC69C2C368DF70098E076 /* GroupLetterSectionView.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
 		E7B00C4D2C328DA400FAEF87 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				E7ACC6A02C368E150098E076 /* HomeViewModel.swift */,
 				E7B00C502C328DF900FAEF87 /* HandwritingAnalyzeResultViewModel.swift */,
 				E77E070C2C3675170036E9AC /* PracticeViewModel.swift */,
 				E77E070E2C3675200036E9AC /* HistoryViewModel.swift */,
@@ -202,12 +227,12 @@
 		E7B00C4F2C328DDA00FAEF87 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E7ACC6982C368DF70098E076 /* HomeViews */,
 				4B3BB2EE2C2D4D5700488386 /* PracticeViews */,
 				E77E07082C3674B10036E9AC /* OnboardingViews */,
 				E77E07062C36747A0036E9AC /* CameraViews */,
 				E7B00C542C328EF800FAEF87 /* HandwritingAssessmentResultView.swift */,
 				7960B3962C32591E00F32B06 /* SplashView.swift */,
-				79EF2A302C33EE6400B35FA2 /* HomeView.swift */,
 				79DCF5072C35C1D400C5A16D /* HistoryView.swift */,
 			);
 			path = Views;
@@ -310,6 +335,7 @@
 				4BB4890C2C349B7300AF3ED1 /* PopUpConfirmationClosed.swift in Sources */,
 				E75D61E52C33EE690067A9E3 /* CustomCameraView.swift in Sources */,
 				E75D61E32C33E5D30067A9E3 /* PreviewCameraView.swift in Sources */,
+				E7ACC69D2C368DF70098E076 /* HomeView.swift in Sources */,
 				E77E070D2C3675170036E9AC /* PracticeViewModel.swift in Sources */,
 				E77E070F2C3675200036E9AC /* HistoryViewModel.swift in Sources */,
 				79DCF5082C35C1D400C5A16D /* HistoryView.swift in Sources */,
@@ -318,6 +344,8 @@
 				E77E07122C3678B80036E9AC /* GroupLetter.swift in Sources */,
 				E7B00C582C3293B500FAEF87 /* PawPrintButtonStyle.swift in Sources */,
 				E7B00C512C328DF900FAEF87 /* HandwritingAnalyzeResultViewModel.swift in Sources */,
+				E7ACC69F2C368DF70098E076 /* GroupLetterSectionView.swift in Sources */,
+				E7ACC69E2C368DF70098E076 /* HomeResultView.swift in Sources */,
 				E763DBA32C2AFEF80087EA5B /* ContentView.swift in Sources */,
 				E7B00C532C328E3A00FAEF87 /* WordResult.swift in Sources */,
 				E7B00C5D2C33E36900FAEF87 /* CameraHandler.swift in Sources */,
@@ -325,9 +353,9 @@
 				79C2A1D42C330CAB007D16D3 /* FirstOnboarding.swift in Sources */,
 				79C2A1D62C330D43007D16D3 /* SecondOnboarding.swift in Sources */,
 				E763DBA12C2AFEF80087EA5B /* pawprintApp.swift in Sources */,
-				79EF2A312C33EE6400B35FA2 /* HomeView.swift in Sources */,
 				7960B3972C32591E00F32B06 /* SplashView.swift in Sources */,
 				7960B39D2C32605300F32B06 /* OnBoardingView.swift in Sources */,
+				E7ACC6A12C368E150098E076 /* HomeViewModel.swift in Sources */,
 				4B3BB2F42C2D4E1D00488386 /* DrawingCanvasViewController.swift in Sources */,
 				E763DBA12C2AFEF80087EA5B /* pawprintApp.swift in Sources */,
 				4B3BB2F22C2D4DBB00488386 /* DrawingCanvasView.swift in Sources */,
