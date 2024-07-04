@@ -15,8 +15,8 @@ struct HomeView: View {
         let buttonTitles = ["History", "iPad", "Whiteboard"]
         
         ZStack {
-            Color("AppBackgroundColor").ignoresSafeArea()
-            Image("line_bg")
+            Color(.appBackground).ignoresSafeArea()
+            Image(.lineBg)
             ScrollView {
                 VStack (alignment: .leading) {
                     HStack (spacing: 20) {
@@ -33,7 +33,7 @@ struct HomeView: View {
                     
                     HStack (alignment: .center) {
                         ZStack {
-                            Image("catwithiPad")
+                            Image(.catwithiPad)
                             .offset(x: -110, y: 25)
 //                            Image("letspractice")
                             HomeResultView()
