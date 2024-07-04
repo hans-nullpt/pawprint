@@ -11,12 +11,10 @@ import Lottie
 struct SplashView: View {
     var body: some View {
         ZStack(alignment:.top) {
-            Image("splashscreen_bg").edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
-            VStack {
-                LottieView(animation: .named("splashscreen.json"))
-                    .playing(loopMode: .loop)
-            }
+            LottieView(animation: .named("splashscreen.json"))
+                .playing(loopMode: .loop)
         }
+        .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
     }
 }
 
