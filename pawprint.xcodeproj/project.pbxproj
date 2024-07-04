@@ -26,6 +26,9 @@
 		E763DBA32C2AFEF80087EA5B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E763DBA22C2AFEF80087EA5B /* ContentView.swift */; };
 		E763DBA52C2AFEF90087EA5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E763DBA42C2AFEF90087EA5B /* Assets.xcassets */; };
 		E763DBA82C2AFEF90087EA5B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E763DBA72C2AFEF90087EA5B /* Preview Assets.xcassets */; };
+		E77E070D2C3675170036E9AC /* PracticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77E070C2C3675170036E9AC /* PracticeViewModel.swift */; };
+		E77E070F2C3675200036E9AC /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77E070E2C3675200036E9AC /* HistoryViewModel.swift */; };
+		E77E07122C3678B80036E9AC /* GroupLetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77E07112C3678B80036E9AC /* GroupLetter.swift */; };
 		E7B00C512C328DF900FAEF87 /* HandwritingAnalyzeResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C502C328DF900FAEF87 /* HandwritingAnalyzeResultViewModel.swift */; };
 		E7B00C532C328E3A00FAEF87 /* WordResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C522C328E3A00FAEF87 /* WordResult.swift */; };
 		E7B00C552C328EF800FAEF87 /* HandwritingAssessmentResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C542C328EF800FAEF87 /* HandwritingAssessmentResultView.swift */; };
@@ -53,6 +56,9 @@
 		E763DBA22C2AFEF80087EA5B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E763DBA42C2AFEF90087EA5B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E763DBA72C2AFEF90087EA5B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E77E070C2C3675170036E9AC /* PracticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeViewModel.swift; sourceTree = "<group>"; };
+		E77E070E2C3675200036E9AC /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
+		E77E07112C3678B80036E9AC /* GroupLetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupLetter.swift; sourceTree = "<group>"; };
 		E7B00C502C328DF900FAEF87 /* HandwritingAnalyzeResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandwritingAnalyzeResultViewModel.swift; sourceTree = "<group>"; };
 		E7B00C522C328E3A00FAEF87 /* WordResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordResult.swift; sourceTree = "<group>"; };
 		E7B00C542C328EF800FAEF87 /* HandwritingAssessmentResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandwritingAssessmentResultView.swift; sourceTree = "<group>"; };
@@ -72,13 +78,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4B3BB2EE2C2D4D5700488386 /* PracticeView */ = {
+		4B3BB2EE2C2D4D5700488386 /* PracticeViews */ = {
 			isa = PBXGroup;
 			children = (
-				4B3BB2F12C2D4DBB00488386 /* DrawingCanvasView.swift */,
-				4B3BB2F32C2D4E1D00488386 /* DrawingCanvasViewController.swift */,
+				E77E07102C36753C0036E9AC /* SubViews */,
+				4BB489092C33F33000AF3ED1 /* PracticeView.swift */,
 			);
-			path = PracticeView;
+			path = PracticeViews;
 			sourceTree = "<group>";
 		};
 		E763DB942C2AFEF70087EA5B = {
@@ -100,11 +106,10 @@
 		E763DB9F2C2AFEF70087EA5B /* pawprint */ = {
 			isa = PBXGroup;
 			children = (
-				E7B00C5B2C33E35600FAEF87 /* Handlers */,
+				E77E070A2C3674D30036E9AC /* Shared */,
 				E7B00C4F2C328DDA00FAEF87 /* Views */,
 				E7B00C4E2C328DBE00FAEF87 /* Models */,
 				E7B00C4D2C328DA400FAEF87 /* ViewModels */,
-				4B3BB2EE2C2D4D5700488386 /* PracticeView */,
 				E763DBA02C2AFEF80087EA5B /* pawprintApp.swift */,
 				E763DBA22C2AFEF80087EA5B /* ContentView.swift */,
 				E763DBA42C2AFEF90087EA5B /* Assets.xcassets */,
@@ -121,10 +126,66 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		E77E07062C36747A0036E9AC /* CameraViews */ = {
+			isa = PBXGroup;
+			children = (
+				E75D61E42C33EE690067A9E3 /* CustomCameraView.swift */,
+				E77E07072C3674840036E9AC /* SubViews */,
+			);
+			path = CameraViews;
+			sourceTree = "<group>";
+		};
+		E77E07072C3674840036E9AC /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				E75D61E22C33E5D30067A9E3 /* PreviewCameraView.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
+		E77E07082C3674B10036E9AC /* OnboardingViews */ = {
+			isa = PBXGroup;
+			children = (
+				7960B39C2C32605300F32B06 /* OnBoardingView.swift */,
+				E77E07092C3674B80036E9AC /* SubViews */,
+			);
+			path = OnboardingViews;
+			sourceTree = "<group>";
+		};
+		E77E07092C3674B80036E9AC /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				79C2A1D32C330CAB007D16D3 /* FirstOnboarding.swift */,
+				79C2A1D52C330D43007D16D3 /* SecondOnboarding.swift */,
+				79C2A1D72C330D65007D16D3 /* ThirdOnboarding.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
+		E77E070A2C3674D30036E9AC /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				E7B00C562C3293A300FAEF87 /* Components */,
+				E7B00C5B2C33E35600FAEF87 /* Handlers */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		E77E07102C36753C0036E9AC /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				4B3BB2F12C2D4DBB00488386 /* DrawingCanvasView.swift */,
+				4B3BB2F32C2D4E1D00488386 /* DrawingCanvasViewController.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
 		E7B00C4D2C328DA400FAEF87 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				E7B00C502C328DF900FAEF87 /* HandwritingAnalyzeResultViewModel.swift */,
+				E77E070C2C3675170036E9AC /* PracticeViewModel.swift */,
+				E77E070E2C3675200036E9AC /* HistoryViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -133,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				E7B00C522C328E3A00FAEF87 /* WordResult.swift */,
+				E77E07112C3678B80036E9AC /* GroupLetter.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -140,12 +202,11 @@
 		E7B00C4F2C328DDA00FAEF87 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E7B00C562C3293A300FAEF87 /* Components */,
+				4B3BB2EE2C2D4D5700488386 /* PracticeViews */,
+				E77E07082C3674B10036E9AC /* OnboardingViews */,
+				E77E07062C36747A0036E9AC /* CameraViews */,
 				E7B00C542C328EF800FAEF87 /* HandwritingAssessmentResultView.swift */,
-				7960B39C2C32605300F32B06 /* OnBoardingView.swift */,
 				7960B3962C32591E00F32B06 /* SplashView.swift */,
-				4BB489092C33F33000AF3ED1 /* PracticeView.swift */,
-				E75D61E42C33EE690067A9E3 /* CustomCameraView.swift */,
 				79EF2A302C33EE6400B35FA2 /* HomeView.swift */,
 				79DCF5072C35C1D400C5A16D /* HistoryView.swift */,
 			);
@@ -155,11 +216,7 @@
 		E7B00C562C3293A300FAEF87 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				79C2A1D32C330CAB007D16D3 /* FirstOnboarding.swift */,
-				79C2A1D52C330D43007D16D3 /* SecondOnboarding.swift */,
-				79C2A1D72C330D65007D16D3 /* ThirdOnboarding.swift */,
 				E7B00C572C3293B500FAEF87 /* PawPrintButtonStyle.swift */,
-				E75D61E22C33E5D30067A9E3 /* PreviewCameraView.swift */,
 				E7436F032C342A8300C3635F /* PopUpConfirmation.swift */,
 				4BB4890B2C349B7300AF3ED1 /* PopUpConfirmationClosed.swift */,
 			);
@@ -253,9 +310,12 @@
 				4BB4890C2C349B7300AF3ED1 /* PopUpConfirmationClosed.swift in Sources */,
 				E75D61E52C33EE690067A9E3 /* CustomCameraView.swift in Sources */,
 				E75D61E32C33E5D30067A9E3 /* PreviewCameraView.swift in Sources */,
+				E77E070D2C3675170036E9AC /* PracticeViewModel.swift in Sources */,
+				E77E070F2C3675200036E9AC /* HistoryViewModel.swift in Sources */,
 				79DCF5082C35C1D400C5A16D /* HistoryView.swift in Sources */,
 				79C2A1D82C330D65007D16D3 /* ThirdOnboarding.swift in Sources */,
 				4BB4890A2C33F33000AF3ED1 /* PracticeView.swift in Sources */,
+				E77E07122C3678B80036E9AC /* GroupLetter.swift in Sources */,
 				E7B00C582C3293B500FAEF87 /* PawPrintButtonStyle.swift in Sources */,
 				E7B00C512C328DF900FAEF87 /* HandwritingAnalyzeResultViewModel.swift in Sources */,
 				E763DBA32C2AFEF80087EA5B /* ContentView.swift in Sources */,
