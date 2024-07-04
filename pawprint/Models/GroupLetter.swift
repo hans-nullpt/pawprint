@@ -121,24 +121,29 @@ enum UpperCaseLetterType: CaseIterable {
     }
 }
 
-struct GroupLetterItem<T>: Identifiable {
+enum LetterType {
+    case lowerCase
+    case upperCase
+}
+
+struct GroupLetterItem: Identifiable {
     var id: UUID = UUID()
-    var type: T
+    var type: LetterType
     var letters: [String]
     var sentences: [[PracticeSentence]]
     
-    static var lowerCaseItems: [GroupLetterItem<LowerCaseLetterType>] {
+    static var lowerCaseItems: [GroupLetterItem] {
         return LowerCaseLetterType.allCases.map { type in
-            GroupLetterItem<LowerCaseLetterType>(
-                type: type, letters: type.description, sentences: type.sentences
+            GroupLetterItem(
+                type: .lowerCase, letters: type.description, sentences: type.sentences
             )
         }
     }
     
-    static var upperCaseItems: [GroupLetterItem<UpperCaseLetterType>] {
+    static var upperCaseItems: [GroupLetterItem] {
         return UpperCaseLetterType.allCases.map { type in
-            GroupLetterItem<UpperCaseLetterType>(
-                type: type, letters: type.description, sentences: type.sentences
+            GroupLetterItem(
+                type: .upperCase, letters: type.description, sentences: type.sentences
             )
         }
     }
