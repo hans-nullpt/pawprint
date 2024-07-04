@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct PracticeSentence {
+struct PracticeSentence: Hashable {
     var step: String
     var value: String
 }
 
-enum LowerCaseLetterType: Any, CaseIterable {
+enum LowerCaseLetterType: CaseIterable {
     case acdgoq
     case ijltu
     case bhkl
@@ -38,22 +38,31 @@ enum LowerCaseLetterType: Any, CaseIterable {
         }
     }
     
-    var sentences: [PracticeSentence] {
+    var sentences: [[PracticeSentence]] {
         switch (self) {
             
         case .acdgoq:
             return [
-                PracticeSentence(step: "Practice 1", value: "cats and"),
-                PracticeSentence(step: "Practice 2", value: "cats and dogs often"),
-                PracticeSentence(step: "Practice 3", value: "cats and dogs often quarrel"),
-                PracticeSentence(step: "Practice 4", value: "cats and dogs often quarrel over food")
+                [
+                    /// Sentence 3
+                    PracticeSentence(step: "Practice 1", value: "cats and"),
+                    PracticeSentence(step: "Practice 2", value: "cats and dogs often"),
+                    PracticeSentence(step: "Practice 3", value: "cats and dogs often quarrel"),
+                    PracticeSentence(step: "Practice 4", value: "cats and dogs often quarrel over food")
+                ],
+                [
+                    /// Sentence 2
+                ],
+                /// dst
             ]
         case .ijltu:
             return [
-                PracticeSentence(step: "Practice 1", value: ""),
-                PracticeSentence(step: "Practice 2", value: ""),
-                PracticeSentence(step: "Practice 3", value: ""),
-                PracticeSentence(step: "Practice 4", value: "")
+                [
+                    PracticeSentence(step: "Practice 1", value: ""),
+                    PracticeSentence(step: "Practice 2", value: ""),
+                    PracticeSentence(step: "Practice 3", value: ""),
+                    PracticeSentence(step: "Practice 4", value: "")
+                ]
             ]
         case .bhkl:
             return []
@@ -67,7 +76,7 @@ enum LowerCaseLetterType: Any, CaseIterable {
     }
 }
 
-enum UpperCaseLetterType: Any, CaseIterable {
+enum UpperCaseLetterType: CaseIterable {
     case cgoq
     case ijltu
     case bdfhk
@@ -93,7 +102,7 @@ enum UpperCaseLetterType: Any, CaseIterable {
         }
     }
     
-    var sentences: [PracticeSentence] {
+    var sentences: [[PracticeSentence]] {
         switch (self) {
             
         case .cgoq:
@@ -108,6 +117,29 @@ enum UpperCaseLetterType: Any, CaseIterable {
             return []
         case .mnvw:
             return []
+        }
+    }
+}
+
+struct GroupLetterItem<T>: Identifiable {
+    var id: UUID = UUID()
+    var type: T
+    var letters: [String]
+    var sentences: [[PracticeSentence]]
+    
+    static var lowerCaseItems: [GroupLetterItem<LowerCaseLetterType>] {
+        return LowerCaseLetterType.allCases.map { type in
+            GroupLetterItem<LowerCaseLetterType>(
+                type: type, letters: type.description, sentences: type.sentences
+            )
+        }
+    }
+    
+    static var upperCaseItems: [GroupLetterItem<UpperCaseLetterType>] {
+        return UpperCaseLetterType.allCases.map { type in
+            GroupLetterItem<UpperCaseLetterType>(
+                type: type, letters: type.description, sentences: type.sentences
+            )
         }
     }
 }
