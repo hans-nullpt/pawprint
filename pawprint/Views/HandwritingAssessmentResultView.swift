@@ -70,6 +70,8 @@ struct HandwritingAssessmentResultView: View {
                                             lineWidth: 4, dash: [6]
                                         )
                                     )
+                                Image(.redpaw)
+                                    .offset(x: 545, y: 120)
                             }
                             
                         }
