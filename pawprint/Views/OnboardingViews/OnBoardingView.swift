@@ -31,8 +31,8 @@ struct OnBoardingView: View {
                         Label("Third", systemImage: "circle")
                     }
             }
-            .padding(.bottom, 50)
-            .accentColor(.red) 
+            .padding(.bottom, 30)
+            .accentColor(.red)
         .tabViewStyle(PageTabViewStyle())
         }
     }
