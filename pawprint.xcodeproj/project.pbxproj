@@ -17,6 +17,7 @@
 		79C2A1D62C330D43007D16D3 /* SecondOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C2A1D52C330D43007D16D3 /* SecondOnboarding.swift */; };
 		79C2A1D82C330D65007D16D3 /* ThirdOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C2A1D72C330D65007D16D3 /* ThirdOnboarding.swift */; };
 		79DCF5082C35C1D400C5A16D /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DCF5072C35C1D400C5A16D /* HistoryView.swift */; };
+		79DCF5122C36F16000C5A16D /* WhiteboardPracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DCF5112C36F16000C5A16D /* WhiteboardPracticeView.swift */; };
 		E7436F042C342A8300C3635F /* PopUpConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7436F032C342A8300C3635F /* PopUpConfirmation.swift */; };
 		E7436F072C345EE800C3635F /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = E7436F062C345EE800C3635F /* Lottie */; };
 		E75D61E32C33E5D30067A9E3 /* PreviewCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E75D61E22C33E5D30067A9E3 /* PreviewCameraView.swift */; };
@@ -50,6 +51,7 @@
 		79C2A1D52C330D43007D16D3 /* SecondOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondOnboarding.swift; sourceTree = "<group>"; };
 		79C2A1D72C330D65007D16D3 /* ThirdOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdOnboarding.swift; sourceTree = "<group>"; };
 		79DCF5072C35C1D400C5A16D /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
+		79DCF5112C36F16000C5A16D /* WhiteboardPracticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteboardPracticeView.swift; sourceTree = "<group>"; };
 		E7436F032C342A8300C3635F /* PopUpConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpConfirmation.swift; sourceTree = "<group>"; };
 		E75D61E22C33E5D30067A9E3 /* PreviewCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewCameraView.swift; sourceTree = "<group>"; };
 		E75D61E42C33EE690067A9E3 /* CustomCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCameraView.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 				E7B00C542C328EF800FAEF87 /* HandwritingAssessmentResultView.swift */,
 				7960B3962C32591E00F32B06 /* SplashView.swift */,
 				79DCF5072C35C1D400C5A16D /* HistoryView.swift */,
+				79DCF5112C36F16000C5A16D /* WhiteboardPracticeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				E763DBA12C2AFEF80087EA5B /* pawprintApp.swift in Sources */,
 				7960B3972C32591E00F32B06 /* SplashView.swift in Sources */,
 				7960B39D2C32605300F32B06 /* OnBoardingView.swift in Sources */,
+				79DCF5122C36F16000C5A16D /* WhiteboardPracticeView.swift in Sources */,
 				E7ACC6A12C368E150098E076 /* HomeViewModel.swift in Sources */,
 				4B3BB2F42C2D4E1D00488386 /* DrawingCanvasViewController.swift in Sources */,
 				E763DBA12C2AFEF80087EA5B /* pawprintApp.swift in Sources */,
