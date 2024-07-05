@@ -33,7 +33,7 @@ struct DeviceHome: View {
             Color(.appBackground).ignoresSafeArea()
             Image(.lineBg)
             ScrollView {
-                VStack (alignment: .leading, spacing: 40) {
+                VStack (alignment: .leading, spacing: 48) {
                     HStack {
                         if device == "iPad"{
                             Image(.iPadIcon)
@@ -52,9 +52,12 @@ struct DeviceHome: View {
                     
                     HStack (alignment: .center) {
                         ZStack {
-                            Image(.letspractice)
-                                .offset(x: -90, y: 25)
                             HomeResultView()
+                                .background {
+                                    Image(.letspractice)
+                                        .offset(x: -90)
+                                    
+                                }
                         }
                     }
                     .frame(maxWidth: .infinity)
