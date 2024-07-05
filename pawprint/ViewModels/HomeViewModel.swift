@@ -8,6 +8,6 @@
 import Foundation
 
 class HomeViewModel: ObservableObject {
-    var lowerCaseGroup = GroupLetterItem<LowerCaseLetterType>.lowerCaseItems
-    var upperCaseGroup = GroupLetterItem<UpperCaseLetterType>.upperCaseItems
+    var lowerCaseGroup: [GroupLetterItem] = GroupLetterItem.lowerCaseItems
+    var upperCaseGroup: [GroupLetterItem] = GroupLetterItem.upperCaseItems
 }
