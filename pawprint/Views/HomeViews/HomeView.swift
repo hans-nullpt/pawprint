@@ -29,34 +29,31 @@ struct DeviceHome: View {
     
     var device: String
     var body: some View {
-        ZStack{
-            ZStack {
-                Color(.appBackground).ignoresSafeArea()
-                Image(.lineBg)
-                ScrollView {
-                    VStack (alignment: .leading) {
-                        HStack {
-                            if device == "iPad"{
-                                Image(.iPadIcon)
-                            }
-                            else {
-                                Image(.whiteboardIcon)
-                            }
-                            Spacer()
-                            Button(action: {
-                            }) {
-                                Text("History")
-                            }
-                            .buttonStyle(PawPrintButtonStyle())
-                            .padding(.bottom, 10)  // Add some spacing between buttons
+        ZStack {
+            Color(.appBackground).ignoresSafeArea()
+            Image(.lineBg)
+            ScrollView {
+                VStack (alignment: .leading, spacing: 40) {
+                    HStack {
+                        if device == "iPad"{
+                            Image(.iPadIcon)
                         }
-                    }
+                        else {
+                            Image(.whiteboardIcon)
+                        }
+                        Spacer()
+                        
+                        Button(action: {
+                        }) {
+                            Text("History")
+                        }
+                        .buttonStyle(PawPrintButtonStyle())
+                    }.offset(y: 40)
                     
                     HStack (alignment: .center) {
                         ZStack {
-                            Image(.catwithiPad)
-                            .offset(x: -110, y: 25)
-//                            Image("letspractice")
+                            Image(.letspractice)
+                                .offset(x: -90, y: 25)
                             HomeResultView()
                         }
                     }
@@ -77,38 +74,9 @@ struct DeviceHome: View {
                         title: "Uppercase",
                         items: vm.upperCaseGroup
                     )
-                    
-//
-                        }.offset(y: 40)
-                        
-                        HStack (alignment: .center) {
-                            ZStack {
-                                Image(.letspractice)
-                                .offset(x: -90, y: 25)
-                                HomeResultView()
-                            }
-                        }
-                        .frame(maxWidth: .infinity)
-                        
-                        Text("Choose group letter to start practicing!")
-                            .foregroundColor(Color("black"))
-                            .bold()
-                            .font(.system(size: 36))
-                            .padding(.bottom, 20)
-                        
-                        GroupLetterSectionView<LowerCaseLetterType>(
-                            title: "Lowercase",
-                            items: vm.lowerCaseGroup
-                        )
-                        
-                        GroupLetterSectionView<UpperCaseLetterType>(
-                            title: "Uppercase",
-                            items: vm.upperCaseGroup
-                        )
-                    }
-                    .padding(.horizontal, 60)
-                    .padding(.vertical, 30)
                 }
+                .padding(.horizontal, 60)
+                .padding(.vertical, 30)
             }
         }
     }
