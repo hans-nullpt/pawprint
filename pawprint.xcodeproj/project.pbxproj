@@ -14,6 +14,7 @@
 		7960B3972C32591E00F32B06 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7960B3962C32591E00F32B06 /* SplashView.swift */; };
 		7960B39D2C32605300F32B06 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7960B39C2C32605300F32B06 /* OnBoardingView.swift */; };
 		799B94752C387B1E00FC2341 /* HomeFirstTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799B94742C387B1E00FC2341 /* HomeFirstTimeView.swift */; };
+		799B94792C3891B300FC2341 /* PopUpPositioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799B94782C3891B300FC2341 /* PopUpPositioning.swift */; };
 		79C2A1D42C330CAB007D16D3 /* FirstOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C2A1D32C330CAB007D16D3 /* FirstOnboarding.swift */; };
 		79C2A1D62C330D43007D16D3 /* SecondOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C2A1D52C330D43007D16D3 /* SecondOnboarding.swift */; };
 		79C2A1D82C330D65007D16D3 /* ThirdOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C2A1D72C330D65007D16D3 /* ThirdOnboarding.swift */; };
@@ -48,6 +49,7 @@
 		7960B3962C32591E00F32B06 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		7960B39C2C32605300F32B06 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		799B94742C387B1E00FC2341 /* HomeFirstTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFirstTimeView.swift; sourceTree = "<group>"; };
+		799B94782C3891B300FC2341 /* PopUpPositioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpPositioning.swift; sourceTree = "<group>"; };
 		79C2A1D32C330CAB007D16D3 /* FirstOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstOnboarding.swift; sourceTree = "<group>"; };
 		79C2A1D52C330D43007D16D3 /* SecondOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondOnboarding.swift; sourceTree = "<group>"; };
 		79C2A1D72C330D65007D16D3 /* ThirdOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdOnboarding.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 				E7B00C572C3293B500FAEF87 /* PawPrintButtonStyle.swift */,
 				E7436F032C342A8300C3635F /* PopUpConfirmation.swift */,
 				4BB4890B2C349B7300AF3ED1 /* PopUpConfirmationClosed.swift */,
+				799B94782C3891B300FC2341 /* PopUpPositioning.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				E7B00C532C328E3A00FAEF87 /* WordResult.swift in Sources */,
 				E7B00C5D2C33E36900FAEF87 /* CameraHandler.swift in Sources */,
 				E7B00C552C328EF800FAEF87 /* HandwritingAssessmentResultView.swift in Sources */,
+				799B94792C3891B300FC2341 /* PopUpPositioning.swift in Sources */,
 				79C2A1D42C330CAB007D16D3 /* FirstOnboarding.swift in Sources */,
 				79C2A1D62C330D43007D16D3 /* SecondOnboarding.swift in Sources */,
 				E763DBA12C2AFEF80087EA5B /* pawprintApp.swift in Sources */,
