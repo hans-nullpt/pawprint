@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B347BC02C3869A700F09961 /* PracticeResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B347BBF2C3869A700F09961 /* PracticeResult.swift */; };
+		4B347BC22C38A78F00F09961 /* PracticeResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B347BC12C38A78F00F09961 /* PracticeResultView.swift */; };
 		4B3BB2F22C2D4DBB00488386 /* DrawingCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3BB2F12C2D4DBB00488386 /* DrawingCanvasView.swift */; };
 		4B3BB2F42C2D4E1D00488386 /* DrawingCanvasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3BB2F32C2D4E1D00488386 /* DrawingCanvasViewController.swift */; };
 		4BB4890A2C33F33000AF3ED1 /* PracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BB489092C33F33000AF3ED1 /* PracticeView.swift */; };
@@ -33,8 +35,8 @@
 		E7ACC69E2C368DF70098E076 /* HomeResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ACC69B2C368DF70098E076 /* HomeResultView.swift */; };
 		E7ACC69F2C368DF70098E076 /* GroupLetterSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ACC69C2C368DF70098E076 /* GroupLetterSectionView.swift */; };
 		E7ACC6A12C368E150098E076 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ACC6A02C368E150098E076 /* HomeViewModel.swift */; };
-		E7ACC6A52C36A7F90098E076 /* WhiteboardPracticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ACC6A42C36A7F90098E076 /* WhiteboardPracticeViewModel.swift */; };
 		E7ACC6A32C36948D0098E076 /* OCRCameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ACC6A22C36948D0098E076 /* OCRCameraViewModel.swift */; };
+		E7ACC6A52C36A7F90098E076 /* WhiteboardPracticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ACC6A42C36A7F90098E076 /* WhiteboardPracticeViewModel.swift */; };
 		E7B00C512C328DF900FAEF87 /* HandwritingAnalyzeResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C502C328DF900FAEF87 /* HandwritingAnalyzeResultViewModel.swift */; };
 		E7B00C532C328E3A00FAEF87 /* WordResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C522C328E3A00FAEF87 /* WordResult.swift */; };
 		E7B00C552C328EF800FAEF87 /* HandwritingAssessmentResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C542C328EF800FAEF87 /* HandwritingAssessmentResultView.swift */; };
@@ -43,6 +45,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4B347BBF2C3869A700F09961 /* PracticeResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeResult.swift; sourceTree = "<group>"; };
+		4B347BC12C38A78F00F09961 /* PracticeResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeResultView.swift; sourceTree = "<group>"; };
 		4B3BB2F12C2D4DBB00488386 /* DrawingCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingCanvasView.swift; sourceTree = "<group>"; };
 		4B3BB2F32C2D4E1D00488386 /* DrawingCanvasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingCanvasViewController.swift; sourceTree = "<group>"; };
 		4BB489092C33F33000AF3ED1 /* PracticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeView.swift; sourceTree = "<group>"; };
@@ -69,8 +73,8 @@
 		E7ACC69B2C368DF70098E076 /* HomeResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeResultView.swift; sourceTree = "<group>"; };
 		E7ACC69C2C368DF70098E076 /* GroupLetterSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupLetterSectionView.swift; sourceTree = "<group>"; };
 		E7ACC6A02C368E150098E076 /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		E7ACC6A42C36A7F90098E076 /* WhiteboardPracticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteboardPracticeViewModel.swift; sourceTree = "<group>"; };
 		E7ACC6A22C36948D0098E076 /* OCRCameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRCameraViewModel.swift; sourceTree = "<group>"; };
+		E7ACC6A42C36A7F90098E076 /* WhiteboardPracticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteboardPracticeViewModel.swift; sourceTree = "<group>"; };
 		E7B00C502C328DF900FAEF87 /* HandwritingAnalyzeResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandwritingAnalyzeResultViewModel.swift; sourceTree = "<group>"; };
 		E7B00C522C328E3A00FAEF87 /* WordResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordResult.swift; sourceTree = "<group>"; };
 		E7B00C542C328EF800FAEF87 /* HandwritingAssessmentResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandwritingAssessmentResultView.swift; sourceTree = "<group>"; };
@@ -95,6 +99,7 @@
 			children = (
 				E77E07102C36753C0036E9AC /* SubViews */,
 				4BB489092C33F33000AF3ED1 /* PracticeView.swift */,
+				4B347BC12C38A78F00F09961 /* PracticeResultView.swift */,
 			);
 			path = PracticeViews;
 			sourceTree = "<group>";
@@ -228,6 +233,7 @@
 			children = (
 				E7B00C522C328E3A00FAEF87 /* WordResult.swift */,
 				E77E07112C3678B80036E9AC /* GroupLetter.swift */,
+				4B347BBF2C3869A700F09961 /* PracticeResult.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -296,7 +302,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1520;
-				LastUpgradeCheck = 1520;
+				LastUpgradeCheck = 1540;
 				TargetAttributes = {
 					E763DB9C2C2AFEF70087EA5B = {
 						CreatedOnToolsVersion = 15.2;
@@ -346,6 +352,7 @@
 				E75D61E52C33EE690067A9E3 /* CustomCameraView.swift in Sources */,
 				E75D61E32C33E5D30067A9E3 /* PreviewCameraView.swift in Sources */,
 				E7ACC69D2C368DF70098E076 /* HomeView.swift in Sources */,
+				4B347BC02C3869A700F09961 /* PracticeResult.swift in Sources */,
 				E77E070D2C3675170036E9AC /* PracticeViewModel.swift in Sources */,
 				E77E070F2C3675200036E9AC /* HistoryViewModel.swift in Sources */,
 				79DCF5082C35C1D400C5A16D /* HistoryView.swift in Sources */,
@@ -364,12 +371,12 @@
 				79C2A1D42C330CAB007D16D3 /* FirstOnboarding.swift in Sources */,
 				79C2A1D62C330D43007D16D3 /* SecondOnboarding.swift in Sources */,
 				E763DBA12C2AFEF80087EA5B /* pawprintApp.swift in Sources */,
+				4B347BC22C38A78F00F09961 /* PracticeResultView.swift in Sources */,
 				7960B3972C32591E00F32B06 /* SplashView.swift in Sources */,
 				7960B39D2C32605300F32B06 /* OnBoardingView.swift in Sources */,
 				79DCF5122C36F16000C5A16D /* WhiteboardPracticeView.swift in Sources */,
 				E7ACC6A12C368E150098E076 /* HomeViewModel.swift in Sources */,
 				4B3BB2F42C2D4E1D00488386 /* DrawingCanvasViewController.swift in Sources */,
-				E763DBA12C2AFEF80087EA5B /* pawprintApp.swift in Sources */,
 				4B3BB2F22C2D4DBB00488386 /* DrawingCanvasView.swift in Sources */,
 				E7436F042C342A8300C3635F /* PopUpConfirmation.swift in Sources */,
 			);
@@ -505,7 +512,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"pawprint/Preview Content\"";
-				DEVELOPMENT_TEAM = 57BYB3NG56;
+				DEVELOPMENT_TEAM = WHG3N2U8WV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) need access to use camera";
@@ -539,7 +546,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"pawprint/Preview Content\"";
-				DEVELOPMENT_TEAM = 57BYB3NG56;
+				DEVELOPMENT_TEAM = WHG3N2U8WV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) need access to use camera";
