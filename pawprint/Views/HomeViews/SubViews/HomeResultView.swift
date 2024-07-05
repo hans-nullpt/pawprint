@@ -9,26 +9,23 @@ import SwiftUI
 
 struct HomeResultView: View {
     var body: some View {
-        VStack {
-            Text("Your last score")
-                .font(.system(size: 24))
+        VStack(spacing: 48) {
+            Text("Your last score ")
+                .font(.system(size: 32))
                 .bold()
-            Text("e, f, s")
-                .font(.system(size: 24))
+            + Text("e, f, s")
+                .font(.system(size: 32))
                 .bold()
                 .foregroundColor(.kRed)
-            ZStack {
                 Text("80%")
                     .font(.system(size: 80))
                     .fontWeight(.heavy)
-                Image(.result)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(maxWidth: 400)
-                    .offset(x: 20)
-            }
+                    .background {
+                        Image(.result)
+                            .scaledToFill()
+                    }
             Text("Your progress seems great!")
-                .font(.system(size: 24))
+                .font(.system(size: 28))
                 .bold()
         }
     }
