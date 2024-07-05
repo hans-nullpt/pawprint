@@ -47,12 +47,12 @@ struct HomeView: View {
                         .font(.system(size: 36))
                         .padding(.bottom, 20)
                     
-                    GroupLetterSectionView<LowerCaseLetterType>(
+                    GroupLetterSectionView(
                         title: "Lowercase",
                         items: vm.lowerCaseGroup
                     )
                     
-                    GroupLetterSectionView<UpperCaseLetterType>(
+                    GroupLetterSectionView(
                         title: "Uppercase",
                         items: vm.upperCaseGroup
                     )

@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct GroupLetterSectionView<T>: View {
+struct GroupLetterSectionView: View {
     var title: String
-    var items: [GroupLetterItem<T>]
+    var items: [GroupLetterItem]
     
     let columns = [
         GridItem(.flexible(), spacing: 30),
@@ -26,13 +26,16 @@ struct GroupLetterSectionView<T>: View {
             
             LazyVGrid(columns: columns, spacing: 30) {
                 ForEach(items, id: \.id) { item in
-                    Button(action: {
-                    }) {
+                    
+                    NavigationLink {
+                       EmptyView()
+                    } label: {
                         Text(item.letters.joined(separator: ", "))
                             .frame(maxWidth: .infinity)
                             .padding()
                     }
                     .buttonStyle(PawPrintButtonStyle())
+                    
                 }
             }
         }
@@ -40,8 +43,8 @@ struct GroupLetterSectionView<T>: View {
 }
 
 #Preview {
-    GroupLetterSectionView<LowerCaseLetterType>(
+    GroupLetterSectionView(
         title: "Lowercase",
-        items: GroupLetterItem<LowerCaseLetterType>.lowerCaseItems
+        items: GroupLetterItem.lowerCaseItems
     )
 }
