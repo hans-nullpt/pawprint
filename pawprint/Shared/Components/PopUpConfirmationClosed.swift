@@ -22,8 +22,6 @@ struct PopUpConfirmationClosed<Content: View>: View {
     
     var body: some View {
         ZStack(alignment: .center) {
-            Image(.catAngry)
-                .offset(y: -246)
             
             ZStack(alignment: .topTrailing) {
                 VStack(spacing: 48) {
@@ -62,12 +60,14 @@ struct PopUpConfirmationClosed<Content: View>: View {
                         )
                         .cornerRadius(.infinity)
                     }
+                    
                 }
                 .padding(40)
                 .padding(.top, showCloseButton ? 72 : 0)
                 .foregroundStyle(.white)
                 .background(.white)
                 .clipShape(RoundedRectangle(cornerRadius: 60))
+
                 
                 if showCloseButton {
                     Button(action: {
@@ -83,9 +83,12 @@ struct PopUpConfirmationClosed<Content: View>: View {
                 }
             }
             .frame(maxWidth: 640)
+            Image(.catCrying)
+                .offset(y: -220)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.black.opacity(0.6))
+                
     }
 }
 
