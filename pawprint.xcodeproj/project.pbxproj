@@ -34,6 +34,7 @@
 		E7ACC69F2C368DF70098E076 /* GroupLetterSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ACC69C2C368DF70098E076 /* GroupLetterSectionView.swift */; };
 		E7ACC6A12C368E150098E076 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ACC6A02C368E150098E076 /* HomeViewModel.swift */; };
 		E7ACC6A52C36A7F90098E076 /* WhiteboardPracticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ACC6A42C36A7F90098E076 /* WhiteboardPracticeViewModel.swift */; };
+		E7ACC6A32C36948D0098E076 /* OCRCameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7ACC6A22C36948D0098E076 /* OCRCameraViewModel.swift */; };
 		E7B00C512C328DF900FAEF87 /* HandwritingAnalyzeResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C502C328DF900FAEF87 /* HandwritingAnalyzeResultViewModel.swift */; };
 		E7B00C532C328E3A00FAEF87 /* WordResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C522C328E3A00FAEF87 /* WordResult.swift */; };
 		E7B00C552C328EF800FAEF87 /* HandwritingAssessmentResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B00C542C328EF800FAEF87 /* HandwritingAssessmentResultView.swift */; };
@@ -69,6 +70,7 @@
 		E7ACC69C2C368DF70098E076 /* GroupLetterSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupLetterSectionView.swift; sourceTree = "<group>"; };
 		E7ACC6A02C368E150098E076 /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		E7ACC6A42C36A7F90098E076 /* WhiteboardPracticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteboardPracticeViewModel.swift; sourceTree = "<group>"; };
+		E7ACC6A22C36948D0098E076 /* OCRCameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRCameraViewModel.swift; sourceTree = "<group>"; };
 		E7B00C502C328DF900FAEF87 /* HandwritingAnalyzeResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandwritingAnalyzeResultViewModel.swift; sourceTree = "<group>"; };
 		E7B00C522C328E3A00FAEF87 /* WordResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordResult.swift; sourceTree = "<group>"; };
 		E7B00C542C328EF800FAEF87 /* HandwritingAssessmentResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandwritingAssessmentResultView.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				E77E070C2C3675170036E9AC /* PracticeViewModel.swift */,
 				E77E070E2C3675200036E9AC /* HistoryViewModel.swift */,
 				E7ACC6A42C36A7F90098E076 /* WhiteboardPracticeViewModel.swift */,
+				E7ACC6A22C36948D0098E076 /* OCRCameraViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7ACC6A32C36948D0098E076 /* OCRCameraViewModel.swift in Sources */,
 				4BB4890C2C349B7300AF3ED1 /* PopUpConfirmationClosed.swift in Sources */,
 				E75D61E52C33EE690067A9E3 /* CustomCameraView.swift in Sources */,
 				E75D61E32C33E5D30067A9E3 /* PreviewCameraView.swift in Sources */,
@@ -501,7 +505,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"pawprint/Preview Content\"";
-				DEVELOPMENT_TEAM = WHG3N2U8WV;
+				DEVELOPMENT_TEAM = 57BYB3NG56;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) need access to use camera";
@@ -535,7 +539,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"pawprint/Preview Content\"";
-				DEVELOPMENT_TEAM = WHG3N2U8WV;
+				DEVELOPMENT_TEAM = 57BYB3NG56;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) need access to use camera";

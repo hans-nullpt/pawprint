@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HandwritingAssessmentResultView: View {
+    @ObservedObject var vm: HandwritingAnalyzeResultViewModel
+    
     var body: some View {
         NavigationStack {
             ZStack{
@@ -39,39 +41,41 @@ struct HandwritingAssessmentResultView: View {
                                 .font(.system(size: 40))
                                 .fontWeight(.medium)
                             
-                            HStack{
-                                Image(.handwritingExample)
-                                    .padding()
-                                    .overlay {
-                                        RoundedRectangle(cornerRadius: 20)
-                                            .stroke(
-                                                .red,
-                                                lineWidth: 4
+                            if let image = vm.capturedImage {
+                                HStack{
+                                    Image(uiImage: image)
+                                        .padding()
+                                        .overlay {
+                                            RoundedRectangle(cornerRadius: 20)
+                                                .stroke(
+                                                    .red,
+                                                    lineWidth: 4
+                                                )
+                                        }
+                                    Spacer()
+                                    Image(systemName: "arrow.right")
+                                        .font(.system(size: 60))
+                                        .fontWeight(.medium)
+                                    Spacer()
+                                    Text("effervessent elves swiftly sew")
+                                        .font(.system(size: 60))
+                                        .fontWeight(.medium)
+                                        .multilineTextAlignment(.center)
+                                }
+                                .padding(.horizontal, 32)
+                                .padding(.vertical, 24)
+                                .frame(maxWidth: .infinity)
+                                .overlay {
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .stroke(
+                                            .black,
+                                            style: StrokeStyle(
+                                                lineWidth: 4, dash: [6]
                                             )
-                                    }
-                                Spacer()
-                                Image(systemName: "arrow.right")
-                                    .font(.system(size: 60))
-                                    .fontWeight(.medium)
-                                Spacer()
-                                Text("effervessent elves swiftly sew")
-                                    .font(.system(size: 60))
-                                    .fontWeight(.medium)
-                                    .multilineTextAlignment(.center)
-                            }
-                            .padding(.horizontal, 32)
-                            .padding(.vertical, 24)
-                            .frame(maxWidth: .infinity)
-                            .overlay {
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(
-                                        .black,
-                                        style: StrokeStyle(
-                                            lineWidth: 4, dash: [6]
                                         )
-                                    )
+                                }
+                                
                             }
-                            
                         }
                         .padding(.vertical, 72)
                         .frame(maxWidth: .infinity)
@@ -114,5 +118,5 @@ struct HandwritingAssessmentResultView: View {
 }
 
 #Preview {
-    HandwritingAssessmentResultView()
+    HandwritingAssessmentResultView(vm: HandwritingAnalyzeResultViewModel())
 }
