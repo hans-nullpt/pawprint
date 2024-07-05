@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import Vision
 
-class HandwritingAnalyzeResultViewModel: ObservableObject {
+class HandwritingAnalyzeResultViewModel: ObservableObject, OCRDelegate {
     @Published var instructionSentence: String = ""
     @Published var showCameraModal = false
     @Published var scannedText: AttributedString = AttributedString()
@@ -17,27 +17,9 @@ class HandwritingAnalyzeResultViewModel: ObservableObject {
     @Published var wordsResults: [WordResult] = []
     @Published var readabilityPercentage: Double = 0
     
-    func recognizeText(image: UIImage) {
-        guard let cgImage = image.cgImage else { return }
-        let request = VNRecognizeTextRequest { (request, error) in
-            guard let observations = request.results as? [VNRecognizedTextObservation], error == nil else {
-                print("Text recognition error: \(error?.localizedDescription ?? "Unknown error")")
-                return
-            }
-            
-            let scanned = observations.map({ recognizedText in
-                recognizedText.topCandidates(1).first?.string ?? ""
-            }).joined(separator: " ")
-            
-            
-            DispatchQueue.main.async {
-                self.processAnaylze(scanned: scanned)
-            }
-        }
-        request.recognitionLevel = .accurate
-        
-        let handler = VNImageRequestHandler(cgImage: cgImage)
-        try? handler.perform([request])
+    func didReceiveOcrData(image: UIImage, scannedText: String) {
+        self.capturedImage = image
+        self.processAnaylze(scanned: scannedText)
     }
     
     func processAnaylze(scanned: String) {

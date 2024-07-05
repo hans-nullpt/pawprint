@@ -8,20 +8,18 @@
 import SwiftUI
 
 struct CustomCameraView: View {
-    let cameraService: CameraHandler = CameraHandler()
-    
-    @State private var isResultPresented: Bool = false
-    @EnvironmentObject private var vm: HandwritingAnalyzeResultViewModel
+    @StateObject private var vm: OCRCameraViewModel = OCRCameraViewModel()
+    @StateObject private var resultVm: HandwritingAnalyzeResultViewModel = HandwritingAnalyzeResultViewModel()
     
     var body: some View {
         NavigationStack{
             ZStack(alignment: .topTrailing) {
-                PreviewCameraView(cameraService: cameraService) { result in
+                PreviewCameraView(cameraService: vm.cameraService) { result in
                     switch result {
                         
                     case .success(let photo):
-                        if let data = photo.fileDataRepresentation() {
-                            vm.capturedImage = UIImage(data: data)
+                        if let data = photo.fileDataRepresentation(), let image = UIImage(data: data) {
+                            vm.save(image: image)
                         } else {
                             print("Error: No image data found")
                         }
@@ -40,8 +38,7 @@ struct CustomCameraView: View {
                     .frame(maxWidth: .infinity, alignment: .center)
                 
                 Button(action: {
-                    cameraService.capturePhoto()
-                    isResultPresented.toggle()
+                    vm.cameraService.capturePhoto()
                 }) {
                     ZStack {
                         Circle()
@@ -56,8 +53,11 @@ struct CustomCameraView: View {
                 .offset(x: -48)
             }
             .ignoresSafeArea()
-            .navigationDestination(isPresented: $isResultPresented) {
-                HandwritingAssessmentResultView()
+            .navigationDestination(isPresented: $vm.isResultPresented) {
+                HandwritingAssessmentResultView(vm: resultVm)
+            }
+            .onAppear {
+                self.vm.delegate = resultVm
             }
         }
     }
