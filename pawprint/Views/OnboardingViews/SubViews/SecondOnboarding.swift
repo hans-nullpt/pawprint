@@ -11,7 +11,11 @@ struct SecondOnboarding: View {
     var body: some View {
         ZStack {
             Image("onboard2")
-                .padding(.bottom, 100)
+                .offset(x: -10, y: -10)
         }
     }
+}
+
+#Preview {
+    SecondOnboarding()
 }

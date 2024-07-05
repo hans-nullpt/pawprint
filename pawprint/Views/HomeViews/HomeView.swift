@@ -8,34 +8,52 @@
 import SwiftUI
 
 struct HomeView: View {
-    
+    var body: some View {
+        TabView {
+            DeviceHome(device: "whiteboard")
+                .tabItem {
+                    Label("Whiteboard", systemImage: "pencil.and.scribble")
+                }
+            
+            DeviceHome(device: "iPad")
+                .tabItem {
+                    Label("iPad", systemImage: "applepencil.and.scribble")
+                }
+        }
+        .accentColor(.black)
+    }
+}
+
+struct DeviceHome: View {
     @StateObject private var vm: HomeViewModel = HomeViewModel()
     
+    var device: String
     var body: some View {
-        let buttonTitles = ["History", "iPad", "Whiteboard"]
-        
         ZStack {
             Color(.appBackground).ignoresSafeArea()
             Image(.lineBg)
             ScrollView {
-                VStack (alignment: .leading) {
-                    HStack (spacing: 20) {
-                        ForEach(buttonTitles, id: \.self) { title in
-                            Button(action: {
-                            }) {
-                                Text(title)
-                            }
-                            .accentColor(.black)
-                            .buttonStyle(PawPrintButtonStyle())
-                            .padding(.bottom, 10)  // Add some spacing between buttons
+                VStack (alignment: .leading, spacing: 40) {
+                    HStack {
+                        if device == "iPad"{
+                            Image(.iPadIcon)
                         }
-                    }
+                        else {
+                            Image(.whiteboardIcon)
+                        }
+                        Spacer()
+                        
+                        Button(action: {
+                        }) {
+                            Text("History")
+                        }
+                        .buttonStyle(PawPrintButtonStyle())
+                    }.offset(y: 40)
                     
                     HStack (alignment: .center) {
                         ZStack {
-                            Image(.catwithiPad)
-                            .offset(x: -110, y: 25)
-//                            Image("letspractice")
+                            Image(.letspractice)
+                                .offset(x: -90, y: 25)
                             HomeResultView()
                         }
                     }
@@ -56,8 +74,6 @@ struct HomeView: View {
                         title: "Uppercase",
                         items: vm.upperCaseGroup
                     )
-                    
-//
                 }
                 .padding(.horizontal, 60)
                 .padding(.vertical, 30)
@@ -65,7 +81,8 @@ struct HomeView: View {
         }
     }
 }
-        
+
+
 #Preview {
     HomeView()
 }

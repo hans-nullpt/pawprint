@@ -43,10 +43,12 @@ struct FirstTab: View {
                     }
                     .buttonStyle(PawPrintButtonStyle())
                     Spacer()
-                }.offset(x: 40, y: 40)
+                }.offset(x: 40, y: 0)
                 
                 ZStack (alignment: .center){
                     Image("HistoryCircle")
+                        .resizable()
+                        .frame(width: 300, height: 100)
                     
                     VStack {
                         Text("History")
@@ -58,7 +60,7 @@ struct FirstTab: View {
                     
                 ZStack {
                     Image("HistoryWhiteboard")
-                        .offset(x: 65, y: 0)
+                        .offset(x: -30, y: -10)
                     
                     ScrollView (showsIndicators: false){
                         VStack(alignment: .leading) {
@@ -98,7 +100,7 @@ struct FirstTab: View {
                         }
                     }
                     .frame(height: 520)
-                    .offset(x: 0, y: -30)
+                    .offset(x: 0, y: 0)
                 }
             }
         }
