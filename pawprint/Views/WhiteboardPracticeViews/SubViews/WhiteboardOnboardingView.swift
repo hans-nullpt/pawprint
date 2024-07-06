@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct WhiteboardOnboardingView: View {
+    @EnvironmentObject private var vm: WhiteboardPracticeViewModel
     @State private var showClosePopup: Bool = false
+    @State private var showStartOverlay: Bool = false
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
@@ -16,10 +18,14 @@ struct WhiteboardOnboardingView: View {
                 Image(.onboardingwhiteboard)
                     .offset(x: -90, y: -40)
                 
-                Button(action: {}) {
+                Button(action: {
+                    withAnimation {
+                        showStartOverlay.toggle()
+                    }
+                }) {
                     HStack {
-                        Text("Next")
-                        Image(systemName: "arrow.right")
+                        Text("Start")
+                        Image(systemName: "play.fill")
                     }
                 }
                 .buttonStyle(PawPrintButtonStyle())
@@ -56,10 +62,53 @@ struct WhiteboardOnboardingView: View {
                     isPresented: $showClosePopup
                 )
             }
+            
+            if showStartOverlay {
+                PracticeStartOverlay(isPresented: $showStartOverlay)
+                    .onDisappear(perform: {
+                        withAnimation {
+                            vm.getSentence()
+                        }
+                    })
+            }
         }
     }
 }
 
+struct PracticeStartOverlay: View {
+    
+    @Binding var isPresented: Bool
+    
+    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    private let text: [String] = ["Ready!", "Set!", "Write!"]
+    
+    @State private var count: Int = 0
+    
+    var body: some View {
+        Text(text[count])
+            .font(.system(size: 64))
+            .fontWeight(.heavy)
+            .frame(width: 300, height: 300)
+            .background(.white)
+            .clipShape(Circle())
+            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
+            .background(.black.opacity(0.6))
+            .onReceive(timer) { _ in
+                guard count > 1 else {
+                    withAnimation(.bouncy) {
+                        count += 1
+                    }
+                    return
+                }
+                
+                withAnimation {
+                    isPresented = false
+                }
+                timer.upstream.connect().cancel()
+            }
+    }
+}
+
 #Preview {
-    WhiteboardOnboardingView()
+    WhiteboardPracticeView(groupLetter: GroupLetterItem.lowerCaseItems.first!)
 }

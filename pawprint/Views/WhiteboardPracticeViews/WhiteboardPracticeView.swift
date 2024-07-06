@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct WhiteboardPracticeView: View {
-    @State private var isPracticeStarted = false
+    @StateObject private var vm: WhiteboardPracticeViewModel = WhiteboardPracticeViewModel()
+    
+    var groupLetter: GroupLetterItem
     
     var body: some View {
         NavigationStack {
-            if isPracticeStarted {
+            if vm.isPracticeStarted {
                 WhiteboardQuestionView()
                     .navigationBarBackButtonHidden()
                     .navigationBarHidden(true)
@@ -23,11 +25,16 @@ struct WhiteboardPracticeView: View {
                     .navigationBarBackButtonHidden()
                     .navigationBarHidden(true)
                     .toolbar(.hidden, for: .tabBar)
+                    .onAppear {
+                        vm.data = groupLetter
+                    }
             }
         }
+        .environmentObject(vm)
     }
 }
 
 #Preview {
-    WhiteboardPracticeView()
+    WhiteboardPracticeView(groupLetter: GroupLetterItem.lowerCaseItems.first!)
+        .environmentObject(WhiteboardPracticeViewModel())
 }

@@ -12,6 +12,7 @@ import AVFoundation
 class WhiteboardPracticeViewModel: ObservableObject {
     @Published var sentence: String = ""
     @Published var remainingTime: TimeInterval = 0
+    @Published var isPracticeStarted: Bool = false
     var data: GroupLetterItem?
     @Published var timer: Publishers.Autoconnect<Timer.TimerPublisher>?
     
@@ -23,14 +24,14 @@ class WhiteboardPracticeViewModel: ObservableObject {
         timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     }
     
-    func getSentence(data: GroupLetterItem) {
-        self.data = data
+    func getSentence() {
         
-        if let sentence = data.sentences.randomElement()?.last {
+        if let sentence = data?.sentences.randomElement()?.last {
             self.sentence = sentence.value
             self.remainingTime = getTimeInterval()
             self.speechRate = -Float(getTimeInterval())
             self.startVoiceOver()
+            self.isPracticeStarted = true
         }
     }
     
@@ -61,6 +62,8 @@ class WhiteboardPracticeViewModel: ObservableObject {
         if speechSynthesizer.isSpeaking {
             speechSynthesizer.stopSpeaking(at: .immediate)
         }
+        
+        self.isPracticeStarted = false
     }
     
     func startVoiceOver() {

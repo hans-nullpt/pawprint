@@ -31,7 +31,7 @@ struct GroupLetterSectionView: View {
                     
                     NavigationLink {
                         if vm.tabSelection == 0 {
-                            WhiteboardPracticeView()
+                            WhiteboardPracticeView(groupLetter: item)
                         } else {
                             PracticeView(groupLetters: item.letters.joined(separator: ", "), content: item.sentences)
                         }
