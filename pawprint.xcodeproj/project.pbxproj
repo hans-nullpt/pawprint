@@ -31,6 +31,8 @@
 		E763DBA52C2AFEF90087EA5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E763DBA42C2AFEF90087EA5B /* Assets.xcassets */; };
 		E763DBA82C2AFEF90087EA5B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E763DBA72C2AFEF90087EA5B /* Preview Assets.xcassets */; };
 		E77062092C38D786003C33BE /* PracticeMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77062082C38D786003C33BE /* PracticeMode.swift */; };
+		E770620D2C38E31E003C33BE /* WhiteboardOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E770620C2C38E31E003C33BE /* WhiteboardOnboardingView.swift */; };
+		E770620F2C38E35B003C33BE /* WhiteboardQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E770620E2C38E35B003C33BE /* WhiteboardQuestionView.swift */; };
 		E77E070D2C3675170036E9AC /* PracticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77E070C2C3675170036E9AC /* PracticeViewModel.swift */; };
 		E77E070F2C3675200036E9AC /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77E070E2C3675200036E9AC /* HistoryViewModel.swift */; };
 		E77E07122C3678B80036E9AC /* GroupLetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77E07112C3678B80036E9AC /* GroupLetter.swift */; };
@@ -72,6 +74,8 @@
 		E763DBA42C2AFEF90087EA5B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E763DBA72C2AFEF90087EA5B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E77062082C38D786003C33BE /* PracticeMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeMode.swift; sourceTree = "<group>"; };
+		E770620C2C38E31E003C33BE /* WhiteboardOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteboardOnboardingView.swift; sourceTree = "<group>"; };
+		E770620E2C38E35B003C33BE /* WhiteboardQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteboardQuestionView.swift; sourceTree = "<group>"; };
 		E77E070C2C3675170036E9AC /* PracticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeViewModel.swift; sourceTree = "<group>"; };
 		E77E070E2C3675200036E9AC /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
 		E77E07112C3678B80036E9AC /* GroupLetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupLetter.swift; sourceTree = "<group>"; };
@@ -147,6 +151,24 @@
 				E763DBA72C2AFEF90087EA5B /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E770620A2C38E2FB003C33BE /* WhiteboardPracticeViews */ = {
+			isa = PBXGroup;
+			children = (
+				79DCF5112C36F16000C5A16D /* WhiteboardPracticeView.swift */,
+				E770620B2C38E30A003C33BE /* SubViews */,
+			);
+			path = WhiteboardPracticeViews;
+			sourceTree = "<group>";
+		};
+		E770620B2C38E30A003C33BE /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				E770620C2C38E31E003C33BE /* WhiteboardOnboardingView.swift */,
+				E770620E2C38E35B003C33BE /* WhiteboardQuestionView.swift */,
+			);
+			path = SubViews;
 			sourceTree = "<group>";
 		};
 		E77E07062C36747A0036E9AC /* CameraViews */ = {
@@ -256,7 +278,7 @@
 				E7B00C542C328EF800FAEF87 /* HandwritingAssessmentResultView.swift */,
 				7960B3962C32591E00F32B06 /* SplashView.swift */,
 				79DCF5072C35C1D400C5A16D /* HistoryView.swift */,
-				79DCF5112C36F16000C5A16D /* WhiteboardPracticeView.swift */,
+				E770620A2C38E2FB003C33BE /* WhiteboardPracticeViews */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -356,7 +378,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E770620D2C38E31E003C33BE /* WhiteboardOnboardingView.swift in Sources */,
 				E7ACC6A32C36948D0098E076 /* OCRCameraViewModel.swift in Sources */,
+				E770620F2C38E35B003C33BE /* WhiteboardQuestionView.swift in Sources */,
 				4BB4890C2C349B7300AF3ED1 /* PopUpConfirmationClosed.swift in Sources */,
 				E75D61E52C33EE690067A9E3 /* CustomCameraView.swift in Sources */,
 				E75D61E32C33E5D30067A9E3 /* PreviewCameraView.swift in Sources */,
