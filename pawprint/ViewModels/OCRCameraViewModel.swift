@@ -15,6 +15,7 @@ struct HandwritingData {
     var scannedText: String
     var content: String
     var groupLetter: GroupLetterItem
+    var boundingBox: CGRect
 }
 
 protocol OCRDelegate {
@@ -24,22 +25,28 @@ protocol OCRDelegate {
 class OCRCameraViewModel: ObservableObject {
     var delegate: OCRDelegate?
     var cameraService: CameraHandler = CameraHandler()
-    var groupLetter: GroupLetterItem?
-    var selectedContent: String?
     
     @Published var isResultPresented: Bool = false
+    @Published var capturedImage: UIImage?
+    @Published var boundingBox: CGRect?
     
     func save(image: UIImage, groupLetter: GroupLetterItem, selectedContent: String) {
-        self.groupLetter = groupLetter
-        self.selectedContent = selectedContent
-        recognizeText(image: image)
-        
-        withAnimation {
-            isResultPresented.toggle()
+        if let rotatedImage = image.rotatedToLandscapeLeft() {
+            recognizeText(image: image) { result, bb in
+                let data = HandwritingData(
+                    image: rotatedImage, scannedText: result, content: selectedContent, groupLetter: groupLetter,
+                    boundingBox: bb
+                )
+                self.delegate?.didReceiveOcrData(data: data)
+                
+                withAnimation {
+                    self.isResultPresented.toggle()
+                }
+            }
         }
     }
     
-    private func recognizeText(image: UIImage) {
+    private func recognizeText(image: UIImage, completion: @escaping (String, CGRect) -> ()) {
         guard let cgImage = image.cgImage else { return }
         let request = VNRecognizeTextRequest { (request, error) in
             guard let observations = request.results as? [VNRecognizedTextObservation], error == nil else {
@@ -51,14 +58,9 @@ class OCRCameraViewModel: ObservableObject {
                 recognizedText.topCandidates(1).first?.string ?? ""
             }).joined(separator: " ")
             
-            
             DispatchQueue.main.async {
-                if let content = self.selectedContent, let groupLetter = self.groupLetter {
-                    let data = HandwritingData(
-                        image: image, scannedText: scanned, content: content, groupLetter: groupLetter
-                    )
-                    self.delegate?.didReceiveOcrData(data: data)
-                }
+                let boundingBox = self.getBoundingBox(observations: observations)
+                completion(scanned, boundingBox)
             }
         }
         request.recognitionLevel = .accurate
@@ -67,4 +69,77 @@ class OCRCameraViewModel: ObservableObject {
         try? handler.perform([request])
     }
     
+    private func getBoundingBox(observations: [VNRecognizedTextObservation]) -> CGRect {
+        var boundingBoxes: [CGRect] = []
+        
+        for observation in observations {
+            let topCandidate = observation.topCandidates(1)
+            
+            for candidate in topCandidate {
+                let range = candidate.string.startIndex..<candidate.string.endIndex
+                
+                if let sentenceBox = try? candidate.boundingBox(for: range) {
+                    boundingBoxes.append(sentenceBox.boundingBox)
+                }
+            }
+        }
+        
+        let allWidth = boundingBoxes.map { $0.width }
+        let maxWidth = (allWidth.max(by: { $0 < $1 }) ?? 0)
+        let height = boundingBoxes.reduce(0) { partialResult, rect in
+            partialResult + rect.height
+        }
+        let x = (boundingBoxes.first?.minX ?? 0)
+        let y = 1 - (boundingBoxes.first?.maxY ?? 0) - height
+        
+        return CGRect(x: x, y: y, width: maxWidth, height: height)
+    }
+    
+    private func vnImageRectForNormalizedRect(rect: CGRect, imageSize: CGSize) -> CGRect {
+        let width = imageSize.width
+        let height = imageSize.height
+        
+        let x = rect.minX * width
+        let y = rect.maxY * height
+        let rectWidth = rect.width * width
+        let rectHeight = rect.height * height
+        
+        return CGRect(x: x, y: y, width: rectWidth, height: rectHeight)
+    }
+    
+}
+
+extension UIImage {
+    func rotatedToLandscapeLeft() -> UIImage? {
+        guard let cgImage = self.cgImage else { return nil }
+        
+        let width = self.size.width
+        let height = self.size.height
+        
+        let rotatedSize = CGSize(width: height, height: width)
+        
+        UIGraphicsBeginImageContext(rotatedSize)
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+        
+        // Move the origin to the middle of the image to rotate around the center.
+        context.translateBy(x: rotatedSize.width / 2, y: rotatedSize.height / 2)
+        
+        // Rotate the image context by 90 degrees (π/2 radians).
+        context.rotate(by: .pi / 2)
+        
+        // Draw the image into the context, applying the rotation.
+        context.scaleBy(x: 1.0, y: -1.0)
+        context.draw(cgImage, in: CGRect(x: -height / 2, y: -width / 2, width: height, height: width))
+        
+        // Get the new rotated image.
+        let rotatedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        // Update the orientation metadata.
+        return rotatedImage?.withOrientation(.left)
+    }
+    
+    func withOrientation(_ orientation: UIImage.Orientation) -> UIImage {
+        return UIImage(cgImage: self.cgImage!, scale: self.scale, orientation: orientation)
+    }
 }
