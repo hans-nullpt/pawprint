@@ -9,26 +9,35 @@ import SwiftUI
 
 
 struct HomeView: View {
+    
+    @StateObject private var vm: HomeViewModel = HomeViewModel()
+    @State private var tab: Int = 0
+    
     var body: some View {
-        TabView {
+        TabView(selection: $vm.tabSelection) {
             DeviceHome(device: .whiteboard)
                 .tabItem {
+                    
                     Label("Whiteboard", systemImage: "pencil.and.scribble")
-                }
+                    
+                }.tag(0)
             
             DeviceHome(device: .ipad)
                 .tabItem {
+                    
                     Label("iPad", systemImage: "applepencil.and.scribble")
-                }
+                    
+                }.tag(1)
         }
         .accentColor(.black)
+        .environmentObject(vm)
     }
 }
 
 struct DeviceHome: View {
-    @StateObject private var vm: HomeViewModel = HomeViewModel()
-    
     var device: PracticeModeType
+    
+    @EnvironmentObject private var vm: HomeViewModel
     
     var body: some View {
         NavigationStack {
@@ -57,11 +66,11 @@ struct DeviceHome: View {
                 }
                 Spacer()
                 HomeResultView()
-                .background {
-                    Image(.letspractice)
-                        .offset(x: -90)
-                }
-                .frame(maxWidth: .infinity)
+                    .background {
+                        Image(.letspractice)
+                            .offset(x: -90)
+                    }
+                    .frame(maxWidth: .infinity)
                 
                 Spacer()
                 VStack(alignment: .leading, spacing: 2){
@@ -96,4 +105,5 @@ struct DeviceHome: View {
 
 #Preview {
     HomeView()
+        .environmentObject(HomeViewModel())
 }

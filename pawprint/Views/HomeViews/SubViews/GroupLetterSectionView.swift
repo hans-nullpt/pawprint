@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct GroupLetterSectionView: View {
+    @EnvironmentObject private var vm: HomeViewModel
+    
     var title: String
     var items: [GroupLetterItem]
     
@@ -27,7 +29,13 @@ struct GroupLetterSectionView: View {
             LazyVGrid(columns: columns, spacing: 14) {
                 ForEach(items, id: \.id) { item in
                     
-                    NavigationLink(destination: PracticeView(groupLetters: item.letters.joined(separator: ", "), content: item.sentences)) {
+                    NavigationLink {
+                        if vm.tabSelection == 0 {
+                            WhiteboardPracticeView()
+                        } else {
+                            PracticeView(groupLetters: item.letters.joined(separator: ", "), content: item.sentences)
+                        }
+                    } label: {
                         Text(item.letters.joined(separator: ", "))
                             .frame(maxWidth: .infinity)
                     }
@@ -44,4 +52,5 @@ struct GroupLetterSectionView: View {
         title: "Lowercase",
         items: GroupLetterItem.lowerCaseItems
     )
+    .environmentObject(HomeViewModel())
 }
