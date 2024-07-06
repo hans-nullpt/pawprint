@@ -31,8 +31,10 @@ struct VerticalSurfaceValidationPopUp: View {
             .background(.white)
             .clipShape(RoundedRectangle(cornerRadius: 60))
             
-            Image(.catCrying)
-                .offset(y: -220)
+            Image(.angryCat)
+                .resizable()
+                .frame(width: 347, height: 431)
+                .offset(y: -274)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.black.opacity(0.6))
