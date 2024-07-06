@@ -31,7 +31,7 @@ struct FirstTab: View {
         ZStack {
             Color("AppBackgroundColor")
                 .ignoresSafeArea(.all)
-            Image("line_bg")
+            Image(.lineBg2)
             VStack(alignment: .center) {
                 HStack {
                     Button(action: {
@@ -103,6 +103,7 @@ struct FirstTab: View {
                     .offset(x: 0, y: 0)
                 }
             }
+            
         }
     }
 }
