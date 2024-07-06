@@ -12,12 +12,17 @@ struct PawPrintButtonStyle: ButtonStyle {
     
     private var background: Image?
     private var foregroundColor: Color?
+    private var enableBottomBorder: Bool = false
     
     init() {}
     
     init(background: Image, foregroundColor: Color) {
         self.background = background
         self.foregroundColor = foregroundColor
+    }
+    
+    init(enableBottomBorder: Bool?) {
+        self.enableBottomBorder = enableBottomBorder ?? false
     }
     
     func makeBody(configuration: Configuration) -> some View {
@@ -31,10 +36,13 @@ struct PawPrintButtonStyle: ButtonStyle {
             }
             .foregroundStyle( foregroundColor ?? .white)
             .clipShape(Capsule())
-//            .overlay {
-//                Capsule()
-//                    .stroke(.black, lineWidth: 4)
-//            }
+            .background {
+                if self.enableBottomBorder {
+                    Capsule()
+                        .stroke(.black, lineWidth: 3)
+                        .offset(y: 5)
+                }
+            }
     }
     
 }
@@ -44,7 +52,7 @@ struct SampleButton: View {
         Button("Sample Button") {
             
         }
-        .buttonStyle(PawPrintButtonStyle())
+        .buttonStyle(PawPrintButtonStyle(enableBottomBorder: true))
             
     }
 }

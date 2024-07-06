@@ -30,13 +30,10 @@ struct GroupLetterSectionView: View {
                     NavigationLink(destination: PracticeView(groupLetters: item.letters.joined(separator: ", "), content: item.sentences)) {
                         Text(item.letters.joined(separator: ", "))
                             .frame(maxWidth: .infinity)
-                            .padding()
                     }
-                    .buttonStyle(PawPrintButtonStyle())
-                    .cornerRadius(.infinity)
+                    .buttonStyle(PawPrintButtonStyle(enableBottomBorder: true))
                     
                 }
-                .cornerRadius(.infinity)
             }
         }
     }

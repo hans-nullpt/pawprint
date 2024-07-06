@@ -7,15 +7,16 @@
 
 import SwiftUI
 
+
 struct HomeView: View {
     var body: some View {
         TabView {
-            DeviceHome(device: "whiteboard")
+            DeviceHome(device: .whiteboard)
                 .tabItem {
                     Label("Whiteboard", systemImage: "pencil.and.scribble")
                 }
             
-            DeviceHome(device: "iPad")
+            DeviceHome(device: .ipad)
                 .tabItem {
                     Label("iPad", systemImage: "applepencil.and.scribble")
                 }
@@ -27,7 +28,8 @@ struct HomeView: View {
 struct DeviceHome: View {
     @StateObject private var vm: HomeViewModel = HomeViewModel()
     
-    var device: String
+    var device: PracticeModeType
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -36,7 +38,7 @@ struct DeviceHome: View {
                 ScrollView {
                     VStack (alignment: .leading, spacing: 40) {
                         HStack {
-                            if device == "iPad"{
+                            if device == .ipad {
                                 Image(.iPadIcon)
                             }
                             else {
