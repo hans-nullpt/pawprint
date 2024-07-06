@@ -73,10 +73,7 @@ struct WhiteboardQuestionView: View {
                 PopUpTimesUpView(
                     isPresented: $vm.showTimesUpPopup
                 ) {
-                    vm.restartPractice()
-                }
-                .onDisappear {
-//                    vm.timer?
+                    vm.startPractice()
                 }
             }
         }

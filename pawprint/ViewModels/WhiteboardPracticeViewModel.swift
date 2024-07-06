@@ -43,15 +43,18 @@ class WhiteboardPracticeViewModel: ObservableObject {
             self.remainingTime = getTimeInterval()
             self.intervalTime = getTimeInterval()
             self.speechRate = -Float(getTimeInterval())
-            self.startVoiceOver()
             self.practiceState = .started
             self.isPracticeStarted = true
+            startPractice()
         }
     }
     
-    func restartPractice() {
+    func startPractice() {
         startTimer()
-        startVoiceOver()
+        
+        for word in sentence.split(separator: " ") {
+            speak(word: String(word))
+        }
     }
     
     private func startTimer() {
@@ -90,9 +93,10 @@ class WhiteboardPracticeViewModel: ObservableObject {
         self.showTimesUpPopup.toggle()
     }
     
-    func startVoiceOver() {
-        let utterance: AVSpeechUtterance = AVSpeechUtterance(string: self.sentence)
+    func speak(word: String) {
+        let utterance: AVSpeechUtterance = AVSpeechUtterance(string: word)
         utterance.preUtteranceDelay = 2
+        utterance.postUtteranceDelay = 2
         utterance.voice = self.voice
         utterance.rate = self.speechRate
         

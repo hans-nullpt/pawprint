@@ -34,6 +34,7 @@
 		E770620D2C38E31E003C33BE /* WhiteboardOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E770620C2C38E31E003C33BE /* WhiteboardOnboardingView.swift */; };
 		E770620F2C38E35B003C33BE /* WhiteboardQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E770620E2C38E35B003C33BE /* WhiteboardQuestionView.swift */; };
 		E77062122C38FA6B003C33BE /* TimeIntervalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77062112C38FA6B003C33BE /* TimeIntervalExtension.swift */; };
+		E77062142C38FBA1003C33BE /* PopUpTimesUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77062132C38FBA1003C33BE /* PopUpTimesUpView.swift */; };
 		E77E070D2C3675170036E9AC /* PracticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77E070C2C3675170036E9AC /* PracticeViewModel.swift */; };
 		E77E070F2C3675200036E9AC /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77E070E2C3675200036E9AC /* HistoryViewModel.swift */; };
 		E77E07122C3678B80036E9AC /* GroupLetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77E07112C3678B80036E9AC /* GroupLetter.swift */; };
@@ -78,6 +79,7 @@
 		E770620C2C38E31E003C33BE /* WhiteboardOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteboardOnboardingView.swift; sourceTree = "<group>"; };
 		E770620E2C38E35B003C33BE /* WhiteboardQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteboardQuestionView.swift; sourceTree = "<group>"; };
 		E77062112C38FA6B003C33BE /* TimeIntervalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExtension.swift; sourceTree = "<group>"; };
+		E77062132C38FBA1003C33BE /* PopUpTimesUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpTimesUpView.swift; sourceTree = "<group>"; };
 		E77E070C2C3675170036E9AC /* PracticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeViewModel.swift; sourceTree = "<group>"; };
 		E77E070E2C3675200036E9AC /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
 		E77E07112C3678B80036E9AC /* GroupLetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupLetter.swift; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 				E7436F032C342A8300C3635F /* PopUpConfirmation.swift */,
 				4BB4890B2C349B7300AF3ED1 /* PopUpConfirmationClosed.swift */,
 				799B94782C3891B300FC2341 /* PopUpPositioning.swift */,
+				E77062132C38FBA1003C33BE /* PopUpTimesUpView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -396,6 +399,7 @@
 				E75D61E52C33EE690067A9E3 /* CustomCameraView.swift in Sources */,
 				E75D61E32C33E5D30067A9E3 /* PreviewCameraView.swift in Sources */,
 				E7ACC69D2C368DF70098E076 /* HomeView.swift in Sources */,
+				E77062142C38FBA1003C33BE /* PopUpTimesUpView.swift in Sources */,
 				4B347BC02C3869A700F09961 /* PracticeResult.swift in Sources */,
 				E77E070D2C3675170036E9AC /* PracticeViewModel.swift in Sources */,
 				E77E070F2C3675200036E9AC /* HistoryViewModel.swift in Sources */,
