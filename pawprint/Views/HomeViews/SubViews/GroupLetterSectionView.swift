@@ -38,6 +38,8 @@ struct GroupLetterSectionView: View {
                     } label: {
                         Text(item.letters.joined(separator: ", "))
                             .frame(maxWidth: .infinity)
+                            .padding()
+                            .toolbar(.hidden, for: .tabBar)
                     }
                     .buttonStyle(PawPrintButtonStyle(enableBottomBorder: true))
                     
