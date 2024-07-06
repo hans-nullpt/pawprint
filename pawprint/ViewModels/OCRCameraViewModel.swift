@@ -8,20 +8,35 @@
 import Foundation
 import UIKit
 import Vision
+import SwiftUI
+
+struct HandwritingData {
+    var image: UIImage
+    var scannedText: String
+    var content: String
+    var groupLetter: GroupLetterItem
+}
 
 protocol OCRDelegate {
-    func didReceiveOcrData(image: UIImage, scannedText: String)
+    func didReceiveOcrData(data: HandwritingData)
 }
 
 class OCRCameraViewModel: ObservableObject {
     var delegate: OCRDelegate?
     var cameraService: CameraHandler = CameraHandler()
+    var groupLetter: GroupLetterItem?
+    var selectedContent: String?
     
     @Published var isResultPresented: Bool = false
     
-    func save(image: UIImage) {
+    func save(image: UIImage, groupLetter: GroupLetterItem, selectedContent: String) {
+        self.groupLetter = groupLetter
+        self.selectedContent = selectedContent
         recognizeText(image: image)
-        isResultPresented.toggle()
+        
+        withAnimation {
+            isResultPresented.toggle()
+        }
     }
     
     private func recognizeText(image: UIImage) {
@@ -38,7 +53,12 @@ class OCRCameraViewModel: ObservableObject {
             
             
             DispatchQueue.main.async {
-                self.delegate?.didReceiveOcrData(image: image, scannedText: scanned)
+                if let content = self.selectedContent, let groupLetter = self.groupLetter {
+                    let data = HandwritingData(
+                        image: image, scannedText: scanned, content: content, groupLetter: groupLetter
+                    )
+                    self.delegate?.didReceiveOcrData(data: data)
+                }
             }
         }
         request.recognitionLevel = .accurate

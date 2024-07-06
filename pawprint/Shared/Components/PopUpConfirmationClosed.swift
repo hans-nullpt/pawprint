@@ -8,16 +8,15 @@
 import SwiftUI
 
 struct PopUpConfirmationClosed: View {
+    @Environment(\.dismiss) private var dismiss
     let message: String
     let showCloseButton: Bool
     @Binding var isPresented: Bool
-    @Binding var isButtonClicked: Bool
     
-    init(message: String, showCloseButton: Bool = false, isPresented: Binding<Bool>, isButtonClicked: Binding<Bool>) {
+    init(message: String, showCloseButton: Bool = false, isPresented: Binding<Bool>) {
         self.message = message
         self.showCloseButton = showCloseButton
         self._isPresented = isPresented
-        self._isButtonClicked = isButtonClicked
     }
     
     var body: some View {
@@ -33,7 +32,7 @@ struct PopUpConfirmationClosed: View {
                     HStack(spacing: 120) {
                         Button(action: {
                             isPresented.toggle()
-                            isButtonClicked.toggle()
+                            dismiss()
                         }) {
                             Text("Yes")
                                 .font(.system(size: 30, weight: .bold))
@@ -93,5 +92,5 @@ struct PopUpConfirmationClosed: View {
 }
 
 #Preview {
-    PopUpConfirmationClosed(message: "Are you sure want to cancel this excercise?", showCloseButton: true, isPresented: .constant(false), isButtonClicked: .constant(false))
+    PopUpConfirmationClosed(message: "Are you sure want to cancel this excercise?", showCloseButton: true, isPresented: .constant(false))
 }
