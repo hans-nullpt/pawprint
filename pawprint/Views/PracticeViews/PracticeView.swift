@@ -224,6 +224,16 @@ struct PracticeView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(.white)
                     
+                    if vm.isSurfacePositionNotValid {
+                        VerticalSurfaceValidationPopUp(isPresented: $vm.isSurfacePositionNotValid)
+                            .ignoresSafeArea()
+                            .offset(x:0, y: 0)
+                            .onAppear{
+                                withAnimation(.spring()) {
+                                }
+                            }
+                    }
+                    
                     if showPopUp {
                         PopUpConfirmationClosed(message: "Are you sure want to cancel this excercise?", showCloseButton: true, isPresented: $showPopUp, isButtonClicked: $isButtonClicked)
                             .ignoresSafeArea()

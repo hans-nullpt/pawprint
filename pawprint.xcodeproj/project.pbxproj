@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4B347BC02C3869A700F09961 /* PracticeResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B347BBF2C3869A700F09961 /* PracticeResult.swift */; };
 		4B347BC22C38A78F00F09961 /* PracticeResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B347BC12C38A78F00F09961 /* PracticeResultView.swift */; };
+		4B347BC42C394BBB00F09961 /* VerticalSurfaceValidationPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B347BC32C394BBB00F09961 /* VerticalSurfaceValidationPopUp.swift */; };
 		4B3BB2F22C2D4DBB00488386 /* DrawingCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3BB2F12C2D4DBB00488386 /* DrawingCanvasView.swift */; };
 		4B3BB2F42C2D4E1D00488386 /* DrawingCanvasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B3BB2F32C2D4E1D00488386 /* DrawingCanvasViewController.swift */; };
 		4BB4890A2C33F33000AF3ED1 /* PracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BB489092C33F33000AF3ED1 /* PracticeView.swift */; };
@@ -50,6 +51,7 @@
 /* Begin PBXFileReference section */
 		4B347BBF2C3869A700F09961 /* PracticeResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeResult.swift; sourceTree = "<group>"; };
 		4B347BC12C38A78F00F09961 /* PracticeResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeResultView.swift; sourceTree = "<group>"; };
+		4B347BC32C394BBB00F09961 /* VerticalSurfaceValidationPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalSurfaceValidationPopUp.swift; sourceTree = "<group>"; };
 		4B3BB2F12C2D4DBB00488386 /* DrawingCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingCanvasView.swift; sourceTree = "<group>"; };
 		4B3BB2F32C2D4E1D00488386 /* DrawingCanvasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingCanvasViewController.swift; sourceTree = "<group>"; };
 		4BB489092C33F33000AF3ED1 /* PracticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeView.swift; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 				E7436F032C342A8300C3635F /* PopUpConfirmation.swift */,
 				4BB4890B2C349B7300AF3ED1 /* PopUpConfirmationClosed.swift */,
 				799B94782C3891B300FC2341 /* PopUpPositioning.swift */,
+				4B347BC32C394BBB00F09961 /* VerticalSurfaceValidationPopUp.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 				E7ACC69E2C368DF70098E076 /* HomeResultView.swift in Sources */,
 				E763DBA32C2AFEF80087EA5B /* ContentView.swift in Sources */,
 				E7B00C532C328E3A00FAEF87 /* WordResult.swift in Sources */,
+				4B347BC42C394BBB00F09961 /* VerticalSurfaceValidationPopUp.swift in Sources */,
 				E7B00C5D2C33E36900FAEF87 /* CameraHandler.swift in Sources */,
 				E7B00C552C328EF800FAEF87 /* HandwritingAssessmentResultView.swift in Sources */,
 				799B94792C3891B300FC2341 /* PopUpPositioning.swift in Sources */,
@@ -525,7 +529,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"pawprint/Preview Content\"";
-				DEVELOPMENT_TEAM = 57BYB3NG56;
+				DEVELOPMENT_TEAM = WHG3N2U8WV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) need access to use camera";
@@ -559,7 +563,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"pawprint/Preview Content\"";
-				DEVELOPMENT_TEAM = 57BYB3NG56;
+				DEVELOPMENT_TEAM = WHG3N2U8WV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) need access to use camera";
