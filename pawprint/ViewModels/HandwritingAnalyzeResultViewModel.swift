@@ -13,7 +13,7 @@ class HandwritingAnalyzeResultViewModel: ObservableObject, OCRDelegate {
     @Published var instructionSentence: String = ""
     @Published var showCameraModal = false
     @Published var scannedText: AttributedString = AttributedString()
-    @Published var capturedImage: UIImage? = UIImage(named: "handwritingExample")
+    @Published var capturedImage: UIImage?
     @Published var wordsResults: [WordResult] = []
     @Published var readabilityPercentage: Double = 0
     @Published var groupLetter: GroupLetterItem?
