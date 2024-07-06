@@ -18,6 +18,7 @@ enum PracticeState {
 
 class WhiteboardPracticeViewModel: ObservableObject {
     @Published var sentence: String = ""
+    @Published var intervalTime: TimeInterval = 0
     @Published var remainingTime: TimeInterval = 0
     @Published var practiceState: PracticeState = .initial
     @Published var isPracticeStarted: Bool = false
@@ -28,8 +29,11 @@ class WhiteboardPracticeViewModel: ObservableObject {
     private var speechRate: Float = AVSpeechUtteranceDefaultSpeechRate
     private let speechSynthesizer: AVSpeechSynthesizer = AVSpeechSynthesizer()
     
+    
+    @Published var showTimesUpPopup: Bool = false
+    
     init() {
-        timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+        startTimer()
     }
     
     func getSentence() {
@@ -37,11 +41,22 @@ class WhiteboardPracticeViewModel: ObservableObject {
         if let sentence = data?.sentences.randomElement()?.last {
             self.sentence = sentence.value
             self.remainingTime = getTimeInterval()
+            self.intervalTime = getTimeInterval()
             self.speechRate = -Float(getTimeInterval())
             self.startVoiceOver()
             self.practiceState = .started
             self.isPracticeStarted = true
         }
+    }
+    
+    func restartPractice() {
+        startTimer()
+        startVoiceOver()
+    }
+    
+    private func startTimer() {
+        timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+        remainingTime = intervalTime
     }
     
     var hasCountdownCompleted: Bool {
@@ -72,7 +87,7 @@ class WhiteboardPracticeViewModel: ObservableObject {
             speechSynthesizer.stopSpeaking(at: .immediate)
         }
         
-        self.practiceState = .timesup
+        self.showTimesUpPopup.toggle()
     }
     
     func startVoiceOver() {

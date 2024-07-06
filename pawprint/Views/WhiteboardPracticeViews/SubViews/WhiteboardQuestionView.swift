@@ -69,11 +69,15 @@ struct WhiteboardQuestionView: View {
                 )
             }
             
-            if vm.practiceState == .timesup {
-                PopUpConfirmationClosed(
-                    message: "Your time is over!",
-                    isPresented: $showClosePopup
-                )
+            if vm.showTimesUpPopup {
+                PopUpTimesUpView(
+                    isPresented: $vm.showTimesUpPopup
+                ) {
+                    vm.restartPractice()
+                }
+                .onDisappear {
+//                    vm.timer?
+                }
             }
         }
         .background {
