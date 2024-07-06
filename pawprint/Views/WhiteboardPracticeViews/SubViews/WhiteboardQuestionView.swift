@@ -11,6 +11,7 @@ struct WhiteboardQuestionView: View {
     @ObservedObject var vm: WhiteboardPracticeViewModel
     
     @State private var showClosePopup: Bool = false
+    @State private var showCamera: Bool = false
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
@@ -19,7 +20,7 @@ struct WhiteboardQuestionView: View {
                     .fontWeight(.heavy)
                     .font(.system(size: 40))
                 
-//                Spacer()
+                //                Spacer()
                 
                 Text(vm.sentence)
                     .fontWeight(.medium)
@@ -29,9 +30,12 @@ struct WhiteboardQuestionView: View {
                         Image(.question)
                     }
                 
-//                Spacer()
+                //                Spacer()
                 
-                Button(action: {}) {
+                Button(action: {
+                    showCamera.toggle()
+                    vm.stopVoiceOver()
+                }) {
                     HStack {
                         Text("Camera")
                         Image(systemName: "camera")
@@ -89,9 +93,18 @@ struct WhiteboardQuestionView: View {
         .navigationBarBackButtonHidden()
         .navigationBarHidden(true)
         .toolbar(.hidden, for: .tabBar)
+        .navigationDestination(isPresented: $showCamera) {
+            if let data = vm.data {
+                CustomCameraView(
+                    groupLetter: data,
+                    selectedContent: vm.sentence
+                )
+            }
+        }
     }
 }
 
 #Preview {
-    WhiteboardQuestionView(vm: WhiteboardPracticeViewModel())
+    WhiteboardQuestionView(vm: WhiteboardPracticeViewModel()
+    )
 }

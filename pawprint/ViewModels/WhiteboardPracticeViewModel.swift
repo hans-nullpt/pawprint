@@ -87,7 +87,7 @@ class WhiteboardPracticeViewModel: ObservableObject {
         
         /// Stop the voice over
         if speechSynthesizer.isSpeaking {
-            speechSynthesizer.stopSpeaking(at: .immediate)
+            stopVoiceOver()
         }
         
         self.showTimesUpPopup.toggle()
@@ -101,6 +101,10 @@ class WhiteboardPracticeViewModel: ObservableObject {
         utterance.rate = self.speechRate
         
         speechSynthesizer.speak(utterance)
+    }
+    
+    func stopVoiceOver() {
+        speechSynthesizer.stopSpeaking(at: .immediate)
     }
     
 }
