@@ -25,7 +25,7 @@ struct WhiteboardOnboardingView: View {
                 }) {
                     HStack {
                         Text("Start")
-                        Image(systemName: "play.fill")
+                        Image(systemName: "pencil.and.scribble")
                     }
                 }
                 .buttonStyle(PawPrintButtonStyle())
