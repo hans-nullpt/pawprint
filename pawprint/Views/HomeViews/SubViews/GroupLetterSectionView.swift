@@ -24,7 +24,7 @@ struct GroupLetterSectionView: View {
                 .bold()
                 .font(.system(size: 24))
             
-            LazyVGrid(columns: columns, spacing: 30) {
+            LazyVGrid(columns: columns, spacing: 14) {
                 ForEach(items, id: \.id) { item in
                     
                     NavigationLink(destination: PracticeView(groupLetters: item.letters.joined(separator: ", "), content: item.sentences)) {
