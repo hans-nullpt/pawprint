@@ -25,7 +25,7 @@ struct HandwritingAssessmentResultView: View {
                             VStack(spacing: 48){
                                 Text("Readability")
                                     .font(.system(size: 40))
-                                Text("\(vm.readabilityPercentage)%")
+                                Text("\(String(format: "%.f", vm.readabilityPercentage))%")
                                     .font(.system(size: 96))
                                     .fontWeight(.heavy)
                                     .overlay {
@@ -44,17 +44,23 @@ struct HandwritingAssessmentResultView: View {
                                     .fontWeight(.medium)
                                 
                                 HStack{
+                                    
                                     if let image = vm.capturedImage {
                                         Image(uiImage: image)
                                             .resizable()
-                                            .scaledToFit()
-                                            .padding()
+                                            .scaledToFill()
+                                            .frame(maxWidth: 400, maxHeight: 200)
+                                            .clipShape(RoundedRectangle(cornerRadius: 20))
                                             .overlay {
                                                 RoundedRectangle(cornerRadius: 20)
                                                     .stroke(
                                                         .red,
                                                         lineWidth: 4
                                                     )
+                                                
+                                                Canvas { context, size in
+                                                    context.stroke(Path(vm.boundingBox), with: .color(.red), lineWidth: 1)
+                                                }
                                             }
                                     }
                                     Spacer()
@@ -66,6 +72,7 @@ struct HandwritingAssessmentResultView: View {
                                         .font(.system(size: 60))
                                         .fontWeight(.medium)
                                         .multilineTextAlignment(.center)
+                                        .frame(maxWidth: 400)
                                 }
                                 .padding(.horizontal, 32)
                                 .padding(.vertical, 24)

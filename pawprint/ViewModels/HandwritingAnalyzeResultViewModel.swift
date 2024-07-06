@@ -17,12 +17,14 @@ class HandwritingAnalyzeResultViewModel: ObservableObject, OCRDelegate {
     @Published var wordsResults: [WordResult] = []
     @Published var readabilityPercentage: Double = 0
     @Published var groupLetter: GroupLetterItem?
+    @Published var boundingBox: CGRect = CGRectZero
     
     func didReceiveOcrData(data: HandwritingData) {
         self.capturedImage = data.image
         self.instructionSentence = data.content
         self.groupLetter = data.groupLetter
         self.processAnaylze(scanned: data.scannedText)
+        self.boundingBox = data.boundingBox
     }
     
     func processAnaylze(scanned: String) {
@@ -115,7 +117,6 @@ class HandwritingAnalyzeResultViewModel: ObservableObject, OCRDelegate {
                     var errText = AttributedString(" \(item.value) ")
                     errText.foregroundColor = .black
                     errText.backgroundColor = item.error == .letterError ? .red.opacity(0.5) : .yellow
-                    errText.font = .body.bold()
                     
                     return errText
                 } else {
