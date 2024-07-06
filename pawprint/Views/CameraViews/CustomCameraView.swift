@@ -11,6 +11,9 @@ struct CustomCameraView: View {
     @StateObject private var vm: OCRCameraViewModel = OCRCameraViewModel()
     @StateObject private var resultVm: HandwritingAnalyzeResultViewModel = HandwritingAnalyzeResultViewModel()
     
+    var groupLetter: GroupLetterItem
+    var selectedContent: String
+    
     var body: some View {
         NavigationStack{
             ZStack(alignment: .topTrailing) {
@@ -19,9 +22,11 @@ struct CustomCameraView: View {
                         
                     case .success(let photo):
                         if let data = photo.fileDataRepresentation(), let image = UIImage(data: data) {
-                            vm.save(image: image)
-                        } else {
-                            print("Error: No image data found")
+                            vm.save(
+                                image: image,
+                                groupLetter: groupLetter,
+                                selectedContent: selectedContent
+                            )
                         }
                     case .failure(let error):
                         print("Error: \(error.localizedDescription)")
@@ -59,10 +64,14 @@ struct CustomCameraView: View {
             .onAppear {
                 self.vm.delegate = resultVm
             }
+            .navigationBarBackButtonHidden()
         }
     }
 }
 
 #Preview {
-    CustomCameraView()
+    CustomCameraView(
+        groupLetter: GroupLetterItem.lowerCaseItems.first!,
+        selectedContent: "Ini test content"
+    )
 }

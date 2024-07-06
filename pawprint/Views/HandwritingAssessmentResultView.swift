@@ -25,7 +25,7 @@ struct HandwritingAssessmentResultView: View {
                             VStack(spacing: 48){
                                 Text("Readability")
                                     .font(.system(size: 40))
-                                Text("80%")
+                                Text("\(vm.readabilityPercentage)%")
                                     .font(.system(size: 96))
                                     .fontWeight(.heavy)
                                     .overlay {
@@ -34,48 +34,54 @@ struct HandwritingAssessmentResultView: View {
                                     }
                             }
                             
-                            Text("Readability Letters Detail (e,f,s) On iPad")
-                                .font(.system(size: 24))
-                                .fontWeight(.medium)
                             
-                            Text("e: 4/5 readable,  f: 4/4 readable,  s: 7/8 readable")
-                                .font(.system(size: 40))
-                                .fontWeight(.medium)
-                            
-                            HStack{
-                                Image(.handwritingExample)
-                                    .padding()
-                                    .overlay {
-                                        RoundedRectangle(cornerRadius: 20)
-                                            .stroke(
-                                                .red,
-                                                lineWidth: 4
-                                            )
+                                Text("Readability Letters Detail (\(vm.groupLetter?.letters.joined(separator: ", ") ?? "")) On iPad")
+                                    .font(.system(size: 24))
+                                    .fontWeight(.medium)
+                                
+                                Text("e: 4/5 readable,  f: 4/4 readable,  s: 7/8 readable")
+                                    .font(.system(size: 40))
+                                    .fontWeight(.medium)
+                                
+                                HStack{
+                                    if let image = vm.capturedImage {
+                                        Image(uiImage: image)
+                                            .resizable()
+                                            .scaledToFit()
+                                            .padding()
+                                            .overlay {
+                                                RoundedRectangle(cornerRadius: 20)
+                                                    .stroke(
+                                                        .red,
+                                                        lineWidth: 4
+                                                    )
+                                            }
                                     }
-                                Spacer()
-                                Image(systemName: "arrow.right")
-                                    .font(.system(size: 60))
-                                    .fontWeight(.medium)
-                                Spacer()
-                                Text("effervessent elves swiftly sew")
-                                    .font(.system(size: 60))
-                                    .fontWeight(.medium)
-                                    .multilineTextAlignment(.center)
-                            }
-                            .padding(.horizontal, 32)
-                            .padding(.vertical, 24)
-                            .frame(maxWidth: .infinity)
-                            .overlay {
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(
-                                        .black,
-                                        style: StrokeStyle(
-                                            lineWidth: 4, dash: [6]
+                                    Spacer()
+                                    Image(systemName: "arrow.right")
+                                        .font(.system(size: 60))
+                                        .fontWeight(.medium)
+                                    Spacer()
+                                    Text(vm.scannedText)
+                                        .font(.system(size: 60))
+                                        .fontWeight(.medium)
+                                        .multilineTextAlignment(.center)
+                                }
+                                .padding(.horizontal, 32)
+                                .padding(.vertical, 24)
+                                .frame(maxWidth: .infinity)
+                                .overlay {
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .stroke(
+                                            .black,
+                                            style: StrokeStyle(
+                                                lineWidth: 4, dash: [6]
+                                            )
                                         )
-                                    )
-                                Image(.redpaw)
-                                    .offset(x: 545, y: 120)
-                            }
+                                    Image(.redpaw)
+                                        .offset(x: 545, y: 120)
+                                }
+                            
                             
                         }
                         .padding(.vertical, 72)
@@ -114,6 +120,7 @@ struct HandwritingAssessmentResultView: View {
                 .padding(.vertical, 64)
             }
             .navigationBarBackButtonHidden()
+            .toolbar(.hidden, for: .tabBar)
         }
         
     }

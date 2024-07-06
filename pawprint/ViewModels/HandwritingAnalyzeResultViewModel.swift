@@ -16,10 +16,13 @@ class HandwritingAnalyzeResultViewModel: ObservableObject, OCRDelegate {
     @Published var capturedImage: UIImage?
     @Published var wordsResults: [WordResult] = []
     @Published var readabilityPercentage: Double = 0
+    @Published var groupLetter: GroupLetterItem?
     
-    func didReceiveOcrData(image: UIImage, scannedText: String) {
-        self.capturedImage = image
-        self.processAnaylze(scanned: scannedText)
+    func didReceiveOcrData(data: HandwritingData) {
+        self.capturedImage = data.image
+        self.instructionSentence = data.content
+        self.groupLetter = data.groupLetter
+        self.processAnaylze(scanned: data.scannedText)
     }
     
     func processAnaylze(scanned: String) {
