@@ -9,9 +9,17 @@ import Foundation
 import Combine
 import AVFoundation
 
+enum PracticeState {
+    case started
+    case initial
+    case stopped
+    case timesup
+}
+
 class WhiteboardPracticeViewModel: ObservableObject {
     @Published var sentence: String = ""
     @Published var remainingTime: TimeInterval = 0
+    @Published var practiceState: PracticeState = .initial
     @Published var isPracticeStarted: Bool = false
     var data: GroupLetterItem?
     @Published var timer: Publishers.Autoconnect<Timer.TimerPublisher>?
@@ -31,6 +39,7 @@ class WhiteboardPracticeViewModel: ObservableObject {
             self.remainingTime = getTimeInterval()
             self.speechRate = -Float(getTimeInterval())
             self.startVoiceOver()
+            self.practiceState = .started
             self.isPracticeStarted = true
         }
     }
@@ -63,7 +72,7 @@ class WhiteboardPracticeViewModel: ObservableObject {
             speechSynthesizer.stopSpeaking(at: .immediate)
         }
         
-        self.isPracticeStarted = false
+        self.practiceState = .timesup
     }
     
     func startVoiceOver() {

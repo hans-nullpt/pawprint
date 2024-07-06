@@ -16,7 +16,7 @@ struct WhiteboardOnboardingView: View {
         ZStack(alignment: .topTrailing) {
             VStack (alignment: .trailing) {
                 Image(.onboardingwhiteboard)
-                    .offset(x: -90, y: -40)
+                    .offset(x: -100, y: 40)
                 
                 Button(action: {
                     withAnimation {
@@ -31,12 +31,7 @@ struct WhiteboardOnboardingView: View {
                 .buttonStyle(PawPrintButtonStyle())
                 .frame(maxWidth: .infinity, alignment: .trailing)
             }
-            .padding(.horizontal, 116)
-            .padding(.vertical, 64)
-            .background {
-                Color(.appBackground).ignoresSafeArea()
-                Image(.lineBg)
-            }
+            .padding(64)
             
             Image(systemName: "xmark")
                 .font(.system(size: 24, weight: .heavy, design: .rounded))
@@ -49,7 +44,7 @@ struct WhiteboardOnboardingView: View {
                 }
                 .clipShape(Circle())
                 .frame(maxWidth: .infinity, alignment: .topTrailing)
-                .offset(x: -32, y: 64)
+                .offset(x: -64, y: 64)
                 .onTapGesture {
                     withAnimation {
                         showClosePopup.toggle()
@@ -71,6 +66,16 @@ struct WhiteboardOnboardingView: View {
                         }
                     })
             }
+        }
+        .navigationBarBackButtonHidden()
+        .navigationBarHidden(true)
+        .toolbar(.hidden, for: .tabBar)
+        .background {
+            Color(.appBackground).ignoresSafeArea()
+            Image(.lineBg)
+        }
+        .navigationDestination(isPresented: $vm.isPracticeStarted) {
+            WhiteboardQuestionView(vm: vm)
         }
     }
 }

@@ -14,21 +14,10 @@ struct WhiteboardPracticeView: View {
     
     var body: some View {
         NavigationStack {
-            if vm.isPracticeStarted {
-                WhiteboardQuestionView()
-                    .navigationBarBackButtonHidden()
-                    .navigationBarHidden(true)
-                    .toolbar(.hidden, for: .tabBar)
-            }
-            else {
-                WhiteboardOnboardingView()
-                    .navigationBarBackButtonHidden()
-                    .navigationBarHidden(true)
-                    .toolbar(.hidden, for: .tabBar)
-                    .onAppear {
-                        vm.data = groupLetter
-                    }
-            }
+            WhiteboardOnboardingView()
+                .onAppear {
+                    vm.data = groupLetter
+                }
         }
         .environmentObject(vm)
     }

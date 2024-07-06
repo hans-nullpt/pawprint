@@ -8,41 +8,89 @@
 import SwiftUI
 
 struct WhiteboardQuestionView: View {
+    @ObservedObject var vm: WhiteboardPracticeViewModel
+    
+    @State private var showClosePopup: Bool = false
+    
     var body: some View {
-        ZStack {
-            VStack (alignment: .center) {
-                Text("00:12")
+        ZStack(alignment: .topTrailing) {
+            VStack {
+                Text(vm.remainingTime.countdownTimer)
                     .fontWeight(.heavy)
                     .font(.system(size: 40))
-                ZStack {
-                    Image(.question)
-                    Text("effervescent elves swiftly sew")
-                        .fontWeight(.medium)
-                        .font(.system(size: 60))
-                }
-                Spacer()
-                HStack {
-                    Spacer()
-                    Button(action: {}) {
-                        HStack {
-                            Text("Camera")
-                            Image(systemName: "camera")
-                        }
+                
+//                Spacer()
+                
+                Text(vm.sentence)
+                    .fontWeight(.medium)
+                    .font(.system(size: 60))
+                    .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
+                    .background {
+                        Image(.question)
                     }
-                    .buttonStyle(PawPrintButtonStyle())
+                
+//                Spacer()
+                
+                Button(action: {}) {
+                    HStack {
+                        Text("Camera")
+                        Image(systemName: "camera")
+                    }
                 }
-                .frame(maxWidth: .infinity)
+                .buttonStyle(PawPrintButtonStyle())
+                .frame(maxWidth: .infinity, alignment: .trailing)
             }
-            .padding(.horizontal, 116)
-            .padding(.vertical, 64)
-            .background {
-                Color(.appBackground).ignoresSafeArea()
-                Image(.lineBg)
+            .padding(.horizontal, 64)
+            .padding(.top, 64)
+            .padding(.bottom, 32)
+            
+            Image(systemName: "xmark")
+                .font(.system(size: 24, weight: .heavy, design: .rounded))
+                .foregroundColor(.white)
+                .padding()
+                .background {
+                    Image(.scratchBackground)
+                        .resizable()
+                        .scaledToFill()
+                }
+                .clipShape(Circle())
+                .frame(maxWidth: .infinity, alignment: .topTrailing)
+                .offset(x: -64, y: 64)
+                .onTapGesture {
+                    withAnimation {
+                        showClosePopup.toggle()
+                    }
+                }
+            
+            if showClosePopup {
+                PopUpConfirmationClosed(
+                    message: "are you sure want to cancel this excercise? ",
+                    isPresented: $showClosePopup
+                )
+            }
+            
+            if vm.practiceState == .timesup {
+                PopUpConfirmationClosed(
+                    message: "Your time is over!",
+                    isPresented: $showClosePopup
+                )
             }
         }
+        .background {
+            Color(.appBackground).ignoresSafeArea()
+            Image(.lineBg)
+        }
+        .onReceive(vm.timer!) { _ in
+            withAnimation {
+                vm.updateTimer()
+            }
+        }
+        .navigationBarBackButtonHidden()
+        .navigationBarHidden(true)
+        .toolbar(.hidden, for: .tabBar)
     }
 }
 
 #Preview {
-    WhiteboardQuestionView()
+    WhiteboardQuestionView(vm: WhiteboardPracticeViewModel())
 }
