@@ -7,15 +7,16 @@
 
 import SwiftUI
 
+
 struct HomeView: View {
     var body: some View {
         TabView {
-            DeviceHome(device: "whiteboard")
+            DeviceHome(device: .whiteboard)
                 .tabItem {
                     Label("Whiteboard", systemImage: "pencil.and.scribble")
                 }
             
-            DeviceHome(device: "iPad")
+            DeviceHome(device: .ipad)
                 .tabItem {
                     Label("iPad", systemImage: "applepencil.and.scribble")
                 }
@@ -27,45 +28,49 @@ struct HomeView: View {
 struct DeviceHome: View {
     @StateObject private var vm: HomeViewModel = HomeViewModel()
     
-    var device: String
+    var device: PracticeModeType
+    
     var body: some View {
         NavigationStack {
-            ZStack {
-                Color(.appBackground).ignoresSafeArea()
-                Image(.lineBg)
-                ScrollView {
-                    VStack (alignment: .leading, spacing: 40) {
-                        HStack {
-                            if device == "iPad"{
-                                Image(.iPadIcon)
-                            }
-                            else {
-                                Image(.whiteboardIcon)
-                            }
-                            Spacer()
-                            
-                            Button(action: {
-                            }) {
-                                Text("History")
-                            }
-                            .buttonStyle(PawPrintButtonStyle())
-                        }.offset(y: 40)
-                        
-                        HStack (alignment: .center) {
-                            ZStack {
-                                Image(.letspractice)
-                                    .offset(x: -90, y: 25)
-                                HomeResultView()
-                            }
-                        }
-                        .frame(maxWidth: .infinity)
-                        
-                        Text("Choose group letter to start practicing!")
-                            .foregroundColor(Color("black"))
-                            .bold()
-                            .font(.system(size: 36))
-                            .padding(.bottom, 20)
-                        
+            VStack (alignment: .leading) {
+                HStack {
+                    if device == .ipad {
+                        Image(.iPadIcon)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 74)
+                    }
+                    else {
+                        Image(.whiteboardIcon)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(maxHeight: 74)
+                    }
+                    Spacer()
+                    
+                    Button(action: {
+                    }) {
+                        Text("History")
+                    }
+                    .buttonStyle(PawPrintButtonStyle())
+                    
+                }
+                Spacer()
+                HomeResultView()
+                .background {
+                    Image(.letspractice)
+                        .offset(x: -90)
+                }
+                .frame(maxWidth: .infinity)
+                
+                Spacer()
+                VStack(alignment: .leading, spacing: 2){
+                    Text("Choose group letter to start practicing!")
+                        .foregroundColor(Color("black"))
+                        .bold()
+                        .font(.system(size: 36))
+                    
+                    VStack(spacing: 32){
                         GroupLetterSectionView(
                             title: "Lowercase",
                             items: vm.lowerCaseGroup
@@ -76,9 +81,13 @@ struct DeviceHome: View {
                             items: vm.upperCaseGroup
                         )
                     }
-                    .padding(.horizontal, 60)
-                    .padding(.vertical, 30)
                 }
+            }
+            .padding(.horizontal, 84)
+            .padding(.vertical, 28)
+            .background {
+                Color(.appBackground).ignoresSafeArea()
+                Image(.lineBg).ignoresSafeArea()
             }
         }.navigationBarHidden(true)
     }

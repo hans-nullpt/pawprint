@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeResultView: View {
     var body: some View {
-        VStack(spacing: 48) {
+        VStack(spacing: 32) {
             Text("Your last score ")
                 .font(.system(size: 32))
                 .bold()
@@ -18,7 +18,7 @@ struct HomeResultView: View {
                 .bold()
                 .foregroundColor(.kRed)
                 Text("80%")
-                    .font(.system(size: 80))
+                    .font(.system(size: 96))
                     .fontWeight(.heavy)
                     .background {
                         Image(.result)
