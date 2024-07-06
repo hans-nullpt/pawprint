@@ -13,6 +13,7 @@ struct pawprintApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(HandwritingAnalyzeResultViewModel())
+                .environmentObject(WhiteboardPracticeViewModel())
         }
     }
 }

@@ -36,6 +36,7 @@
 		E770620F2C38E35B003C33BE /* WhiteboardQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E770620E2C38E35B003C33BE /* WhiteboardQuestionView.swift */; };
 		E77062122C38FA6B003C33BE /* TimeIntervalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77062112C38FA6B003C33BE /* TimeIntervalExtension.swift */; };
 		E77062142C38FBA1003C33BE /* PopUpTimesUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77062132C38FBA1003C33BE /* PopUpTimesUpView.swift */; };
+		E770621A2C39ACD1003C33BE /* DataScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77062192C39ACD1003C33BE /* DataScannerView.swift */; };
 		E77E070D2C3675170036E9AC /* PracticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77E070C2C3675170036E9AC /* PracticeViewModel.swift */; };
 		E77E070F2C3675200036E9AC /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77E070E2C3675200036E9AC /* HistoryViewModel.swift */; };
 		E77E07122C3678B80036E9AC /* GroupLetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77E07112C3678B80036E9AC /* GroupLetter.swift */; };
@@ -82,6 +83,7 @@
 		E770620E2C38E35B003C33BE /* WhiteboardQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteboardQuestionView.swift; sourceTree = "<group>"; };
 		E77062112C38FA6B003C33BE /* TimeIntervalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExtension.swift; sourceTree = "<group>"; };
 		E77062132C38FBA1003C33BE /* PopUpTimesUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpTimesUpView.swift; sourceTree = "<group>"; };
+		E77062192C39ACD1003C33BE /* DataScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataScannerView.swift; sourceTree = "<group>"; };
 		E77E070C2C3675170036E9AC /* PracticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeViewModel.swift; sourceTree = "<group>"; };
 		E77E070E2C3675200036E9AC /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
 		E77E07112C3678B80036E9AC /* GroupLetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupLetter.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				E75D61E22C33E5D30067A9E3 /* PreviewCameraView.swift */,
+				E77062192C39ACD1003C33BE /* DataScannerView.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 				E77E070F2C3675200036E9AC /* HistoryViewModel.swift in Sources */,
 				E77062122C38FA6B003C33BE /* TimeIntervalExtension.swift in Sources */,
 				79DCF5082C35C1D400C5A16D /* HistoryView.swift in Sources */,
+				E770621A2C39ACD1003C33BE /* DataScannerView.swift in Sources */,
 				79C2A1D82C330D65007D16D3 /* ThirdOnboarding.swift in Sources */,
 				4BB4890A2C33F33000AF3ED1 /* PracticeView.swift in Sources */,
 				E77E07122C3678B80036E9AC /* GroupLetter.swift in Sources */,
@@ -569,7 +573,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"pawprint/Preview Content\"";
-				DEVELOPMENT_TEAM = WHG3N2U8WV;
+				DEVELOPMENT_TEAM = 57BYB3NG56;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "pawprint need access to use camera";
@@ -603,7 +607,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"pawprint/Preview Content\"";
-				DEVELOPMENT_TEAM = WHG3N2U8WV;
+				DEVELOPMENT_TEAM = 57BYB3NG56;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "pawprint need access to use camera";

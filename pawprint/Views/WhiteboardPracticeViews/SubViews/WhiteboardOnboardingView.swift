@@ -25,7 +25,7 @@ struct WhiteboardOnboardingView: View {
                 }) {
                     HStack {
                         Text("Start")
-                        Image(systemName: "play.fill")
+                        Image(systemName: "pencil.and.scribble")
                     }
                 }
                 .buttonStyle(PawPrintButtonStyle())
@@ -62,7 +62,7 @@ struct WhiteboardOnboardingView: View {
                 PracticeStartOverlay(isPresented: $showStartOverlay)
                     .onDisappear(perform: {
                         withAnimation {
-                            vm.getSentence()
+                            vm.isPracticeStarted.toggle()
                         }
                     })
             }
@@ -75,7 +75,7 @@ struct WhiteboardOnboardingView: View {
             Image(.lineBg)
         }
         .navigationDestination(isPresented: $vm.isPracticeStarted) {
-            WhiteboardQuestionView(vm: vm)
+            WhiteboardQuestionView()
         }
     }
 }

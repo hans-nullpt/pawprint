@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WhiteboardPracticeView: View {
-    @StateObject private var vm: WhiteboardPracticeViewModel = WhiteboardPracticeViewModel()
+    @EnvironmentObject private var vm: WhiteboardPracticeViewModel
     
     var groupLetter: GroupLetterItem
     
