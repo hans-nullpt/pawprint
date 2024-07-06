@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WhiteboardQuestionView: View {
-    @ObservedObject var vm: WhiteboardPracticeViewModel
+    @EnvironmentObject private var vm: WhiteboardPracticeViewModel
     
     @State private var showClosePopup: Bool = false
     @State private var showCamera: Bool = false
@@ -85,7 +85,7 @@ struct WhiteboardQuestionView: View {
             Color(.appBackground).ignoresSafeArea()
             Image(.lineBg)
         }
-        .onReceive(vm.timer!) { _ in
+        .onReceive(vm.timer) { _ in
             withAnimation {
                 vm.updateTimer()
             }
@@ -101,10 +101,13 @@ struct WhiteboardQuestionView: View {
                 )
             }
         }
+        .onAppear {
+            vm.getSentence()
+        }
     }
 }
 
 #Preview {
-    WhiteboardQuestionView(vm: WhiteboardPracticeViewModel()
-    )
+    WhiteboardQuestionView()
+    
 }

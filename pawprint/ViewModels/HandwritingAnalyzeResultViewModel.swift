@@ -118,7 +118,6 @@ class HandwritingAnalyzeResultViewModel: ObservableObject, OCRDelegate {
                     var errText = AttributedString(" \(item.value) ")
                     errText.foregroundColor = .black
                     errText.backgroundColor = item.error == .letterError ? .red.opacity(0.5) : .yellow
-                    errText.font = .system().bold()
                     
                     return errText
                 } else {

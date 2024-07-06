@@ -23,7 +23,7 @@ class WhiteboardPracticeViewModel: ObservableObject {
     @Published var practiceState: PracticeState = .initial
     @Published var isPracticeStarted: Bool = false
     var data: GroupLetterItem?
-    @Published var timer: Publishers.Autoconnect<Timer.TimerPublisher>?
+    @Published var timer: Publishers.Autoconnect<Timer.TimerPublisher> = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     private let voice: AVSpeechSynthesisVoice = AVSpeechSynthesisVoice()
     private var speechRate: Float = AVSpeechUtteranceDefaultSpeechRate
@@ -31,10 +31,6 @@ class WhiteboardPracticeViewModel: ObservableObject {
     
     
     @Published var showTimesUpPopup: Bool = false
-    
-    init() {
-        startTimer()
-    }
     
     func getSentence() {
         
@@ -83,7 +79,7 @@ class WhiteboardPracticeViewModel: ObservableObject {
         }
         
         /// TODO: Play times up sound effect
-        self.timer?.upstream.connect().cancel()
+        self.timer.upstream.connect().cancel()
         
         /// Stop the voice over
         if speechSynthesizer.isSpeaking {
@@ -95,8 +91,9 @@ class WhiteboardPracticeViewModel: ObservableObject {
     
     func speak(word: String) {
         let utterance: AVSpeechUtterance = AVSpeechUtterance(string: word)
-        utterance.preUtteranceDelay = 2
-        utterance.postUtteranceDelay = 2
+        
+        utterance.preUtteranceDelay = 1
+        utterance.postUtteranceDelay = 1
         utterance.voice = self.voice
         utterance.rate = self.speechRate
         
