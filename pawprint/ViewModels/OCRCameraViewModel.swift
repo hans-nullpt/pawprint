@@ -31,16 +31,20 @@ class OCRCameraViewModel: ObservableObject {
     @Published var boundingBox: CGRect?
     
     func save(image: UIImage, groupLetter: GroupLetterItem, selectedContent: String) {
-        if let rotatedImage = image.rotatedToLandscapeLeft() {
-            recognizeText(image: image) { result, bb in
-                let data = HandwritingData(
-                    image: rotatedImage, scannedText: result, content: selectedContent, groupLetter: groupLetter,
-                    boundingBox: bb
-                )
-                self.delegate?.didReceiveOcrData(data: data)
+        if let rotatedImage = image.rotate(radians: -(.pi/2)) {
+            recognizeText(image: rotatedImage) { result, bb in
                 
-                withAnimation {
-                    self.isResultPresented.toggle()
+                let normalizeRect = self.vnImageRectForNormalizedRect(rect: bb, imageSize: rotatedImage.size)
+                if let crop = rotatedImage.cgImage?.cropping(to: normalizeRect) {
+                    let data = HandwritingData(
+                        image: UIImage(cgImage: crop), scannedText: result, content: selectedContent, groupLetter: groupLetter,
+                        boundingBox: bb
+                    )
+                    self.delegate?.didReceiveOcrData(data: data)
+                    
+                    withAnimation {
+                        self.isResultPresented.toggle()
+                    }
                 }
             }
         }
@@ -85,12 +89,12 @@ class OCRCameraViewModel: ObservableObject {
         }
         
         let allWidth = boundingBoxes.map { $0.width }
-        let maxWidth = (allWidth.max(by: { $0 < $1 }) ?? 0)
+        let maxWidth = (allWidth.max(by: { $0 < $1 }) ?? 0) + 0.2
         let height = boundingBoxes.reduce(0) { partialResult, rect in
-            partialResult + rect.height
+            partialResult + rect.height + 0.4
         }
-        let x = (boundingBoxes.first?.minX ?? 0)
-        let y = 1 - (boundingBoxes.first?.maxY ?? 0) - height
+        let x = (boundingBoxes.first?.minX ?? 0) - (0.2 / 2)
+        let y = 1 - (boundingBoxes.first?.maxY ?? 0) - height - (0.4 / 2)
         
         return CGRect(x: x, y: y, width: maxWidth, height: height)
     }
@@ -141,5 +145,27 @@ extension UIImage {
     
     func withOrientation(_ orientation: UIImage.Orientation) -> UIImage {
         return UIImage(cgImage: self.cgImage!, scale: self.scale, orientation: orientation)
+    }
+    
+    func rotate(radians: CGFloat) -> UIImage? {
+        var newSize = CGRect(origin: CGPoint.zero, size: self.size).applying(CGAffineTransform(rotationAngle: CGFloat(radians))).size
+        // Trim off the extremely small float value to prevent core graphics from rounding it up
+        newSize.width = floor(newSize.width)
+        newSize.height = floor(newSize.height)
+        
+        UIGraphicsBeginImageContextWithOptions(newSize, false, self.scale)
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+        
+        // Move origin to middle
+        context.translateBy(x: newSize.width/2, y: newSize.height/2)
+        // Rotate around middle
+        context.rotate(by: CGFloat(radians))
+        // Draw the image at its center
+        self.draw(in: CGRect(x: -self.size.width/2, y: -self.size.height/2, width: self.size.width, height: self.size.height))
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
     }
 }
