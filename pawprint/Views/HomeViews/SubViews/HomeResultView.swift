@@ -17,13 +17,13 @@ struct HomeResultView: View {
                 .font(.system(size: 32))
                 .bold()
                 .foregroundColor(.kRed)
-                Text("80%")
-                    .font(.system(size: 96))
-                    .fontWeight(.heavy)
-                    .background {
-                        Image(.result)
-                            .scaledToFill()
-                    }
+            Text("80%")
+                .font(.system(size: 96))
+                .fontWeight(.heavy)
+                .background {
+                    Image(.result)
+                        .scaledToFill()
+                }
             Text("Your progress seems great!")
                 .font(.system(size: 28))
                 .bold()

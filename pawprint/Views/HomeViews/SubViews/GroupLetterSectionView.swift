@@ -34,12 +34,11 @@ struct GroupLetterSectionView: View {
                             WhiteboardPracticeView(groupLetter: item)
                         } else {
                             PracticeView(groupLetters: item.letters.joined(separator: ", "), content: item.sentences)
+                                .toolbar(.hidden, for: .tabBar)
                         }
                     } label: {
                         Text(item.letters.joined(separator: ", "))
                             .frame(maxWidth: .infinity)
-                            .padding()
-                            .toolbar(.hidden, for: .tabBar)
                     }
                     .buttonStyle(PawPrintButtonStyle(enableBottomBorder: true))
                     
