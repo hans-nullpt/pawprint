@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HandwritingAssessmentResultView: View {
     @ObservedObject var vm: HandwritingAnalyzeResultViewModel
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         
@@ -118,7 +119,9 @@ struct HandwritingAssessmentResultView: View {
                         
                         Spacer()
                         
-                        Button(action: {}) {
+                        Button(action: {
+                            dismiss()
+                        }) {
                             HStack {
                                 Text("Finish")
                                 Image(systemName: "flag.2.crossed")
