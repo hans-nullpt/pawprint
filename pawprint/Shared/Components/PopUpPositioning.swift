@@ -1,27 +1,28 @@
 //
-//  PopUpConfirmationClosed.swift
+//  PopUpPositioning.swift
 //  pawprint
 //
-//  Created by Isaac Tambunan on 03/07/24.
+//  Created by Maria Charlotta on 06/07/24.
 //
 
 import SwiftUI
 
-struct PopUpConfirmationClosed: View {
+struct PopUpPositioning<Content: View>: View {
     let message: String
     let showCloseButton: Bool
+    let content: () -> Content
     @Binding var isPresented: Bool
-    @Binding var isButtonClicked: Bool
     
-    init(message: String, showCloseButton: Bool = false, isPresented: Binding<Bool>, isButtonClicked: Binding<Bool>) {
+    init(message: String, showCloseButton: Bool = false, isPresented: Binding<Bool>, @ViewBuilder content: @escaping () -> Content) {
         self.message = message
         self.showCloseButton = showCloseButton
         self._isPresented = isPresented
-        self._isButtonClicked = isButtonClicked
+        self.content = content
     }
     
     var body: some View {
         ZStack(alignment: .center) {
+            
             ZStack(alignment: .topTrailing) {
                 VStack(spacing: 48) {
                     Text(message)
@@ -33,7 +34,6 @@ struct PopUpConfirmationClosed: View {
                     HStack(spacing: 120) {
                         Button(action: {
                             isPresented.toggle()
-                            isButtonClicked.toggle()
                         }) {
                             Text("Yes")
                                 .font(.system(size: 30, weight: .bold))
@@ -83,15 +83,15 @@ struct PopUpConfirmationClosed: View {
                 }
             }
             .frame(maxWidth: 640)
-            Image(.catCrying)
-                .offset(y: -220)
+            Image(.catFire)
+                .offset(y: -270)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.black.opacity(0.6))
-                
     }
 }
 
 #Preview {
-    PopUpConfirmationClosed(message: "Are you sure want to cancel this excercise?", showCloseButton: true, isPresented: .constant(false), isButtonClicked: .constant(false))
+    PopUpPositioning(message: "Please place your Ipad vertically using it’s case", showCloseButton: true, isPresented: .constant(false)) {
+    }
 }
