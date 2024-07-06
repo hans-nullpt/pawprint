@@ -12,7 +12,7 @@ struct SplashView: View {
     var body: some View {
         ZStack(alignment:.top) {
             LottieView(animation: .named("splashscreen2.json"))
-                .playing(loopMode: .loop)
+                .playing(loopMode: .playOnce)
         }
         .edgesIgnoringSafeArea(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
     }
