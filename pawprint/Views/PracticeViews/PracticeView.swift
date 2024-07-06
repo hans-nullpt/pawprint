@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PracticeView: View {
     @Environment(\.managedObjectContext) var viewContext
+    @Environment(\.dismiss) private var dismiss
     @StateObject private var vm: PracticeAnalyzeResultViewModel = PracticeAnalyzeResultViewModel()
     
     @State var id:UUID?
@@ -225,7 +226,7 @@ struct PracticeView: View {
                     .background(.white)
                     
                     if showPopUp {
-                        PopUpConfirmationClosed(message: "Are you sure want to cancel this excercise?", showCloseButton: true, isPresented: $showPopUp, isButtonClicked: $isButtonClicked)
+                        PopUpConfirmationClosed(message: "Are you sure want to cancel this excercise?", showCloseButton: true, isPresented: $showPopUp)
                             .ignoresSafeArea()
                             .offset(x:0, y: setOffset)
                             .onAppear{
@@ -235,11 +236,9 @@ struct PracticeView: View {
                             }
                     }
                 }
-                .navigationBarHidden(true)
-                .navigationDestination(isPresented: $isButtonClicked) {
-                    HomeView()
-                }
+                
             }
+            .navigationBarHidden(true)
             .navigationDestination(isPresented: $isBlankScreen) {
                 PracticeResultView()
             }
