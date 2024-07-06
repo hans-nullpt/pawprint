@@ -62,6 +62,9 @@ struct HandwritingAssessmentResultView: View {
                                                     context.stroke(Path(vm.boundingBox), with: .color(.red), lineWidth: 1)
                                                 }
                                             }
+                                            .onTapGesture {
+                                                vm.showImageDetail.toggle()
+                                            }
                                     }
                                     Spacer()
                                     Image(systemName: "arrow.right")
@@ -73,6 +76,7 @@ struct HandwritingAssessmentResultView: View {
                                         .fontWeight(.medium)
                                         .multilineTextAlignment(.center)
                                         .frame(maxWidth: 400)
+                                        .fixedSize(horizontal: false, vertical: true)
                                 }
                                 .padding(.horizontal, 32)
                                 .padding(.vertical, 24)
@@ -128,6 +132,14 @@ struct HandwritingAssessmentResultView: View {
             }
             .navigationBarBackButtonHidden()
             .toolbar(.hidden, for: .tabBar)
+            .sheet(isPresented: $vm.showImageDetail) {
+                if let image = vm.capturedImage {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                        .scenePadding()
+                }
+            }
         }
         
     }

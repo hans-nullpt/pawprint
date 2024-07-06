@@ -17,21 +17,31 @@ struct CustomCameraView: View {
     var body: some View {
         NavigationStack{
             ZStack(alignment: .topTrailing) {
-                PreviewCameraView(cameraService: vm.cameraService) { result in
-                    switch result {
-                        
-                    case .success(let photo):
-                        if let data = photo.fileDataRepresentation(), let image = UIImage(data: data) {
-                            vm.save(
-                                image: image,
-                                groupLetter: groupLetter,
-                                selectedContent: selectedContent
-                            )
-                        }
-                    case .failure(let error):
-                        print("Error: \(error.localizedDescription)")
+                DataScannerViewControllerRepresentable { image, _ in
+                    
+                    if let image = image {
+                        vm.save(
+                            image: image,
+                            groupLetter: groupLetter,
+                            selectedContent: selectedContent
+                        )
                     }
                 }
+                //                PreviewCameraView(cameraService: vm.cameraService) { result in
+                //                    switch result {
+                //
+                //                    case .success(let photo):
+                //                        if let data = photo.fileDataRepresentation(), let image = UIImage(data: data) {
+                //                            vm.save(
+                //                                image: image,
+                //                                groupLetter: groupLetter,
+                //                                selectedContent: selectedContent
+                //                            )
+                //                        }
+                //                    case .failure(let error):
+                //                        print("Error: \(error.localizedDescription)")
+                //                    }
+                //                }
                 
                 Text("Capture your written sentences \(Image(systemName: "camera.viewfinder"))")
                     .foregroundStyle(.white)
@@ -42,20 +52,20 @@ struct CustomCameraView: View {
                     .offset(y: 48)
                     .frame(maxWidth: .infinity, alignment: .center)
                 
-                Button(action: {
-                    vm.cameraService.capturePhoto()
-                }) {
-                    ZStack {
-                        Circle()
-                            .fill(.gray.opacity(0.5))
-                            .frame(width: 96, height: 96)
-                        Circle()
-                            .fill(.white)
-                            .frame(width: 64, height: 64)
-                    }
-                }
-                .frame(maxHeight: .infinity, alignment: .center)
-                .offset(x: -48)
+                //                Button(action: {
+                //                    vm.cameraService.capturePhoto()
+                //                }) {
+                //                    ZStack {
+                //                        Circle()
+                //                            .fill(.gray.opacity(0.5))
+                //                            .frame(width: 96, height: 96)
+                //                        Circle()
+                //                            .fill(.white)
+                //                            .frame(width: 64, height: 64)
+                //                    }
+                //                }
+                //                .frame(maxHeight: .infinity, alignment: .center)
+                //                .offset(x: -48)
             }
             .ignoresSafeArea()
             .navigationDestination(isPresented: $vm.isResultPresented) {

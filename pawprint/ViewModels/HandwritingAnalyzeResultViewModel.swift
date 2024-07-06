@@ -13,11 +13,12 @@ class HandwritingAnalyzeResultViewModel: ObservableObject, OCRDelegate {
     @Published var instructionSentence: String = ""
     @Published var showCameraModal = false
     @Published var scannedText: AttributedString = AttributedString()
-    @Published var capturedImage: UIImage?
+    @Published var capturedImage: UIImage? = UIImage(named: "handwritingExample")
     @Published var wordsResults: [WordResult] = []
     @Published var readabilityPercentage: Double = 0
     @Published var groupLetter: GroupLetterItem?
     @Published var boundingBox: CGRect = CGRectZero
+    @Published var showImageDetail: Bool = false
     
     func didReceiveOcrData(data: HandwritingData) {
         self.capturedImage = data.image
@@ -117,6 +118,7 @@ class HandwritingAnalyzeResultViewModel: ObservableObject, OCRDelegate {
                     var errText = AttributedString(" \(item.value) ")
                     errText.foregroundColor = .black
                     errText.backgroundColor = item.error == .letterError ? .red.opacity(0.5) : .yellow
+                    errText.font = .system().bold()
                     
                     return errText
                 } else {
