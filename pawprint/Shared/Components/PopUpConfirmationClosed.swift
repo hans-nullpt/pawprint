@@ -7,24 +7,21 @@
 
 import SwiftUI
 
-struct PopUpConfirmationClosed<Content: View>: View {
+struct PopUpConfirmationClosed: View {
     let message: String
     let showCloseButton: Bool
-    let content: () -> Content
     @Binding var isPresented: Bool
+    @Binding var isButtonClicked: Bool
     
-    init(message: String, showCloseButton: Bool = false, isPresented: Binding<Bool>, @ViewBuilder content: @escaping () -> Content) {
+    init(message: String, showCloseButton: Bool = false, isPresented: Binding<Bool>, isButtonClicked: Binding<Bool>) {
         self.message = message
         self.showCloseButton = showCloseButton
         self._isPresented = isPresented
-        self.content = content
+        self._isButtonClicked = isButtonClicked
     }
     
     var body: some View {
         ZStack(alignment: .center) {
-            Image(.catAngry)
-                .offset(y: -246)
-            
             ZStack(alignment: .topTrailing) {
                 VStack(spacing: 48) {
                     Text(message)
@@ -36,6 +33,7 @@ struct PopUpConfirmationClosed<Content: View>: View {
                     HStack(spacing: 120) {
                         Button(action: {
                             isPresented.toggle()
+                            isButtonClicked.toggle()
                         }) {
                             Text("Yes")
                                 .font(.system(size: 30, weight: .bold))
@@ -83,6 +81,11 @@ struct PopUpConfirmationClosed<Content: View>: View {
                 }
             }
             .frame(maxWidth: 640)
+            
+            Image(.sadCat)
+                .resizable()
+                .frame(width: 347, height: 431)
+                .offset(y: -262)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.black.opacity(0.6))
@@ -90,6 +93,5 @@ struct PopUpConfirmationClosed<Content: View>: View {
 }
 
 #Preview {
-    PopUpConfirmationClosed(message: "Are you sure want to cancel this excercise?", showCloseButton: true, isPresented: .constant(false)) {
-    }
+    PopUpConfirmationClosed(message: "Are you sure want to cancel this excercise?", showCloseButton: true, isPresented: .constant(false), isButtonClicked: .constant(false))
 }
