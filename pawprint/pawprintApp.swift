@@ -12,6 +12,7 @@ struct pawprintApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+            SoundView()
         }
     }
 }

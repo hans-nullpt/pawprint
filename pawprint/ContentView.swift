@@ -8,14 +8,37 @@
 import SwiftUI
 
 struct ContentView: View {
+    @AppStorage("soundOn") var soundOn: Bool = true
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ZStack {
+            if soundOn {
+                Image("buttonaudio")
+                    .offset(x: 341, y: -300)
+                    .onTapGesture {
+                        soundOn.toggle()
+                        muteOrPlay()
+                    }
+            }else {
+                Image("buttonmute")
+                    .offset(x: 341, y: -300)
+                    .onTapGesture {
+                        soundOn.toggle()
+                        muteOrPlay()
+                    }
+            }
+            
         }
         .padding()
+    }
+    func muteOrPlay(){
+        if !soundOn {
+            SoundManager.musicInstance.player?.stop()
+        }else {
+            SoundManager.musicInstance.musicStatus = true
+            SoundManager.musicInstance.playSound(sound: .pawprintsound)
+            SoundManager.musicInstance.player?.volume = 1.0
+            SoundManager.musicInstance.player?.numberOfLoops = 10
+        }
     }
 }
 
