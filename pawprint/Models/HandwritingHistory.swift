@@ -16,7 +16,7 @@ class HandwritingHistory {
     var type: String
     var readibilityPercentage: Double
     var timestamp: Date
-    var mode: PracticeModeType
+    var mode: String
     
     init(sentence: String, letters: String, type: String, readibilityPercentage: Double, timestamp: Date, mode: PracticeModeType) {
         self.sentence = sentence
@@ -24,6 +24,6 @@ class HandwritingHistory {
         self.type = type
         self.readibilityPercentage = readibilityPercentage
         self.timestamp = timestamp
-        self.mode = mode
+        self.mode = mode.rawValue
     }
 }
