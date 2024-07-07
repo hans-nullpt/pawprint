@@ -37,6 +37,8 @@
 		E77062122C38FA6B003C33BE /* TimeIntervalExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77062112C38FA6B003C33BE /* TimeIntervalExtension.swift */; };
 		E77062142C38FBA1003C33BE /* PopUpTimesUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77062132C38FBA1003C33BE /* PopUpTimesUpView.swift */; };
 		E770621A2C39ACD1003C33BE /* DataScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77062192C39ACD1003C33BE /* DataScannerView.swift */; };
+		E770621F2C3AA460003C33BE /* pawprintsound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E770621E2C3AA460003C33BE /* pawprintsound.mp3 */; };
+		E77062212C3AA6DE003C33BE /* SoundViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77062202C3AA6DE003C33BE /* SoundViewModel.swift */; };
 		E77E070D2C3675170036E9AC /* PracticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77E070C2C3675170036E9AC /* PracticeViewModel.swift */; };
 		E77E070F2C3675200036E9AC /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77E070E2C3675200036E9AC /* HistoryViewModel.swift */; };
 		E77E07122C3678B80036E9AC /* GroupLetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77E07112C3678B80036E9AC /* GroupLetter.swift */; };
@@ -84,6 +86,8 @@
 		E77062112C38FA6B003C33BE /* TimeIntervalExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExtension.swift; sourceTree = "<group>"; };
 		E77062132C38FBA1003C33BE /* PopUpTimesUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpTimesUpView.swift; sourceTree = "<group>"; };
 		E77062192C39ACD1003C33BE /* DataScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataScannerView.swift; sourceTree = "<group>"; };
+		E770621E2C3AA460003C33BE /* pawprintsound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = pawprintsound.mp3; sourceTree = "<group>"; };
+		E77062202C3AA6DE003C33BE /* SoundViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundViewModel.swift; sourceTree = "<group>"; };
 		E77E070C2C3675170036E9AC /* PracticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeViewModel.swift; sourceTree = "<group>"; };
 		E77E070E2C3675200036E9AC /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
 		E77E07112C3678B80036E9AC /* GroupLetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupLetter.swift; sourceTree = "<group>"; };
@@ -187,6 +191,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		E770621D2C3AA442003C33BE /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				E770621E2C3AA460003C33BE /* pawprintsound.mp3 */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
 		E77E07062C36747A0036E9AC /* CameraViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -227,6 +239,7 @@
 		E77E070A2C3674D30036E9AC /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				E770621D2C3AA442003C33BE /* Audio */,
 				E77062102C38FA60003C33BE /* Extensions */,
 				E7B00C562C3293A300FAEF87 /* Components */,
 				E7B00C5B2C33E35600FAEF87 /* Handlers */,
@@ -271,6 +284,7 @@
 				E77E070E2C3675200036E9AC /* HistoryViewModel.swift */,
 				E7ACC6A42C36A7F90098E076 /* WhiteboardPracticeViewModel.swift */,
 				E7ACC6A22C36948D0098E076 /* OCRCameraViewModel.swift */,
+				E77062202C3AA6DE003C33BE /* SoundViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -387,6 +401,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E763DBA82C2AFEF90087EA5B /* Preview Assets.xcassets in Resources */,
+				E770621F2C3AA460003C33BE /* pawprintsound.mp3 in Resources */,
 				E763DBA52C2AFEF90087EA5B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -408,6 +423,7 @@
 				E77062142C38FBA1003C33BE /* PopUpTimesUpView.swift in Sources */,
 				4B347BC02C3869A700F09961 /* PracticeResult.swift in Sources */,
 				E77E070D2C3675170036E9AC /* PracticeViewModel.swift in Sources */,
+				E77062212C3AA6DE003C33BE /* SoundViewModel.swift in Sources */,
 				E77E070F2C3675200036E9AC /* HistoryViewModel.swift in Sources */,
 				E77062122C38FA6B003C33BE /* TimeIntervalExtension.swift in Sources */,
 				79DCF5082C35C1D400C5A16D /* HistoryView.swift in Sources */,

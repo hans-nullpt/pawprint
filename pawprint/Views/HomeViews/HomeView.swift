@@ -38,6 +38,9 @@ struct DeviceHome: View {
     var device: PracticeModeType
     
     @EnvironmentObject private var vm: HomeViewModel
+    @EnvironmentObject private var soundVm: SoundViewModel
+    
+    @AppStorage("background_music") private var isSoundActive: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -57,11 +60,41 @@ struct DeviceHome: View {
                     }
                     Spacer()
                     
-                    Button(action: {
-                    }) {
-                        Text("History")
+                    HStack {
+                        Button(action: {
+                            withAnimation {
+                                isSoundActive.toggle()
+                                
+                                if isSoundActive {
+                                    soundVm.playSound(sound: .pawprintsound)
+                                } else {
+                                    soundVm.stopSound()
+                                }
+                            }
+                        } ) {
+                            if isSoundActive {
+                                Image(systemName: "speaker.wave.2")
+                                    .font(.title)
+                            } else {
+                                Image(systemName: "speaker.slash")
+                                    .font(.title)
+                            }
+
+                        }
+                        .contentTransition(.symbolEffect(.replace))
+                        .frame(width: 64, height: 64)
+                        .foregroundStyle(.white)
+                        .background {
+                            Image(.scratchBackground)
+                        }
+                        .clipShape(Circle())
+                        
+                        Button(action: {
+                        }) {
+                            Text("History")
+                        }
+                        .buttonStyle(PawPrintButtonStyle())
                     }
-                    .buttonStyle(PawPrintButtonStyle())
                     
                 }
                 Spacer()
@@ -98,7 +131,13 @@ struct DeviceHome: View {
                 Color(.appBackground).ignoresSafeArea()
                 Image(.lineBg).ignoresSafeArea()
             }
-        }.navigationBarHidden(true)
+        }
+        .navigationBarHidden(true)
+        .onAppear {
+            if isSoundActive {
+                soundVm.playSound(sound: .pawprintsound)
+            }
+        }
     }
 }
 
@@ -106,4 +145,5 @@ struct DeviceHome: View {
 #Preview {
     HomeView()
         .environmentObject(HomeViewModel())
+        .environmentObject(SoundViewModel.musicInstance)
 }
