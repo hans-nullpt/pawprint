@@ -14,6 +14,7 @@ struct pawprintApp: App {
             ContentView()
                 .environmentObject(HandwritingAnalyzeResultViewModel())
                 .environmentObject(WhiteboardPracticeViewModel())
+                .environmentObject(SoundViewModel.musicInstance)
         }
     }
 }

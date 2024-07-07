@@ -24,21 +24,8 @@ struct PopUpTimesUpView: View {
                     .multilineTextAlignment(.center)
                     .frame(width: 640)
                 
-                HStack(spacing: 120) {
-                    Button(action: {
-                        isPresented.toggle()
-                        onRetry()
-                    }) {
-                        Text("Retry")
-                            .font(.system(size: 30, weight: .bold))
-                    }
-                    .frame(width: 182, height: 60)
-                    .foregroundColor(.white)
-                    .background(
-                        Image(.scratchBackground)
-                            .resizable()
-                    )
-                    .cornerRadius(.infinity)
+                HStack(spacing: 88) {
+                    
                     
                     Button(action: {
                         isPresented.toggle()
@@ -46,14 +33,29 @@ struct PopUpTimesUpView: View {
                     }) {
                         Text("No")
                             .font(.system(size: 30, weight: .bold))
+                            .frame(width: 160)
                     }
-                    .frame(width: 182, height: 60)
-                    .foregroundColor(.white)
-                    .background(
-                        Image(.scratchBackgroundRed)
-                            .resizable()
+                    .buttonStyle(
+                        PawPrintButtonStyle(
+                            background: Image(.scratchBackgroundRed),
+                            foregroundColor: .white
+                        )
                     )
-                    .cornerRadius(.infinity)
+                    
+                    Button(action: {
+                        isPresented.toggle()
+                        onRetry()
+                    }) {
+                        Text("Retry")
+                            .font(.system(size: 30, weight: .bold))
+                            .frame(width: 160)
+                    }
+                    .buttonStyle(
+                        PawPrintButtonStyle(
+                            background: Image(.scratchBackground),
+                            foregroundColor: .white
+                        )
+                    )
                 }
                 
             }
