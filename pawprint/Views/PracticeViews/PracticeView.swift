@@ -236,14 +236,18 @@ struct PracticeView: View {
                     }
                     
                     if showPopUp {
-                        PopUpConfirmationClosed(message: "Are you sure want to cancel this excercise?", showCloseButton: true, isPresented: $showPopUp)
-                            .ignoresSafeArea()
-                            .offset(x:0, y: setOffset)
-                            .onAppear{
-                                withAnimation(.spring()) {
-                                    setOffset = 0
-                                }
-                            }
+                        PopUpConfirmationClosed(
+                            message: "Are you sure want to cancel this excercise?",
+                            showCloseButton: true,
+                            isPresented: $showPopUp
+                        )
+//                            .ignoresSafeArea()
+//                            .offset(x:0, y: setOffset)
+//                            .onAppear{
+//                                withAnimation(.spring()) {
+//                                    setOffset = 0
+//                                }
+//                            }
                     }
                 }
                 
@@ -257,5 +261,5 @@ struct PracticeView: View {
 }
 
 #Preview {
-    PracticeView()
+   PracticeView()
 }
