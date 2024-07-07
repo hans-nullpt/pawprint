@@ -90,6 +90,9 @@ struct WhiteboardQuestionView: View {
                 vm.updateTimer()
             }
         }
+        .onDisappear {
+            vm.stopPractice()
+        }
         .navigationBarBackButtonHidden()
         .navigationBarHidden(true)
         .toolbar(.hidden, for: .tabBar)
