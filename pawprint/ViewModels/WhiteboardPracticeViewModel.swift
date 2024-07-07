@@ -78,15 +78,21 @@ class WhiteboardPracticeViewModel: ObservableObject {
             return
         }
         
-        /// TODO: Play times up sound effect
-        self.timer.upstream.connect().cancel()
-        
         /// Stop the voice over
         if speechSynthesizer.isSpeaking {
             stopVoiceOver()
         }
         
         self.showTimesUpPopup.toggle()
+    }
+    
+    func stopPractice() {
+        stopTimer()
+        stopVoiceOver()
+    }
+    
+    func stopTimer() {
+        self.timer.upstream.connect().cancel()
     }
     
     func speak(word: String) {

@@ -62,7 +62,7 @@ struct PopUpConfirmationClosed: View {
                     
                 }
                 .padding(40)
-                .padding(.top, showCloseButton ? 72 : 0)
+                .padding(.top, 72)
                 .foregroundStyle(.white)
                 .background(.white)
                 .clipShape(RoundedRectangle(cornerRadius: 60))

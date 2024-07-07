@@ -17,13 +17,14 @@ struct CustomCameraView: View {
     var body: some View {
         NavigationStack{
             ZStack(alignment: .topTrailing) {
-                DataScannerViewControllerRepresentable { image, _ in
+                DataScannerViewControllerRepresentable { image, recognizedItems in
                     
                     if let image = image {
                         vm.save(
                             image: image,
                             groupLetter: groupLetter,
-                            selectedContent: selectedContent
+                            selectedContent: selectedContent,
+                            recognizedItems: recognizedItems
                         )
                     }
                 }

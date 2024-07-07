@@ -9,13 +9,13 @@ import Foundation
 import UIKit
 import Vision
 import SwiftUI
+import VisionKit
 
 struct HandwritingData {
     var image: UIImage
     var scannedText: String
     var content: String
     var groupLetter: GroupLetterItem
-    var boundingBox: CGRect
 }
 
 protocol OCRDelegate {
@@ -30,22 +30,24 @@ class OCRCameraViewModel: ObservableObject {
     @Published var capturedImage: UIImage?
     @Published var boundingBox: CGRect?
     
-    func save(image: UIImage, groupLetter: GroupLetterItem, selectedContent: String) {
+    func save(image: UIImage, groupLetter: GroupLetterItem, selectedContent: String, recognizedItems: [RecognizedItem]) {
+        
+        var recognizedText: String = recognizedItems.compactMap { item in
+            if case let .text(text) = item {
+                return text.transcript
+            }
+            
+            return nil
+        }.joined(separator: " ")
+        
         if let rotatedImage = image.rotate(radians: -(.pi/2)) {
-            recognizeText(image: rotatedImage) { result, bb in
-                
-                let normalizeRect = self.vnImageRectForNormalizedRect(rect: bb, imageSize: rotatedImage.size)
-                if let crop = rotatedImage.cgImage?.cropping(to: normalizeRect) {
-                    let data = HandwritingData(
-                        image: UIImage(cgImage: crop), scannedText: result, content: selectedContent, groupLetter: groupLetter,
-                        boundingBox: bb
-                    )
-                    self.delegate?.didReceiveOcrData(data: data)
-                    
-                    withAnimation {
-                        self.isResultPresented.toggle()
-                    }
-                }
+            let data = HandwritingData(
+                image: rotatedImage, scannedText: recognizedText, content: selectedContent, groupLetter: groupLetter
+            )
+            self.delegate?.didReceiveOcrData(data: data)
+            
+            withAnimation {
+                self.isResultPresented.toggle()
             }
         }
     }
@@ -89,12 +91,12 @@ class OCRCameraViewModel: ObservableObject {
         }
         
         let allWidth = boundingBoxes.map { $0.width }
-        let maxWidth = (allWidth.max(by: { $0 < $1 }) ?? 0) + 0.2
+        let maxWidth = (allWidth.max(by: { $0 < $1 }) ?? 0)
         let height = boundingBoxes.reduce(0) { partialResult, rect in
-            partialResult + rect.height + 0.4
+            partialResult + rect.height
         }
-        let x = (boundingBoxes.first?.minX ?? 0) - (0.2 / 2)
-        let y = 1 - (boundingBoxes.first?.maxY ?? 0) - height - (0.4 / 2)
+        let x = (boundingBoxes.first?.minX ?? 0)
+        let y = 1 - (boundingBoxes.first?.maxY ?? 0) - height
         
         return CGRect(x: x, y: y, width: maxWidth, height: height)
     }
