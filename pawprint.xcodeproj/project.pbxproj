@@ -39,6 +39,7 @@
 		E770621A2C39ACD1003C33BE /* DataScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77062192C39ACD1003C33BE /* DataScannerView.swift */; };
 		E770621F2C3AA460003C33BE /* pawprintsound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E770621E2C3AA460003C33BE /* pawprintsound.mp3 */; };
 		E77062212C3AA6DE003C33BE /* SoundViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77062202C3AA6DE003C33BE /* SoundViewModel.swift */; };
+		E77062232C3AB973003C33BE /* HandwritingHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77062222C3AB973003C33BE /* HandwritingHistory.swift */; };
 		E77E070D2C3675170036E9AC /* PracticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77E070C2C3675170036E9AC /* PracticeViewModel.swift */; };
 		E77E070F2C3675200036E9AC /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77E070E2C3675200036E9AC /* HistoryViewModel.swift */; };
 		E77E07122C3678B80036E9AC /* GroupLetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77E07112C3678B80036E9AC /* GroupLetter.swift */; };
@@ -88,6 +89,7 @@
 		E77062192C39ACD1003C33BE /* DataScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataScannerView.swift; sourceTree = "<group>"; };
 		E770621E2C3AA460003C33BE /* pawprintsound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = pawprintsound.mp3; sourceTree = "<group>"; };
 		E77062202C3AA6DE003C33BE /* SoundViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundViewModel.swift; sourceTree = "<group>"; };
+		E77062222C3AB973003C33BE /* HandwritingHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandwritingHistory.swift; sourceTree = "<group>"; };
 		E77E070C2C3675170036E9AC /* PracticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeViewModel.swift; sourceTree = "<group>"; };
 		E77E070E2C3675200036E9AC /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
 		E77E07112C3678B80036E9AC /* GroupLetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupLetter.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 				E77E07112C3678B80036E9AC /* GroupLetter.swift */,
 				4B347BBF2C3869A700F09961 /* PracticeResult.swift */,
 				E77062082C38D786003C33BE /* PracticeMode.swift */,
+				E77062222C3AB973003C33BE /* HandwritingHistory.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 				79DCF5082C35C1D400C5A16D /* HistoryView.swift in Sources */,
 				E770621A2C39ACD1003C33BE /* DataScannerView.swift in Sources */,
 				79C2A1D82C330D65007D16D3 /* ThirdOnboarding.swift in Sources */,
+				E77062232C3AB973003C33BE /* HandwritingHistory.swift in Sources */,
 				4BB4890A2C33F33000AF3ED1 /* PracticeView.swift in Sources */,
 				E77E07122C3678B80036E9AC /* GroupLetter.swift in Sources */,
 				E7ACC6A52C36A7F90098E076 /* WhiteboardPracticeViewModel.swift in Sources */,

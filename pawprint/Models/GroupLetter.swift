@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PracticeSentence: Hashable {
+struct PracticeSentence: Hashable, Codable {
     var step: String
     var value: String
 }
@@ -534,12 +534,13 @@ enum UpperCaseLetterType: CaseIterable {
     }
 }
 
-enum LetterType {
-    case lowerCase
-    case upperCase
+enum LetterType: String, Codable {
+    case lowerCase = "Lowercase"
+    case upperCase = "Uppercase"
 }
 
-struct GroupLetterItem: Identifiable {
+//@Model
+struct GroupLetterItem: Identifiable, Codable {
     var id: UUID = UUID()
     var type: LetterType
     var letters: [String]

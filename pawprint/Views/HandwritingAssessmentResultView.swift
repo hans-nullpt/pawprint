@@ -10,6 +10,7 @@ import SwiftUI
 struct HandwritingAssessmentResultView: View {
     @ObservedObject var vm: HandwritingAnalyzeResultViewModel
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var context
     
     var body: some View {
         
@@ -103,7 +104,7 @@ struct HandwritingAssessmentResultView: View {
                             }
                         }
                     } else {
-                        Text("Paw can not analyze your handwriting")
+                        Text("Uh ohh! Paw can not analyze your handwriting")
                             .font(.system(size: 48))
                             .fontWeight(.medium)
                             .padding(.horizontal, 24)
@@ -157,6 +158,32 @@ struct HandwritingAssessmentResultView: View {
                         .scaledToFit()
                         .scenePadding()
                 }
+            }
+            .onDisappear {
+                
+                if let groupLetter = vm.groupLetter {
+                    
+                    let data = HandwritingHistory(
+                        sentence: vm.instructionSentence,
+                        letters: groupLetter.letters.joined(separator: ", "),
+                        type: groupLetter.type.rawValue,
+                        readibilityPercentage: vm.readabilityPercentage,
+                        timestamp: Date.now,
+                        mode: .whiteboard
+                    )
+                    
+                    print("Saving the data")
+                    
+                    context.insert(data)
+                    
+                    do {
+                        try context.save()
+                    } catch {
+                        print("Error: \(error.localizedDescription)")
+                    }
+                }
+                
+                
             }
         }
         
