@@ -11,14 +11,12 @@ import Vision
 
 class HandwritingAnalyzeResultViewModel: ObservableObject, OCRDelegate {
     @Published var instructionSentence: String = ""
-    @Published var scanned: String = ""
     @Published var showCameraModal = false
     @Published var scannedText: AttributedString = AttributedString()
     @Published var capturedImage: UIImage?
     @Published var wordsResults: [WordResult] = []
     @Published var readabilityPercentage: Double = 0
     @Published var groupLetter: GroupLetterItem?
-    @Published var boundingBox: CGRect = CGRectZero
     @Published var showImageDetail: Bool = false
     @Published var letterCount: [LetterCount] = []
     @Published var letterCountString: [String] = []
@@ -28,8 +26,6 @@ class HandwritingAnalyzeResultViewModel: ObservableObject, OCRDelegate {
         self.instructionSentence = data.content
         self.groupLetter = data.groupLetter
         self.processAnaylze(scanned: data.scannedText.split(separator: "\n").joined(separator: " "))
-        self.boundingBox = data.boundingBox
-        self.scanned = data.scannedText.split(separator: "\n").joined(separator: " ")
     }
     
     func processAnaylze(scanned: String) {
@@ -84,12 +80,21 @@ class HandwritingAnalyzeResultViewModel: ObservableObject, OCRDelegate {
                 guard scanned.count > content.count else {
                     /// return result contains word error
                     let results = zip(scanned, content).map { scannedLetter, contentLetter  in
-                        WordAnalyzeResult(
-                            value: String(scannedLetter),
-                            actualLetter: String(contentLetter),
-                            isError: true,
-                            error: .wordError
-                        )
+                        if !content.contains(scannedLetter) {
+                            WordAnalyzeResult(
+                                value: String(scannedLetter),
+                                actualLetter: String(contentLetter),
+                                isError: true,
+                                error: .letterError
+                            )
+                        } else {
+                            WordAnalyzeResult(
+                                value: String(scannedLetter),
+                                actualLetter: String(contentLetter),
+                                isError: true,
+                                error: .wordError
+                            )
+                        }
                     }
                     
                     return WordResult(value: String(scanned), hasError: true, results: results)
@@ -157,7 +162,7 @@ class HandwritingAnalyzeResultViewModel: ObservableObject, OCRDelegate {
     func checkReadabilityPercentage(results: [WordResult]) {
         let percentage = results.reduce(0) { prev, item in
             
-            let correct = item.results.filter({ !$0.isError })
+            let correct = item.results.filter({ !($0.isError) })
             
             return prev + (Double(correct.count) / Double(item.value.count) * 100 )
         } / Double(results.count)

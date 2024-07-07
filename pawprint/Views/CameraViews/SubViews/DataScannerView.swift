@@ -10,7 +10,7 @@ import VisionKit
 import SwiftUI
 
 protocol DataScannerDelegate {
-    func didCapture(image: UIImage, recognizedItem: RecognizedItem)
+    func didCapture(image: UIImage, recognizedItems: [RecognizedItem])
 }
 
 class CaptureButtonView: UIView {
@@ -42,8 +42,28 @@ class CaptureButtonView: UIView {
     }
 }
 
+class CanvasView: UIView {
+    // Array of CGRects to draw
+    var rects: [CGRect] = []
+    
+    // Only override draw() if you perform custom drawing.
+    override func draw(_ rect: CGRect) {
+        // Drawing code
+        guard let context = UIGraphicsGetCurrentContext() else { return }
+        
+        // Set drawing parameters
+        context.setStrokeColor(UIColor.systemYellow.cgColor)
+        context.setLineWidth(2.0)
+        
+        // Draw rectangles
+        for rect in rects {
+            context.stroke(rect)
+        }
+    }
+}
+
 class DataScannerViewControllerWrapper: UIViewController, DataScannerViewControllerDelegate {
-    private var recognizedItem: RecognizedItem? = nil
+    private var recognizedItems: [RecognizedItem] = []
     
     var scannerController: DataScannerViewController!
     var dataScannerDelegate: DataScannerDelegate?
@@ -84,14 +104,29 @@ class DataScannerViewControllerWrapper: UIViewController, DataScannerViewControl
         scannerController = DataScannerViewController(
             recognizedDataTypes: [.text(textContentType: .none)],
             qualityLevel: .accurate,
-            recognizesMultipleItems: false,
-            //            isHighFrameRateTrackingEnabled: true,
-            isGuidanceEnabled: true,
+            recognizesMultipleItems: true,
+            isHighFrameRateTrackingEnabled: true,
+            isGuidanceEnabled: false,
             isHighlightingEnabled: true
         )
-        
-        
+            
         scannerController.delegate = self
+        
+        let roiRect = CGRect(
+            x: 256 / 2,
+            y: view.frame.size.height / 4 ,
+            width: view.frame.size.width - 256,
+            height: view.frame.size.height / 2
+        )
+        scannerController.regionOfInterest = roiRect
+        
+        let canvasView = CanvasView()
+        canvasView.frame = view.bounds
+        canvasView.backgroundColor = .clear
+        
+        canvasView.rects = [roiRect]
+        
+        scannerController.overlayContainerView.addSubview(canvasView)
         
         addChild(scannerController)
         view.addSubview(scannerController.view)
@@ -128,10 +163,7 @@ class DataScannerViewControllerWrapper: UIViewController, DataScannerViewControl
             do {
                 let photo = try await scannerController.capturePhoto()
                 
-                if let item = self.recognizedItem
-                {
-                    dataScannerDelegate?.didCapture(image: photo, recognizedItem: item)
-                }
+                dataScannerDelegate?.didCapture(image: photo, recognizedItems: recognizedItems)
             }
         }
     }
@@ -142,16 +174,18 @@ class DataScannerViewControllerWrapper: UIViewController, DataScannerViewControl
     func dataScanner(_ dataScanner: DataScannerViewController, didAdd addedItems: [RecognizedItem], allItems: [RecognizedItem]) {
         UINotificationFeedbackGenerator().notificationOccurred(.success)
         
-        if let item = addedItems.first {
-            recognizedItem = item
-        }
+        recognizedItems.append(contentsOf: addedItems)
         
     }
     
     func dataScanner(_ dataScanner: DataScannerViewController, didRemove removedItems: [RecognizedItem], allItems: [RecognizedItem]) {
-        if let item = recognizedItem, removedItems.contains(where: { $0.id == item.id }) {
-            print("Item: \(item.id) removed")
-            recognizedItem = nil
+//        if let item = recognizedItem, removedItems.contains(where: { $0.id == item.id }) {
+//            print("Item: \(item.id) removed")
+//            recognizedItem = nil
+//        }
+        
+        for item in removedItems {
+            recognizedItems = recognizedItems.filter { $0.id != item.id }
         }
     }
     
@@ -159,12 +193,11 @@ class DataScannerViewControllerWrapper: UIViewController, DataScannerViewControl
         print("Scanner; Unavailable")
     }
     
-    
 }
 
 struct DataScannerViewControllerRepresentable: UIViewControllerRepresentable {
     
-    let completion: (UIImage?, RecognizedItem?) -> ()
+    let completion: (UIImage?, [RecognizedItem]) -> ()
     
     func makeUIViewController(context: Context) -> DataScannerViewControllerWrapper {
         let controller = DataScannerViewControllerWrapper()
@@ -178,15 +211,15 @@ struct DataScannerViewControllerRepresentable: UIViewControllerRepresentable {
     
     // Coordinator Pattern (optional for delegation)
     class Coordinator: NSObject, DataScannerDelegate {
-        private var completion: (UIImage?, RecognizedItem?) -> ()
+        private var completion: (UIImage?, [RecognizedItem]) -> ()
         
-        init(completion: @escaping(UIImage?, RecognizedItem?) -> ()) {
+        init(completion: @escaping(UIImage?, [RecognizedItem]) -> ()) {
             self.completion = completion
         }
         
-        func didCapture(image: UIImage, recognizedItem: RecognizedItem) {
+        func didCapture(image: UIImage, recognizedItems: [RecognizedItem]) {
             print("Gambar: \(image)")
-            completion(image, recognizedItem)
+            completion(image, recognizedItems)
         }
         
     }

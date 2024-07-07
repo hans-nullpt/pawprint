@@ -9,13 +9,13 @@ import Foundation
 import UIKit
 import Vision
 import SwiftUI
+import VisionKit
 
 struct HandwritingData {
     var image: UIImage
     var scannedText: String
     var content: String
     var groupLetter: GroupLetterItem
-    var boundingBox: CGRect
 }
 
 protocol OCRDelegate {
@@ -30,24 +30,24 @@ class OCRCameraViewModel: ObservableObject {
     @Published var capturedImage: UIImage?
     @Published var boundingBox: CGRect?
     
-    func save(image: UIImage, groupLetter: GroupLetterItem, selectedContent: String, scannedText: String) {
+    func save(image: UIImage, groupLetter: GroupLetterItem, selectedContent: String, recognizedItems: [RecognizedItem]) {
+        
+        var recognizedText: String = recognizedItems.compactMap { item in
+            if case let .text(text) = item {
+                return text.transcript
+            }
+            
+            return nil
+        }.joined(separator: " ")
+        
         if let rotatedImage = image.rotate(radians: -(.pi/2)) {
-            recognizeText(image: rotatedImage) { result, bb in
-                
-                let normalizeRect = self.vnImageRectForNormalizedRect(rect: bb, imageSize: rotatedImage.size)
-                if let crop = rotatedImage.cgImage?.cropping(to: normalizeRect) {
-                    
-                }
-                
-                let data = HandwritingData(
-                    image: rotatedImage, scannedText: scannedText, content: selectedContent, groupLetter: groupLetter,
-                    boundingBox: bb
-                )
-                self.delegate?.didReceiveOcrData(data: data)
-                
-                withAnimation {
-                    self.isResultPresented.toggle()
-                }
+            let data = HandwritingData(
+                image: rotatedImage, scannedText: recognizedText, content: selectedContent, groupLetter: groupLetter
+            )
+            self.delegate?.didReceiveOcrData(data: data)
+            
+            withAnimation {
+                self.isResultPresented.toggle()
             }
         }
     }
