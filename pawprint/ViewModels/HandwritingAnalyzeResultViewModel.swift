@@ -11,6 +11,7 @@ import Vision
 
 class HandwritingAnalyzeResultViewModel: ObservableObject, OCRDelegate {
     @Published var instructionSentence: String = ""
+    @Published var scanned: String = ""
     @Published var showCameraModal = false
     @Published var scannedText: AttributedString = AttributedString()
     @Published var capturedImage: UIImage?
@@ -26,8 +27,9 @@ class HandwritingAnalyzeResultViewModel: ObservableObject, OCRDelegate {
         self.capturedImage = data.image
         self.instructionSentence = data.content
         self.groupLetter = data.groupLetter
-        self.processAnaylze(scanned: data.scannedText)
+        self.processAnaylze(scanned: data.scannedText.split(separator: "\n").joined(separator: " "))
         self.boundingBox = data.boundingBox
+        self.scanned = data.scannedText.split(separator: "\n").joined(separator: " ")
     }
     
     func processAnaylze(scanned: String) {
@@ -47,7 +49,7 @@ class HandwritingAnalyzeResultViewModel: ObservableObject, OCRDelegate {
                 if (content == scanned) {
                     /// Example: jaded <> jaded
                     let results = scanned.map { scan in
-                        WordAnalyzeResult(value: String(scan), actualLetter: String(content))
+                        WordAnalyzeResult(value: String(scan), actualLetter: String(scan))
                     }
                     return WordResult(value: String(scanned), results: results)
                 } else {
@@ -81,14 +83,16 @@ class HandwritingAnalyzeResultViewModel: ObservableObject, OCRDelegate {
                 /// Check if the scanned length greater than content length, then define as word error
                 guard scanned.count > content.count else {
                     /// return result contains word error
-                    let result = WordAnalyzeResult(
-                        value: String(scanned),
-                        actualLetter: String(content),
-                        isError: true, 
-                        error: .wordError
-                    )
+                    let results = zip(scanned, content).map { scannedLetter, contentLetter  in
+                        WordAnalyzeResult(
+                            value: String(scannedLetter),
+                            actualLetter: String(contentLetter),
+                            isError: true,
+                            error: .wordError
+                        )
+                    }
                     
-                    return WordResult(value: String(scanned), hasError: true, results: [result])
+                    return WordResult(value: String(scanned), hasError: true, results: results)
                 }
                 
                 /// Otherwise, check each letter equality
@@ -133,7 +137,7 @@ class HandwritingAnalyzeResultViewModel: ObservableObject, OCRDelegate {
             let item = result.results.map { item in
                 /// If error, create AttributedString with highlighter
                 if item.isError {
-                    var errText = AttributedString(" \(item.value) ")
+                    var errText = item.error == .letterError ? AttributedString(" \(item.value) ") : AttributedString("\(item.value)")
                     errText.foregroundColor = .black
                     errText.backgroundColor = item.error == .letterError ? .red.opacity(0.5) : .yellow
                     
@@ -182,12 +186,12 @@ class HandwritingAnalyzeResultViewModel: ObservableObject, OCRDelegate {
             LetterCount(
                 value: letter,
                 total: actualLetterResults.filter { $0.actualLetter == letter }.count,
-                error: actualLetterResults.filter { $0.actualLetter == letter && $0.isError }.count
+                error: actualLetterResults.filter { $0.actualLetter == letter && $0.error == .letterError }.count
             )
         }
         
         self.letterCountString = self.letterCount.map { item in
-            "\(item.value): \(item.total - item.error) / \(item.total) readable"
+            "\(item.value): \(item.total - item.error)/\(item.total) readable"
         }
     }
 }
