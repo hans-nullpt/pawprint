@@ -19,6 +19,8 @@ class HandwritingAnalyzeResultViewModel: ObservableObject, OCRDelegate {
     @Published var groupLetter: GroupLetterItem?
     @Published var boundingBox: CGRect = CGRectZero
     @Published var showImageDetail: Bool = false
+    @Published var letterCount: [LetterCount] = []
+    @Published var letterCountString: [String] = []
     
     func didReceiveOcrData(data: HandwritingData) {
         self.capturedImage = data.image
@@ -45,7 +47,7 @@ class HandwritingAnalyzeResultViewModel: ObservableObject, OCRDelegate {
                 if (content == scanned) {
                     /// Example: jaded <> jaded
                     let results = scanned.map { scan in
-                        WordAnalyzeResult(value: String(scan))
+                        WordAnalyzeResult(value: String(scan), actualLetter: String(content))
                     }
                     return WordResult(value: String(scanned), results: results)
                 } else {
@@ -59,10 +61,15 @@ class HandwritingAnalyzeResultViewModel: ObservableObject, OCRDelegate {
                         
                         /// If error, then return result contains letter error
                         guard content == scanned else {
-                            return WordAnalyzeResult(value: String(scanned), isError: true, error: .letterError)
+                            return WordAnalyzeResult(
+                                value: String(scanned),
+                                actualLetter: String(content),
+                                isError: true,
+                                error: .letterError
+                            )
                         }
                         
-                        return WordAnalyzeResult(value: String(scanned))
+                        return WordAnalyzeResult(value: String(scanned), actualLetter: String(content))
                     }
                     
                     /// return word result that contains error
@@ -74,7 +81,12 @@ class HandwritingAnalyzeResultViewModel: ObservableObject, OCRDelegate {
                 /// Check if the scanned length greater than content length, then define as word error
                 guard scanned.count > content.count else {
                     /// return result contains word error
-                    let result = WordAnalyzeResult(value: String(scanned), isError: true, error: .wordError)
+                    let result = WordAnalyzeResult(
+                        value: String(scanned),
+                        actualLetter: String(content),
+                        isError: true, 
+                        error: .wordError
+                    )
                     
                     return WordResult(value: String(scanned), hasError: true, results: [result])
                 }
@@ -85,10 +97,15 @@ class HandwritingAnalyzeResultViewModel: ObservableObject, OCRDelegate {
                     
                     if !content.contains(letter) {
                         /// If content doesnt contains the letter, then return result with letter error
-                        results.append(WordAnalyzeResult(value: String(letter), isError: true, error: .letterError))
+                        results.append(WordAnalyzeResult(
+                            value: String(letter),
+                            actualLetter: String(content),
+                            isError: true, 
+                            error: .letterError
+                        ))
                     } else {
                         /// Otherwise, true
-                        results.append(WordAnalyzeResult(value: String(letter)))
+                        results.append(WordAnalyzeResult(value: String(letter), actualLetter: String(content)))
                     }
                     
                 }
@@ -100,6 +117,7 @@ class HandwritingAnalyzeResultViewModel: ObservableObject, OCRDelegate {
         
         buildSentenceHighlighter(results: results)
         checkReadabilityPercentage(results: results)
+        getLetterCount(results: results)
     }
     
     func buildSentenceHighlighter(results: [WordResult]) {
@@ -141,5 +159,35 @@ class HandwritingAnalyzeResultViewModel: ObservableObject, OCRDelegate {
         } / Double(results.count)
         
         self.readabilityPercentage = round(percentage)
+    }
+    
+    func getLetterCount(results: [WordResult]) {
+        guard groupLetter != nil else {
+            return
+        }
+        
+        let actualLetterResults = results.flatMap { result in
+            let actualLetter = result.results.compactMap { item in
+                if groupLetter!.letters.contains(item.actualLetter) {
+                    return item
+                }
+                
+                return nil
+            }
+            
+            return actualLetter
+        }
+        
+        self.letterCount = groupLetter!.letters.map { letter in
+            LetterCount(
+                value: letter,
+                total: actualLetterResults.filter { $0.actualLetter == letter }.count,
+                error: actualLetterResults.filter { $0.actualLetter == letter && $0.isError }.count
+            )
+        }
+        
+        self.letterCountString = self.letterCount.map { item in
+            "\(item.value): \(item.total - item.error) / \(item.total) readable"
+        }
     }
 }

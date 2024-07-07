@@ -14,8 +14,15 @@ enum WordErrorType {
 
 struct WordAnalyzeResult {
     var value: String
+    var actualLetter: String
     var isError: Bool = false
     var error: WordErrorType?
+}
+
+struct LetterCount {
+    var value: String
+    var total: Int
+    var error: Int
 }
 
 struct WordResult {

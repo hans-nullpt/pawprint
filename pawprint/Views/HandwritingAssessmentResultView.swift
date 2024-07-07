@@ -14,33 +14,34 @@ struct HandwritingAssessmentResultView: View {
     var body: some View {
         
         NavigationStack {
-            ZStack{
-                Image(.doodleBackground)
-                
-                VStack(alignment: .leading) {
-                    Text("How Paw see your handwriting")
-                        .font(.system(size: 36))
-                        .fontWeight(.semibold)
-                    ZStack(alignment: .leading) {
-                        VStack(spacing: 32) {
-                            VStack(spacing: 48){
-                                Text("Readability")
-                                    .font(.system(size: 40))
-                                Text("\(String(format: "%.f", vm.readabilityPercentage))%")
-                                    .font(.system(size: 96))
-                                    .fontWeight(.heavy)
-                                    .overlay {
-                                        Image(.result)
-                                            .offset(x: 24)
-                                    }
-                            }
-                            
-                            
-                                Text("Readability Letters Detail (\(vm.groupLetter?.letters.joined(separator: ", ") ?? "")) On iPad")
+            GeometryReader { reader in
+                ZStack{
+                    Image(.doodleBackground)
+                    
+                    VStack(alignment: .leading) {
+                        Text("How Paw see your handwriting")
+                            .font(.system(size: 36))
+                            .fontWeight(.semibold)
+                        ZStack(alignment: .leading) {
+                            VStack(spacing: 32) {
+                                VStack(spacing: 48){
+                                    Text("Readability")
+                                        .font(.system(size: 40))
+                                    Text("\(String(format: "%.f", vm.readabilityPercentage))%")
+                                        .font(.system(size: 96))
+                                        .fontWeight(.heavy)
+                                        .overlay {
+                                            Image(.result)
+                                                .offset(x: 24)
+                                        }
+                                }
+                                
+                                
+                                Text("Readability Letters Detail (\(vm.groupLetter?.letters.joined(separator: ", ") ?? "")) On Whiteboard")
                                     .font(.system(size: 24))
                                     .fontWeight(.medium)
                                 
-                                Text("e: 4/5 readable,  f: 4/4 readable,  s: 7/8 readable")
+                                Text(vm.letterCountString.joined(separator: ", "))
                                     .font(.system(size: 40))
                                     .fontWeight(.medium)
                                 
@@ -50,7 +51,7 @@ struct HandwritingAssessmentResultView: View {
                                         Image(uiImage: image)
                                             .resizable()
                                             .scaledToFill()
-                                            .frame(maxWidth: 400, maxHeight: 200)
+                                            .frame(maxWidth: reader.size.width / 2 - 32, maxHeight: 200)
                                             .clipShape(RoundedRectangle(cornerRadius: 20))
                                             .overlay {
                                                 RoundedRectangle(cornerRadius: 20)
@@ -76,7 +77,7 @@ struct HandwritingAssessmentResultView: View {
                                         .font(.system(size: 60))
                                         .fontWeight(.medium)
                                         .multilineTextAlignment(.center)
-                                        .frame(maxWidth: 400)
+                                        .frame(maxWidth: reader.size.width / 2 - 32)
                                         .fixedSize(horizontal: false, vertical: true)
                                 }
                                 .padding(.horizontal, 32)
@@ -93,29 +94,12 @@ struct HandwritingAssessmentResultView: View {
                                     Image(.redpaw)
                                         .offset(x: 545, y: 120)
                                 }
-                            
-                            
+                                
+                                
+                            }
+                            .padding(.vertical, 72)
+                            .frame(maxWidth: .infinity)
                         }
-                        .padding(.vertical, 72)
-                        .frame(maxWidth: .infinity)
-                        
-                        //                    Image(.catTeaching)
-                        //                        .resizable()
-                        //                        .scaledToFit()
-                        //                        .frame(maxWidth: 256)
-                        //                        .offset(x: -20, y: 232)
-                    }
-                    
-                    Spacer()
-                    
-                    HStack {
-                        //                        Button(action: {}) {
-                        //                            HStack {
-                        //                                Text("Repeat")
-                        //                                Image(systemName: "repeat")
-                        //                            }
-                        //                        }
-                        //                        .buttonStyle(PawPrintButtonStyle())
                         
                         Spacer()
                         
@@ -128,19 +112,20 @@ struct HandwritingAssessmentResultView: View {
                             }
                         }
                         .buttonStyle(PawPrintButtonStyle())
+                        .frame(maxWidth: .infinity, alignment: .trailing)
                     }
+                    .padding(.horizontal, 116)
+                    .padding(.vertical, 64)
                 }
-                .padding(.horizontal, 116)
-                .padding(.vertical, 64)
-            }
-            .navigationBarBackButtonHidden()
-            .toolbar(.hidden, for: .tabBar)
-            .sheet(isPresented: $vm.showImageDetail) {
-                if let image = vm.capturedImage {
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFit()
-                        .scenePadding()
+                .navigationBarBackButtonHidden()
+                .toolbar(.hidden, for: .tabBar)
+                .sheet(isPresented: $vm.showImageDetail) {
+                    if let image = vm.capturedImage {
+                        Image(uiImage: image)
+                            .resizable()
+                            .scaledToFit()
+                            .scenePadding()
+                    }
                 }
             }
         }
