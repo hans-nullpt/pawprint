@@ -44,64 +44,87 @@ struct HandwritingAssessmentResultView: View {
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
                     
-                    HStack{
-                        
-                        if let image = vm.capturedImage {
-                            Image(uiImage: image)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(maxWidth: reader.size.width / 2 - 32, maxHeight: 200)
-                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                    if let image = vm.capturedImage, vm.scannedText != AttributedString() {
+                        HStack{
+                            
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(maxWidth: reader.size.width / 2 - 32, maxHeight: 200)
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    .overlay {
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .stroke(
+                                                .kRed,
+                                                lineWidth: 4
+                                            )
+                                    }
+                                    .onTapGesture {
+                                        vm.showImageDetail.toggle()
+                                    }
+                            
+                            Spacer()
+                            
+                            Image(systemName: "arrow.right")
+                                .font(.system(size: 60))
+                                .fontWeight(.medium)
+                            
+                            Spacer()
+                            
+                            Text(vm.scannedText)
+                                .font(.system(size: 48))
+                                .fontWeight(.medium)
+                                .multilineTextAlignment(.center)
+                                .frame(maxWidth: reader.size.width / 2 - 32)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .padding()
                                 .overlay {
                                     RoundedRectangle(cornerRadius: 10)
                                         .stroke(
-                                            .kRed,
+                                            .black,
                                             lineWidth: 4
                                         )
                                 }
-                                .onTapGesture {
-                                    vm.showImageDetail.toggle()
-                                }
                         }
-                        
-                        Spacer()
-                        
-                        Image(systemName: "arrow.right")
-                            .font(.system(size: 60))
-                            .fontWeight(.medium)
-                        
-                        Spacer()
-                        
-                        Text(vm.scannedText)
-                            .font(.system(size: 48))
-                            .fontWeight(.medium)
-                            .multilineTextAlignment(.center)
-                            .frame(maxWidth: reader.size.width / 2 - 32)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .padding()
-                            .overlay {
-                                RoundedRectangle(cornerRadius: 10)
+                        .padding(.horizontal, 24)
+                        .padding(.vertical, 24)
+                        .frame(maxWidth: .infinity)
+                        .overlay {
+                            ZStack(alignment: .bottomTrailing) {
+                                RoundedRectangle(cornerRadius: 20)
                                     .stroke(
                                         .black,
-                                        lineWidth: 4
+                                        style: StrokeStyle(
+                                            lineWidth: 4, dash: [6]
+                                        )
                                     )
+                                Image(.redpaw)
+                                    .offset(x: 64, y: 64)
                             }
-                    }
-                    .padding(.horizontal, 24)
-                    .padding(.vertical, 24)
-                    .frame(maxWidth: .infinity)
-                    .overlay {
-                        ZStack(alignment: .bottomTrailing) {
-                            RoundedRectangle(cornerRadius: 20)
-                                .stroke(
-                                    .black,
-                                    style: StrokeStyle(
-                                        lineWidth: 4, dash: [6]
-                                    )
-                                )
-                            Image(.redpaw)
-                                .offset(x: 64, y: 64)
                         }
+                    } else {
+                        Text("Paw can not analyze your handwriting")
+                            .font(.system(size: 48))
+                            .fontWeight(.medium)
+                            .padding(.horizontal, 24)
+                            .padding(.bottom, 64)
+                            .padding(.top, 72)
+                            .frame(maxWidth: .infinity)
+                            .overlay {
+                                Image(.catCrying)
+                                    .offset(y: -160)
+                            }
+                            .background {
+                                ZStack(alignment: .bottomTrailing) {
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .fill(.white)
+                                        .strokeBorder(Color.black, lineWidth: 4)
+                                    
+                                    Image(.redpaw)
+                                        .offset(x: 64, y: 64)
+                                }
+                            }
+                            .offset(y: 140)
                     }
                     
                     Spacer()
