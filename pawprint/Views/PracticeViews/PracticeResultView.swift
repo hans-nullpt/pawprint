@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PracticeResultView: View {
     @StateObject private var vm: PracticeAnalyzeResultViewModel = PracticeAnalyzeResultViewModel()
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         
@@ -87,7 +88,9 @@ struct PracticeResultView: View {
                     HStack {
                         Spacer()
                         
-                        Button(action: {}) {
+                        Button(action: {
+                            dismiss()
+                        }) {
                             HStack {
                                 Text("Finish")
                                 Image(systemName: "flag.2.crossed")
@@ -100,6 +103,7 @@ struct PracticeResultView: View {
                 .padding(.vertical, 64)
             }
             .navigationBarBackButtonHidden()
+            .toolbar(.hidden, for: .tabBar)
         }
         
     }
