@@ -11,7 +11,7 @@ import CoreMotion
 
 class PracticeAnalyzeResultViewModel: ObservableObject {
     @Published var groupLetter: String = ""
-    @Published var imageResult: UIImage?
+    @Published var imageResult: String = ""
     @Published var textResult: String = ""
     @Published var gravityValue: String = ""
     @Published var isSurfacePositionNotValid: Bool = true
@@ -71,25 +71,10 @@ class PracticeAnalyzeResultViewModel: ObservableObject {
     
     func didReceivePracticeData(data: PracticeResult) {
         groupLetter = data.groupLetter ?? ""
-        imageResult = data.imageResult
+        imageResult = data.imageResult ?? ""
         textResult = data.textResult ?? ""
         
         print("check group letter", groupLetter)
     }
     
-    func getResult() -> PracticeResult {
-        return PracticeResult(groupLetter: groupLetter, imageResult: imageResult, textResult: textResult)
-    }
-    
-    func getGroupLetter() -> String {
-        return groupLetter
-    }
-    
-    func getImage() -> UIImage {
-        return imageResult ?? UIImage()
-    }
-    
-    func getTextResult() -> String {
-        return textResult
-    }
 }

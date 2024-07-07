@@ -6,9 +6,13 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct PracticeResultView: View {
     @StateObject private var vm: PracticeAnalyzeResultViewModel = PracticeAnalyzeResultViewModel()
+    @Environment(\.modelContext) private var context
+    
+    @Query var items: [PracticeResult]
     
     var body: some View {
         
@@ -23,6 +27,7 @@ struct PracticeResultView: View {
                     ZStack(alignment: .leading) {
                         VStack(spacing: 32) {
                             VStack(spacing: 48){
+                                
                                 Text("Readability")
                                     .font(.system(size: 40))
                                 Text("80%")
@@ -34,7 +39,7 @@ struct PracticeResultView: View {
                                     }
                             }
                             
-                            Text("Readability Letters Detail (\(vm.groupLetter)) On iPad")
+                            Text("Readability Letters Detail (\(items.count)) On iPad")
                                 .font(.system(size: 24))
                                 .fontWeight(.medium)
                             
@@ -103,8 +108,24 @@ struct PracticeResultView: View {
         }
         
     }
+    
+    func addItem() {
+        let item = PracticeResult(groupLetter: "", imageResult: "", textResult: "")
+        
+        context.insert(item)
+    }
+    
+    func updateItem(_ item: PawPrintData) {
+        item.name = "practice"
+        
+        try? context.save()
+    }
+    
+    func deleteItem(_ item: PawPrintData) {
+        context.delete(item)
+    }
 }
 
-#Preview {
-    PracticeResultView()
-}
+//#Preview {
+//    PracticeResultView()
+//}

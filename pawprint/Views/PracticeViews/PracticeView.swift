@@ -6,11 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct PracticeView: View {
     @Environment(\.managedObjectContext) var viewContext
     @Environment(\.dismiss) private var dismiss
     @StateObject private var vm: PracticeAnalyzeResultViewModel = PracticeAnalyzeResultViewModel()
+    
+    @Query var items: [PracticeResult]
     
     @State var id:UUID?
     @State var data:Data?
@@ -107,7 +110,7 @@ struct PracticeView: View {
                         
                         // TIMER COMPONENT
                         VStack (alignment: .center) {
-                            Text("00:07")
+                            Text("00:07 :: \(items.count)")
                                 .font(.system(size: 36, weight: .bold))
                                 .foregroundColor(.black)
                         }
@@ -253,9 +256,10 @@ struct PracticeView: View {
                 PracticeResultView()
             }
         }
+        .modelContainer(for: PracticeResult.self, inMemory: true)
     }
 }
 
-#Preview {
-    PracticeView()
-}
+//#Preview {
+//    PracticeView()
+//}

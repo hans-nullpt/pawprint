@@ -7,9 +7,23 @@
 
 import Foundation
 import UIKit
+import SwiftData
 
-struct PracticeResult {
-    var groupLetter: String?
-    var imageResult: UIImage?
-    var textResult: String?
+@Model
+class PracticeResult: Identifiable {
+    var groupLetter: String? = ""
+    var imageResult: String? = ""
+    var textResult: String? = ""
+
+    init(groupLetter: String, imageResult: String, textResult: String) {
+        self.groupLetter = groupLetter
+        self.imageResult = imageResult
+        self.textResult = textResult
+    }
 }
+
+//struct PracticeResult: Codable {
+//    var groupLetter: String? = ""
+//    var imageResult: String? = ""
+//    var textResult: String? = ""
+//}
