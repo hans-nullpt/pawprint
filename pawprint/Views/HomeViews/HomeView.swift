@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import SwiftData
 
 struct HomeView: View {
     
@@ -35,12 +35,22 @@ struct HomeView: View {
 }
 
 struct DeviceHome: View {
+    
+    @Query var histories: [HandwritingHistory]
     var device: PracticeModeType
     
     @EnvironmentObject private var vm: HomeViewModel
     @EnvironmentObject private var soundVm: SoundViewModel
     
     @AppStorage("background_music") private var isSoundActive: Bool = false
+    
+    init(device: PracticeModeType) {
+        self.device = device
+        
+        _histories = Query(filter: #Predicate<HandwritingHistory> { data in
+            data.mode == device.rawValue
+        }, sort: \HandwritingHistory.timestamp, order: .reverse)
+    }
     
     var body: some View {
         NavigationStack {
@@ -97,7 +107,7 @@ struct DeviceHome: View {
                     
                 }
                 Spacer()
-                HomeResultView()
+                HomeResultView(data: histories.first)
                     .background {
                         Image(.letspractice)
                             .offset(x: -90)

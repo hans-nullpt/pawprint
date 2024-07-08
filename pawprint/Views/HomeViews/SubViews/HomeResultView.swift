@@ -8,25 +8,30 @@
 import SwiftUI
 
 struct HomeResultView: View {
+    var data: HandwritingHistory?
     var body: some View {
-        VStack(spacing: 32) {
-            Text("Your last score ")
-                .font(.system(size: 32))
-                .bold()
-            + Text("e, f, s")
-                .font(.system(size: 32))
-                .bold()
-                .foregroundColor(.kRed)
-            Text("80%")
-                .font(.system(size: 96))
-                .fontWeight(.heavy)
-                .background {
-                    Image(.result)
-                        .scaledToFill()
-                }
-            Text("Your progress seems great!")
-                .font(.system(size: 28))
-                .bold()
+        if data != nil {
+            VStack(spacing: 32) {
+                Text("Your last score ")
+                    .font(.system(size: 32))
+                    .bold()
+                + Text(data!.letters)
+                    .font(.system(size: 32))
+                    .bold()
+                    .foregroundColor(.kRed)
+                Text("\(String(format: "%.f", data!.readibilityPercentage))%")
+                    .font(.system(size: 96))
+                    .fontWeight(.heavy)
+                    .background {
+                        Image(.result)
+                            .scaledToFill()
+                    }
+                Text(data!.readibilityPercentage > 70 ? "Your progress seems great!" : "You need to practice again \nwith this letter group.")
+                    .font(.system(size: 28))
+                    .bold()
+            }
+        } else {
+            HomeFirstTimeView()
         }
     }
 }

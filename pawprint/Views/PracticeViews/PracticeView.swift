@@ -240,7 +240,7 @@ struct PracticeView: View {
                     .background(.white)
                     
                    
-                    if !vm.isSurfacePositionNotValid {
+                    if vm.isSurfacePositionNotValid {
                         VerticalSurfaceValidationPopUp(isPresented: $vm.isSurfacePositionNotValid)
                             .ignoresSafeArea()
                             .offset(x:0, y: 0)
