@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import CoreMotion
+import Vision
 
 class IpadPracticeViewModel: ObservableObject {
 //    @Published var groupLetter: String = ""
@@ -64,11 +65,19 @@ class IpadPracticeViewModel: ObservableObject {
     }
     
     func sendData() {
+        
+        print("Send Image: ", self.capturedImage)
         if let image = self.capturedImage, let groupLetter = self.data {
+                        isNextScreen = true
+            
             let handwritinData = HandwritingData(image: image, scannedText: "", content: self.sentence, groupLetter: groupLetter)
             delegate?.didReceiveOcrData(data: handwritinData)
+            
         }
+        
     }
+    
+    
     
     private func startFetchingSensorData() {
         // Check if the motion manager is available and the sensors are available
@@ -108,8 +117,32 @@ class IpadPracticeViewModel: ObservableObject {
         }
     }
     
+     func recognizeText(image: UIImage, completion: @escaping (String) -> ()) {
+        guard let cgImage = image.cgImage else { return }
+        let request = VNRecognizeTextRequest { (request, error) in
+            guard let observations = request.results as? [VNRecognizedTextObservation], error == nil else {
+                print("Text recognition error: \(error?.localizedDescription ?? "Unknown error")")
+                return
+            }
+            
+            let scanned = observations.map({ recognizedText in
+                recognizedText.topCandidates(1).first?.string ?? ""
+            }).joined(separator: " ")
+            
+            DispatchQueue.main.async {
+                completion(scanned)
+            }
+        }
+        request.recognitionLevel = .accurate
+        
+        let handler = VNImageRequestHandler(cgImage: cgImage)
+        try? handler.perform([request])
+    }
+    
     func didReceivePracticeData(data: Data, image: UIImage) {
         capturedImage = image
+        
+        print("Image from canvas", image)
 //        groupLetter = data.groupLetter ?? ""
 //        imageResult = data.imageResult
 //        textResult = data.textResult ?? ""

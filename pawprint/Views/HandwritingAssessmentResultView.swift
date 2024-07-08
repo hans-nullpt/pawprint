@@ -45,7 +45,7 @@ struct HandwritingAssessmentResultView: View {
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
                     
-                    if let image = vm.capturedImage, vm.scannedText != AttributedString() {
+                    if let image = vm.capturedImage {
                         HStack{
                             
                                 Image(uiImage: image)
@@ -157,6 +157,7 @@ struct HandwritingAssessmentResultView: View {
                         .resizable()
                         .scaledToFit()
                         .scenePadding()
+                        .border(.black)
                 }
             }
             .onDisappear {

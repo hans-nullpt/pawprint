@@ -14,8 +14,9 @@ struct PracticeView: View {
     @StateObject private var resultVm: HandwritingAnalyzeResultViewModel = HandwritingAnalyzeResultViewModel()
     
     @State var id:UUID?
-    @State var data:Data?
+    @State var data:Data = Data()
     @State var groupLetter: GroupLetterItem
+    @State var image: UIImage? = nil
     
     @State private var isTracingMode = false
     @State var leftName = "Tracing"
@@ -187,10 +188,16 @@ struct PracticeView: View {
                             }
                             
                             //                CANVAS VIEW COMPONENT
-                            DrawingCanvasView(groupLetter: groupLetter.letters.joined(separator: ", "), data: data ?? Data(), id: id ?? UUID())
-//                                .environment(\.managedObjectContext, viewContext)
-//                                .navigationBarTitle(title ?? "Untitled",displayMode: .inline)
-                                .cornerRadius(12)
+//                            DrawingCanvasView(
+//                                vm: vm, data: data ?? Data(), id: id ?? UUID())
+////                                .environment(\.managedObjectContext, viewContext)
+////                                .navigationBarTitle(title ?? "Untitled",displayMode: .inline)
+//                                .cornerRadius(12)
+                            
+                            DrawingCanvasView2(data: data) { data, image in
+                                self.image = image
+                            }
+//                            DrawingCanvasView(vm: vm, data: data, id: id ?? UUID())
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                         }
                         .frame(height: 630)
@@ -201,11 +208,14 @@ struct PracticeView: View {
                         HStack (alignment: .center) {
                             Spacer()
                             Button(action: {
-                                if !vm.isBlankScreen {
-                                    vm.nextStep()
-                                } else {
-                                    vm.isNextScreen = true
-                                    vm.sendData()
+//                                if !vm.isBlankScreen {
+//                                    vm.nextStep()
+//                                } else {
+//                                    vm.sendData()
+//                                }
+                                
+                                if let image = ImageRenderer(content: Text("Hai")).uiImage {
+                                    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
                                 }
                             }) {
                                 HStack {
@@ -226,7 +236,7 @@ struct PracticeView: View {
                     .background(.white)
                     
                    
-                    if vm.isSurfacePositionNotValid {
+                    if !vm.isSurfacePositionNotValid {
                         VerticalSurfaceValidationPopUp(isPresented: $vm.isSurfacePositionNotValid)
                             .ignoresSafeArea()
                             .offset(x:0, y: 0)
@@ -248,8 +258,8 @@ struct PracticeView: View {
                 
             }
             .onAppear {
-                vm.getRandomSentence(data: groupLetter)
                 vm.delegate = self.resultVm
+                vm.getRandomSentence(data: groupLetter)
             }
             .toolbar(.hidden, for: .tabBar)
             .navigationBarHidden(true)
