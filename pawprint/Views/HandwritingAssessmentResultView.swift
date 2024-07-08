@@ -45,7 +45,7 @@ struct HandwritingAssessmentResultView: View {
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
                     
-                    if let image = vm.capturedImage, vm.scannedText != AttributedString(), vm.mode != .ipad {
+                    if let image = vm.capturedImage, vm.scannedText != AttributedString(){
                         HStack{
                             
                                 Image(uiImage: image)

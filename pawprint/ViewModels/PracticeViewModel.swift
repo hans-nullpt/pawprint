@@ -9,20 +9,23 @@ import Foundation
 import UIKit
 import CoreMotion
 import Vision
+import SwiftUI
 
 class IpadPracticeViewModel: ObservableObject {
-//    @Published var groupLetter: String = ""
-//    @Published var imageResult: UIImage?
-//    @Published var textResult: String = ""
+    //    @Published var groupLetter: String = ""
+    //    @Published var imageResult: UIImage?
+    //    @Published var textResult: String = ""
     @Published var gravityValue: String = ""
     @Published var isSurfacePositionNotValid: Bool = true
     @Published var capturedImage: UIImage?
+    @Published var imageRect: CGRect = CGRectZero
     @Published var contentIndex: Int = 0
     @Published var sentence: String = ""
     @Published var sentences: [PracticeSentence] = []
     @Published var isBlankScreen: Bool = false
     @Published var isNextScreen: Bool = false
     @Published var data: GroupLetterItem?
+    @Published var scannedText: String = ""
     
     
     // The instance of CMMotionManager responsible for handling sensor updates
@@ -61,17 +64,30 @@ class IpadPracticeViewModel: ObservableObject {
             contentIndex += 1
         } else {
             isBlankScreen = true
-        }                           
+        }
     }
     
     func sendData() {
         
-        print("Send Image: ", self.capturedImage)
         if let image = self.capturedImage, let groupLetter = self.data {
-                        isNextScreen = true
+           
             
-            let handwritinData = HandwritingData(image: image, scannedText: "", content: self.sentence, groupLetter: groupLetter, mode: .ipad)
-            delegate?.didReceiveOcrData(data: handwritinData)
+            
+            if let newImage = UIImage(color: .white, size: CGSize(width: imageRect.width, height: imageRect.height)){
+                if let overlayedImage = newImage.image(byDrawingImage: image, inRect: imageRect){
+                    recognizeText(image: overlayedImage) { scanned in
+                        print("Result: ", scanned)
+                        let handwritinData = HandwritingData(image: image, scannedText: scanned, content: self.sentence, groupLetter: groupLetter, mode: .ipad)
+                        self.delegate?.didReceiveOcrData(data: handwritinData)
+                        
+                        withAnimation {
+                            self.isNextScreen = true
+                        }
+                    }
+                }
+            }
+            
+            
             
         }
         
@@ -117,7 +133,7 @@ class IpadPracticeViewModel: ObservableObject {
         }
     }
     
-     func recognizeText(image: UIImage, completion: @escaping (String) -> ()) {
+    func recognizeText(image: UIImage, completion: @escaping (String) -> ()) {
         guard let cgImage = image.cgImage else { return }
         let request = VNRecognizeTextRequest { (request, error) in
             guard let observations = request.results as? [VNRecognizedTextObservation], error == nil else {
@@ -143,26 +159,26 @@ class IpadPracticeViewModel: ObservableObject {
         capturedImage = image
         
         print("Image from canvas", image)
-//        groupLetter = data.groupLetter ?? ""
-//        imageResult = data.imageResult
-//        textResult = data.textResult ?? ""
-//        
-//        print("check group letter", groupLetter)
+        //        groupLetter = data.groupLetter ?? ""
+        //        imageResult = data.imageResult
+        //        textResult = data.textResult ?? ""
+        //
+        //        print("check group letter", groupLetter)
     }
-//    
-//    func getResult() -> PracticeResult {
-//        return PracticeResult(groupLetter: groupLetter, imageResult: imageResult, textResult: textResult)
-//    }
-//    
-//    func getGroupLetter() -> String {
-//        return groupLetter
-//    }
-//    
-//    func getImage() -> UIImage {
-//        return imageResult ?? UIImage()
-//    }
-//    
-//    func getTextResult() -> String {
-//        return textResult
-//    }
+    //
+    //    func getResult() -> PracticeResult {
+    //        return PracticeResult(groupLetter: groupLetter, imageResult: imageResult, textResult: textResult)
+    //    }
+    //
+    //    func getGroupLetter() -> String {
+    //        return groupLetter
+    //    }
+    //
+    //    func getImage() -> UIImage {
+    //        return imageResult ?? UIImage()
+    //    }
+    //
+    //    func getTextResult() -> String {
+    //        return textResult
+    //    }
 }

@@ -11,7 +11,7 @@ import PencilKit
 
 struct DrawingCanvasView2: UIViewRepresentable {
     
-    var completion: (Data, UIImage) -> ()
+    var completion: (Data, UIImage, CGRect) -> ()
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
         if let drawing = try? PKDrawing(data: data) {
@@ -137,9 +137,9 @@ class Coordinator: NSObject, PKCanvasViewDelegate, UIIndirectScribbleInteraction
     var canvasViewId: String
     var hiddentTextField: UITextField?
     var drawingTool = PKInkingTool(.pen, color: .black, width: 30)
-    var canvasViewDrawingDidChange: (Data, UIImage) -> ()
+    var canvasViewDrawingDidChange: (Data, UIImage, CGRect) -> ()
     
-    init(canvasView: PKCanvasView, canvasViewId: String, hiddentTextField: UITextField? = nil, canvasViewDrawingDidChange: @escaping (Data, UIImage) -> ()) {
+    init(canvasView: PKCanvasView, canvasViewId: String, hiddentTextField: UITextField? = nil, canvasViewDrawingDidChange: @escaping (Data, UIImage, CGRect) -> ()) {
         self.canvasView = canvasView
         self.canvasViewId = canvasViewId
         self.hiddentTextField = hiddentTextField
@@ -194,7 +194,17 @@ class Coordinator: NSObject, PKCanvasViewDelegate, UIIndirectScribbleInteraction
     
     func canvasViewDrawingDidChange(_ canvasView: PKCanvasView) {
 //        print("PPP")
-        canvasViewDrawingDidChange(canvasView.drawing.dataRepresentation(), canvasView.drawing.image(from: canvasView.drawing.bounds, scale: 1))
+        
+        let image = canvasView.drawing.image(from: canvasView.drawing.bounds, scale: 1)
+        let rect = CGRect(x: canvasView.center.x, y: canvasView.center.y, width: canvasView.frame.width, height: canvasView.frame.height)
+        
+//        if let newImage = UIImage(color: .white, size: CGSize(width: canvasView.frame.width, height: canvasView.frame.height)){
+//            if let overlayedImage = newImage.image(byDrawingImage: image, inRect: CGRect(x: canvasView.center.x, y: canvasView.center.y, width: canvasView.frame.width, height: canvasView.frame.height)){
+//                canvasViewDrawingDidChange(canvasView.drawing.dataRepresentation(), overlayedImage, rect)
+//            }
+//        }
+//        
+        canvasViewDrawingDidChange(canvasView.drawing.dataRepresentation(), image, rect)
     }
     
     func canvasViewDidEndUsingTool(_ canvasView: PKCanvasView) {
@@ -213,3 +223,27 @@ class Coordinator: NSObject, PKCanvasViewDelegate, UIIndirectScribbleInteraction
     }
 }
 
+extension UIImage {
+    
+    public convenience init?(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
+        let rect = CGRect(origin: .zero, size: size)
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0.0)
+        color.setFill()
+        UIRectFill(rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        guard let cgImage = image?.cgImage else { return nil }
+        self.init(cgImage: cgImage)
+    }
+    func image(byDrawingImage image: UIImage, inRect rect: CGRect) -> UIImage! {
+        UIGraphicsBeginImageContext(size)
+        draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        image.draw(in: rect)
+        let result = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return result
+    }
+}
+extension CGRect {
+    var center: CGPoint { return CGPoint(x: midX, y: midY) }
+}
