@@ -20,12 +20,14 @@ class HandwritingAnalyzeResultViewModel: ObservableObject, OCRDelegate {
     @Published var showImageDetail: Bool = false
     @Published var letterCount: [LetterCount] = []
     @Published var letterCountString: [String] = []
+    @Published var mode: PracticeModeType = .whiteboard
     
     func didReceiveOcrData(data: HandwritingData) {
         self.capturedImage = data.image
         self.instructionSentence = data.content
         self.groupLetter = data.groupLetter
         self.processAnaylze(scanned: data.scannedText.split(separator: "\n").joined(separator: " "))
+        self.mode = data.mode
         
         recognizeText(image: data.image) { scanned in
             print("Scanned: ", scanned)

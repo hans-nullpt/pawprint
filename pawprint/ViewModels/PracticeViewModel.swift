@@ -70,7 +70,7 @@ class IpadPracticeViewModel: ObservableObject {
         if let image = self.capturedImage, let groupLetter = self.data {
                         isNextScreen = true
             
-            let handwritinData = HandwritingData(image: image, scannedText: "", content: self.sentence, groupLetter: groupLetter)
+            let handwritinData = HandwritingData(image: image, scannedText: "", content: self.sentence, groupLetter: groupLetter, mode: .ipad)
             delegate?.didReceiveOcrData(data: handwritinData)
             
         }

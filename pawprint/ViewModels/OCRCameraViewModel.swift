@@ -16,6 +16,7 @@ struct HandwritingData {
     var scannedText: String
     var content: String
     var groupLetter: GroupLetterItem
+    var mode: PracticeModeType = .whiteboard
 }
 
 protocol OCRDelegate {

@@ -16,7 +16,6 @@ struct PracticeView: View {
     @State var id:UUID?
     @State var data:Data = Data()
     @State var groupLetter: GroupLetterItem
-    @State var image: UIImage? = nil
     
     @State private var isTracingMode = false
     @State var leftName = "Tracing"
@@ -195,7 +194,7 @@ struct PracticeView: View {
 //                                .cornerRadius(12)
                             
                             DrawingCanvasView2(data: data) { data, image in
-                                self.image = image
+                                vm.capturedImage = image.
                             }
 //                            DrawingCanvasView(vm: vm, data: data, id: id ?? UUID())
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -208,15 +207,15 @@ struct PracticeView: View {
                         HStack (alignment: .center) {
                             Spacer()
                             Button(action: {
-//                                if !vm.isBlankScreen {
-//                                    vm.nextStep()
-//                                } else {
-//                                    vm.sendData()
-//                                }
-                                
-                                if let image = ImageRenderer(content: Text("Hai")).uiImage {
-                                    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                                if !vm.isBlankScreen {
+                                    vm.nextStep()
+                                } else {
+                                    vm.sendData()
                                 }
+                                
+//                                if let image = ImageRenderer(content: Text("Hai")).uiImage {
+//                                    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+//                                }
                             }) {
                                 HStack {
                                     Text("Next")
