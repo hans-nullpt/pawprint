@@ -8,19 +8,33 @@
 import Foundation
 import UIKit
 import CoreMotion
+import Vision
+import SwiftUI
 
-class PracticeAnalyzeResultViewModel: ObservableObject {
-    @Published var groupLetter: String = ""
-    @Published var imageResult: UIImage?
-    @Published var textResult: String = ""
+class IpadPracticeViewModel: ObservableObject {
+    //    @Published var groupLetter: String = ""
+    //    @Published var imageResult: UIImage?
+    //    @Published var textResult: String = ""
     @Published var gravityValue: String = ""
     @Published var isSurfacePositionNotValid: Bool = true
+    @Published var capturedImage: UIImage?
+    @Published var imageRect: CGRect = CGRectZero
+    @Published var contentIndex: Int = 0
+    @Published var sentence: String = ""
+    @Published var sentences: [PracticeSentence] = []
+    @Published var isBlankScreen: Bool = false
+    @Published var isNextScreen: Bool = false
+    @Published var data: GroupLetterItem?
+    @Published var scannedText: String = ""
+    
     
     // The instance of CMMotionManager responsible for handling sensor updates
     private let motionManager = CMMotionManager()
     
     // Properties to hold the sensor values
     private var gravity: CMAcceleration = CMAcceleration()
+    
+    var delegate: OCRDelegate?
     
     init() {
         // Set the update interval to any time that you want
@@ -30,6 +44,56 @@ class PracticeAnalyzeResultViewModel: ObservableObject {
         
         startFetchingSensorData()
     }
+    
+    func getRandomSentence(data: GroupLetterItem) {
+        self.data = data
+        if let sentences = data.sentences.randomElement() {
+            self.sentences = sentences
+            
+            nextStep()
+        }
+    }
+    
+    func nextStep() {
+        
+        if contentIndex < self.sentences.count {
+            isBlankScreen = false
+            
+            self.sentence = sentences[contentIndex].value
+            
+            contentIndex += 1
+        } else {
+            isBlankScreen = true
+        }
+    }
+    
+    func sendData() {
+        
+        if let image = self.capturedImage, let groupLetter = self.data {
+           
+            
+            
+            if let newImage = UIImage(color: .white, size: CGSize(width: imageRect.width, height: imageRect.height)){
+                if let overlayedImage = newImage.image(byDrawingImage: image, inRect: imageRect){
+                    recognizeText(image: overlayedImage) { scanned in
+                        print("Result: ", scanned)
+                        let handwritinData = HandwritingData(image: image, scannedText: scanned, content: self.sentence, groupLetter: groupLetter, mode: .ipad)
+                        self.delegate?.didReceiveOcrData(data: handwritinData)
+                        
+                        withAnimation {
+                            self.isNextScreen = true
+                        }
+                    }
+                }
+            }
+            
+            
+            
+        }
+        
+    }
+    
+    
     
     private func startFetchingSensorData() {
         // Check if the motion manager is available and the sensors are available
@@ -69,27 +133,52 @@ class PracticeAnalyzeResultViewModel: ObservableObject {
         }
     }
     
-    func didReceivePracticeData(data: PracticeResult) {
-        groupLetter = data.groupLetter ?? ""
-        imageResult = data.imageResult
-        textResult = data.textResult ?? ""
+    func recognizeText(image: UIImage, completion: @escaping (String) -> ()) {
+        guard let cgImage = image.cgImage else { return }
+        let request = VNRecognizeTextRequest { (request, error) in
+            guard let observations = request.results as? [VNRecognizedTextObservation], error == nil else {
+                print("Text recognition error: \(error?.localizedDescription ?? "Unknown error")")
+                return
+            }
+            
+            let scanned = observations.map({ recognizedText in
+                recognizedText.topCandidates(1).first?.string ?? ""
+            }).joined(separator: " ")
+            
+            DispatchQueue.main.async {
+                completion(scanned)
+            }
+        }
+        request.recognitionLevel = .accurate
         
-        print("check group letter", groupLetter)
+        let handler = VNImageRequestHandler(cgImage: cgImage)
+        try? handler.perform([request])
     }
     
-    func getResult() -> PracticeResult {
-        return PracticeResult(groupLetter: groupLetter, imageResult: imageResult, textResult: textResult)
+    func didReceivePracticeData(data: Data, image: UIImage) {
+        capturedImage = image
+        
+        print("Image from canvas", image)
+        //        groupLetter = data.groupLetter ?? ""
+        //        imageResult = data.imageResult
+        //        textResult = data.textResult ?? ""
+        //
+        //        print("check group letter", groupLetter)
     }
-    
-    func getGroupLetter() -> String {
-        return groupLetter
-    }
-    
-    func getImage() -> UIImage {
-        return imageResult ?? UIImage()
-    }
-    
-    func getTextResult() -> String {
-        return textResult
-    }
+    //
+    //    func getResult() -> PracticeResult {
+    //        return PracticeResult(groupLetter: groupLetter, imageResult: imageResult, textResult: textResult)
+    //    }
+    //
+    //    func getGroupLetter() -> String {
+    //        return groupLetter
+    //    }
+    //
+    //    func getImage() -> UIImage {
+    //        return imageResult ?? UIImage()
+    //    }
+    //
+    //    func getTextResult() -> String {
+    //        return textResult
+    //    }
 }

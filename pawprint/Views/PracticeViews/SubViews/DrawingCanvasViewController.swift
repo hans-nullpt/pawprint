@@ -9,11 +9,13 @@ import SwiftUI
 import PencilKit
 
 class DrawingCanvasViewController: UIViewController {
+    
+    let canvasViewId = UUID().uuidString
     let imgRect = CGRect(x: 0, y: 0, width: 400.0, height: 100.0)
     
     lazy var canvas: PKCanvasView = {
         let view = PKCanvasView()
-        view.drawingPolicy = .pencilOnly
+        view.drawingPolicy = .anyInput
         view.minimumZoomScale = 1
         view.maximumZoomScale = 1
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -42,11 +44,19 @@ class DrawingCanvasViewController: UIViewController {
         )
         toolPicker.setVisible(true, forFirstResponder: canvas)
         toolPicker.addObserver(canvas)
-        canvas.delegate = self
+//        canvas.delegate = self
         canvas.isOpaque = false
+        canvas.layer.opacity = 0.1
         canvas.backgroundColor = UIColor.clear
 //        canvas.delegate = context.coordinator
         canvas.becomeFirstResponder()
+        
+//        let scribbleInteraction = UIScribbleInteraction(delegate: self)
+//        canvas.addInteraction(scribbleInteraction)
+        
+//        let textField = UITextField(frame: canvas.frame)
+//        textField.addTarget(self, action: #selector(handleTextFieldDidChange), for: .editingChanged)
+//        canvas.addSubview(textField)
         
 //        let imageView = UIImageView(image: UIImage(named: "logo"))
 //
@@ -55,15 +65,17 @@ class DrawingCanvasViewController: UIViewController {
 //            subView.sendSubviewToBack(imageView)
         
         
-        if let drawing = try? PKDrawing(data: drawingData){
-            canvas.drawing = drawing
-        }
+//        if let drawing = try? PKDrawing(data: drawingData){
+//            canvas.drawing = drawing
+//        }
     }
+    
 }
 
 extension DrawingCanvasViewController:PKToolPickerObserver, PKCanvasViewDelegate{
     func canvasViewDrawingDidChange(_ canvasView: PKCanvasView) {
-        drawingChanged(canvasView.drawing.dataRepresentation(), canvas.drawing.image(from: imgRect, scale: 1.0))
+        print("Onchanged")
+        drawingChanged(canvasView.drawing.dataRepresentation(), canvas.drawing.image(from: canvasView.drawing.bounds, scale: 1))
     }
 }
 

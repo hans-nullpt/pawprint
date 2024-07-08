@@ -115,5 +115,5 @@ struct PracticeStartOverlay: View {
 }
 
 #Preview {
-    WhiteboardPracticeView(groupLetter: GroupLetterItem.lowerCaseItems.first!)
+   WhiteboardPracticeView(groupLetter: GroupLetterItem.lowerCaseItems.first!)
 }

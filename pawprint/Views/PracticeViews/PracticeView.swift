@@ -10,22 +10,19 @@ import SwiftUI
 struct PracticeView: View {
     @Environment(\.managedObjectContext) var viewContext
     @Environment(\.dismiss) private var dismiss
-    @StateObject private var vm: PracticeAnalyzeResultViewModel = PracticeAnalyzeResultViewModel()
+    @StateObject private var vm: IpadPracticeViewModel = IpadPracticeViewModel()
+    @StateObject private var resultVm: HandwritingAnalyzeResultViewModel = HandwritingAnalyzeResultViewModel()
     
     @State var id:UUID?
-    @State var data:Data?
-    @State var groupLetters: String?
-    @State var content: [[PracticeSentence]]?
-    @State var contentIdx = 0
+    @State var data:Data = Data()
+    @State var groupLetter: GroupLetterItem
     
     @State private var isTracingMode = false
-    @State private var isBlankScreen = false
     @State var leftName = "Tracing"
     @State var rightName = "Line"
     @State var showPopUp = false
-    @State var setOffset: CGFloat = 1000
     @State var isButtonClicked = false
-
+    
     
     var body: some View {
         NavigationStack{
@@ -38,67 +35,72 @@ struct PracticeView: View {
                                 Text("Practice writing the sentences below, then write the letters larger as shown.")
                                     .font(.system(size: 20, weight: .semibold))
                                     .underline()
-                                Text(content?[0][contentIdx].value ?? "")
+                                Text(vm.sentence)
                                     .font(.system(size: 60, weight: .semibold))
+                                    .lineLimit(2)
                             }
                             
                             Spacer()
                             
-                            ZStack {
-                                Capsule()
-                                    .fill(Color("gray"))
-                                    .stroke(.black, lineWidth: 2)
-                                    .frame(width: 300,height: 68)
-                                    .overlay {
-                                        Image(.scratchBackground)
-                                            .resizable()
-                                    }
-                                    .cornerRadius(.infinity)
-                                    .onTapGesture {
-                                        withAnimation(.easeOut) {
-                                            isTracingMode.toggle()
+                            if !vm.isBlankScreen {
+                                ZStack {
+                                    Capsule()
+                                        .fill(Color("gray"))
+                                        .stroke(.black, lineWidth: 2)
+                                        .frame(width: 300,height: 68)
+                                        .overlay {
+                                            Image(.scratchBackground)
+                                                .resizable()
+                                        }
+                                        .cornerRadius(.infinity)
+                                        .onTapGesture {
+                                            withAnimation(.easeOut) {
+                                                isTracingMode.toggle()
+                                            }
+                                        }
+                                    HStack{
+                                        ZStack{
+                                            Capsule()
+                                                .fill(.white)
+                                                .frame(width: 145,height: 55)
+                                                .offset(x: isTracingMode ? 148 : 5)
+                                                .padding()
+                                            
+                                            Text("\(leftName)")
+                                                .font(.system(size: 24, weight: .regular))
+                                                .foregroundColor(isTracingMode ? .white : .black)
+                                        }
+                                        ZStack{
+                                            Capsule()
+                                                .fill(.clear)
+                                                .frame(width: 145,height: 48)
+                                            Text("\(rightName)")
+                                                .font(.system(size: 24, weight: .regular))
+                                                .foregroundColor(isTracingMode ? .black : .white)
                                         }
                                     }
-                                HStack{
-                                    ZStack{
-                                        Capsule()
-                                            .fill(.white)
-                                            .frame(width: 145,height: 55)
-                                            .offset(x: isTracingMode ? 148 : 5)
-                                            .padding()
-                                        
-                                        Text("\(leftName)")
-                                            .font(.system(size: 24, weight: .regular))
-                                            .foregroundColor(isTracingMode ? .white : .black)
-                                    }
-                                    ZStack{
-                                        Capsule()
-                                            .fill(.clear)
-                                            .frame(width: 145,height: 48)
-                                        Text("\(rightName)")
-                                            .font(.system(size: 24, weight: .regular))
-                                            .foregroundColor(isTracingMode ? .black : .white)
-                                    }
                                 }
+                                .frame(height: 55)
                             }
-                            .opacity(isBlankScreen ? 0 : 1)
-                            .frame(height: 55)
                             
-                            Button(action: {
-                                showPopUp.toggle()
-                                setOffset = 1000
-                            }) {
-                                ZStack {
+                            Image(systemName: "xmark")
+                                .font(.system(size: 24, weight: .heavy, design: .rounded))
+                                .foregroundColor(.white)
+                                .padding()
+                                .background {
                                     Image(.scratchBackground)
                                         .resizable()
                                         .frame(width: 68, height: 68)
-                                    Image(systemName: "xmark")
-                                        .font(.system(size: 36, weight: .heavy, design: .rounded))
-                                        .foregroundColor(.white)
+                                        .cornerRadius(.infinity)
+                                        .scaledToFill()
                                 }
-                            }
-                            .foregroundColor(.white)
-                            .cornerRadius(.infinity)
+                                .clipShape(Circle())
+                                .frame(maxWidth: 68, alignment: .topTrailing)
+                                .onTapGesture {
+                                    withAnimation {
+                                        showPopUp.toggle()
+                                    }
+                                }
                         }
                         .padding(29)
                         .frame(maxWidth: .infinity)
@@ -114,109 +116,121 @@ struct PracticeView: View {
                         .frame(maxWidth: .infinity)
                         .padding()
                         
+                        
                         // CANVAS COMPONENT
                         ZStack(alignment: .top) {
-                            // TRACING BACKGROUND
-                            VStack(alignment: .leading) {
-                                //                            Text("effe_ves_en_")
-                                Text(content?[0][contentIdx].value ?? "")
-                                    .multilineTextAlignment(.leading)
-                                    .lineLimit(3)
-                                    .fixedSize(horizontal: false, vertical: true)
-                                    .font(.custom("helvetica", fixedSize: 180) .weight(.bold))
-                                    .tracking(0)
-                                    .foregroundColor(.gray.opacity(0.5))
-                                    .offset(y: -14)
-                                    .opacity(isBlankScreen ? 0 : (isTracingMode ? 0 : 1))
-                                    .lineSpacing(16)
-                            }
-                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                            .clipped()
-                            
-                            // GRID BACKGROUND
-                            Grid(alignment: .leading, horizontalSpacing: 0, verticalSpacing: 37) {
-                                ZStack(alignment: .leading){
-                                    VStack(spacing: 99) {
-                                        VStack(spacing: 38) {
-                                            Divider().background(.black)
-                                            Divider()
-                                        }
-                                        VStack(spacing: 38) {
-                                            Divider()
-                                            Divider().background(.black)
-                                        }
-                                    }.opacity(isBlankScreen ? 0 : (isTracingMode ? 1 : 0))
+                            if !vm.isBlankScreen {
+                                // TRACING BACKGROUND
+                                VStack(alignment: .leading) {
+                                    Text(vm.sentence)
+                                        .multilineTextAlignment(.leading)
+                                        .lineLimit(3)
+                                        .fixedSize(horizontal: false, vertical: true)
+                                        .font(.custom("helvetica", fixedSize: 180) .weight(.bold))
+                                        .tracking(0)
+                                        .foregroundColor(.gray.opacity(0.5))
+                                        .offset(y: -14)
+                                        .opacity((isTracingMode ? 0 : 1))
+                                        .lineSpacing(16)
                                 }
-                                .frame(maxHeight: 192, alignment: .leading)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                                 .clipped()
                                 
-                                ZStack(alignment: .leading){
-                                    VStack(spacing: 99) {
-                                        VStack(spacing: 38) {
-                                            Divider().background(.black)
-                                            Divider()
-                                        }
-                                        VStack(spacing: 38) {
-                                            Divider()
-                                            Divider().background(.black)
-                                        }
-                                    }.opacity(isBlankScreen ? 0 : (isTracingMode ? 1 : 0))
+                                // GRID BACKGROUND
+                                Grid(alignment: .leading, horizontalSpacing: 0, verticalSpacing: 37) {
+                                    ZStack(alignment: .leading){
+                                        VStack(spacing: 99) {
+                                            VStack(spacing: 38) {
+                                                Divider().background(.black)
+                                                Divider()
+                                            }
+                                            VStack(spacing: 38) {
+                                                Divider()
+                                                Divider().background(.black)
+                                            }
+                                        }.opacity((isTracingMode ? 1 : 0))
+                                    }
+                                    .frame(maxHeight: 192, alignment: .leading)
+                                    .clipped()
+                                    
+                                    ZStack(alignment: .leading){
+                                        VStack(spacing: 99) {
+                                            VStack(spacing: 38) {
+                                                Divider().background(.black)
+                                                Divider()
+                                            }
+                                            VStack(spacing: 38) {
+                                                Divider()
+                                                Divider().background(.black)
+                                            }
+                                        }.opacity((isTracingMode ? 1 : 0))
+                                    }
+                                    .frame(maxHeight: 180, alignment: .leading)
+                                    .clipped()
+                                    
+                                    ZStack(alignment: .leading){
+                                        VStack(spacing: 99) {
+                                            VStack(spacing: 38) {
+                                                Divider().background(.black)
+                                                Divider()
+                                            }
+                                            VStack(spacing: 38) {
+                                                Divider()
+                                                Divider().background(.black)
+                                            }
+                                        }.opacity((isTracingMode ? 1 : 0))
+                                    }
+                                    .frame(maxHeight: 192, alignment: .leading)
+                                    .clipped()
                                 }
-                                .frame(maxHeight: 180, alignment: .leading)
-                                .clipped()
-                                
-                                ZStack(alignment: .leading){
-                                    VStack(spacing: 99) {
-                                        VStack(spacing: 38) {
-                                            Divider().background(.black)
-                                            Divider()
-                                        }
-                                        VStack(spacing: 38) {
-                                            Divider()
-                                            Divider().background(.black)
-                                        }
-                                    }.opacity(isBlankScreen ? 0 : (isTracingMode ? 1 : 0))
-                                }
-                                .frame(maxHeight: 192, alignment: .leading)
-                                .clipped()
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
                             }
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
                             
                             //                CANVAS VIEW COMPONENT
-                            DrawingCanvasView(groupLetter: groupLetters ?? "", data: data ?? Data(), id: id ?? UUID())
-                                .environment(\.managedObjectContext, viewContext)
-                            //                    .navigationBarTitle(title ?? "Untitled",displayMode: .inline)
-                                .cornerRadius(12)
+//                            DrawingCanvasView(
+//                                vm: vm, data: data ?? Data(), id: id ?? UUID())
+////                                .environment(\.managedObjectContext, viewContext)
+////                                .navigationBarTitle(title ?? "Untitled",displayMode: .inline)
+//                                .cornerRadius(12)
+                            
+                            DrawingCanvasView2(completion:  { data, image, rect in
+                                vm.imageRect = rect
+                                vm.capturedImage = image
+                                
+//                                vm.recognizeText(image: image) { scan in
+//                                    print("PPPP: ", scan)
+//                                }
+                            }, data: data)
+//                            DrawingCanvasView(vm: vm, data: data, id: id ?? UUID())
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                         }
                         .frame(height: 630)
                         .clipped()
                         
+                        
                         // BOTTOM COMPONENT
                         HStack (alignment: .center) {
                             Spacer()
-//                            NavigationLink(destination: PracticeResultView(vm: PracticeAnalyzeResultViewModel())) {
-                                Button(action: {
-                                    if (contentIdx < ((content?[0].count ?? 1) - 1)) {
-                                        isBlankScreen = false
-                                        contentIdx += 1
-                                    } else {
-                                        if isBlankScreen {
-                                        } else {
-                                            isBlankScreen = true
-                                        }
-                                    }
-                                }) {
-                                    HStack {
-                                        Text("Next")
-                                            .font(.system(size: 24, weight: .bold))
-                                        Image(systemName: "arrow.right")
-                                            .font(.system(size: 24, weight: .bold, design: .rounded))
-                                            .foregroundColor(.white)
-                                    }
+                            Button(action: {
+                                if !vm.isBlankScreen {
+                                    vm.nextStep()
+                                } else {
+                                    vm.sendData()
                                 }
-                                .buttonStyle(PawPrintButtonStyle())
-//                            }
+                                
+//                                if let image = ImageRenderer(content: Text("Hai")).uiImage {
+//                                    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+//                                }
+                            }) {
+                                HStack {
+                                    Text("Next")
+                                        .font(.system(size: 24, weight: .bold))
+                                    Image(systemName: "arrow.right")
+                                        .font(.system(size: 24, weight: .bold, design: .rounded))
+                                        .foregroundColor(.white)
+                                }
+                            }
+                            .buttonStyle(PawPrintButtonStyle())
                         }
                         .frame(maxWidth: .infinity)
                         .frame(height: 90)
@@ -225,7 +239,8 @@ struct PracticeView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(.white)
                     
-                    if vm.isSurfacePositionNotValid {
+                   
+                    if !vm.isSurfacePositionNotValid {
                         VerticalSurfaceValidationPopUp(isPresented: $vm.isSurfacePositionNotValid)
                             .ignoresSafeArea()
                             .offset(x:0, y: 0)
@@ -236,26 +251,29 @@ struct PracticeView: View {
                     }
                     
                     if showPopUp {
-                        PopUpConfirmationClosed(message: "Are you sure want to cancel this excercise?", showCloseButton: true, isPresented: $showPopUp)
-                            .ignoresSafeArea()
-                            .offset(x:0, y: setOffset)
-                            .onAppear{
-                                withAnimation(.spring()) {
-                                    setOffset = 0
-                                }
-                            }
+                        PopUpConfirmationClosed(
+                            message: "Are you sure want to cancel this excercise?",
+                            showCloseButton: true,
+                            isPresented: $showPopUp
+                        )
+                        .ignoresSafeArea()
                     }
                 }
                 
             }
+            .onAppear {
+                vm.delegate = self.resultVm
+                vm.getRandomSentence(data: groupLetter)
+            }
+            .toolbar(.hidden, for: .tabBar)
             .navigationBarHidden(true)
-            .navigationDestination(isPresented: $isBlankScreen) {
-                PracticeResultView()
+            .navigationDestination(isPresented: $vm.isNextScreen) {
+                HandwritingAssessmentResultView(vm: resultVm)
             }
         }
     }
 }
 
 #Preview {
-    PracticeView()
+    PracticeView(groupLetter: GroupLetterItem.lowerCaseItems.first!)
 }

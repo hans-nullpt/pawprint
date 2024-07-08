@@ -20,12 +20,40 @@ class HandwritingAnalyzeResultViewModel: ObservableObject, OCRDelegate {
     @Published var showImageDetail: Bool = false
     @Published var letterCount: [LetterCount] = []
     @Published var letterCountString: [String] = []
+    @Published var mode: PracticeModeType = .whiteboard
     
     func didReceiveOcrData(data: HandwritingData) {
         self.capturedImage = data.image
         self.instructionSentence = data.content
         self.groupLetter = data.groupLetter
         self.processAnaylze(scanned: data.scannedText.split(separator: "\n").joined(separator: " "))
+        self.mode = data.mode
+        
+        recognizeText(image: data.image) { scanned in
+            print("Scanned: ", scanned)
+        }
+    }
+    
+    private func recognizeText(image: UIImage, completion: @escaping (String) -> ()) {
+        guard let cgImage = image.cgImage else { return }
+        let request = VNRecognizeTextRequest { (request, error) in
+            guard let observations = request.results as? [VNRecognizedTextObservation], error == nil else {
+                print("Text recognition error: \(error?.localizedDescription ?? "Unknown error")")
+                return
+            }
+            
+            let scanned = observations.map({ recognizedText in
+                recognizedText.topCandidates(1).first?.string ?? ""
+            }).joined(separator: " ")
+            
+            DispatchQueue.main.async {
+                completion(scanned)
+            }
+        }
+        request.recognitionLevel = .accurate
+        
+        let handler = VNImageRequestHandler(cgImage: cgImage)
+        try? handler.perform([request])
     }
     
     func processAnaylze(scanned: String) {

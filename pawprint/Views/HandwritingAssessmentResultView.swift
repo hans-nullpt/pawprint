@@ -35,7 +35,7 @@ struct HandwritingAssessmentResultView: View {
                         }
                     
                     
-                    Text("Readability Letters Detail (\(vm.groupLetter?.letters.joined(separator: ", ") ?? "")) On Whiteboard")
+                    Text("Readability Letters Detail (\(vm.groupLetter?.letters.joined(separator: ", ") ?? "")) On \(vm.mode.rawValue)")
                         .font(.system(size: 24))
                         .fontWeight(.medium)
                     
@@ -45,7 +45,7 @@ struct HandwritingAssessmentResultView: View {
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
                     
-                    if let image = vm.capturedImage, vm.scannedText != AttributedString() {
+                    if let image = vm.capturedImage, vm.scannedText != AttributedString(){
                         HStack{
                             
                                 Image(uiImage: image)
@@ -111,6 +111,8 @@ struct HandwritingAssessmentResultView: View {
                             .padding(.bottom, 64)
                             .padding(.top, 72)
                             .frame(maxWidth: .infinity)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .multilineTextAlignment(.center)
                             .overlay {
                                 Image(.catCrying)
                                     .offset(y: -160)
@@ -157,6 +159,7 @@ struct HandwritingAssessmentResultView: View {
                         .resizable()
                         .scaledToFit()
                         .scenePadding()
+                        .border(.black)
                 }
             }
             .onDisappear {
