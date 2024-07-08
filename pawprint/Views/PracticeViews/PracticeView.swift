@@ -20,10 +20,10 @@ struct PracticeView: View {
     
     @State private var isTracingMode = false
     @State private var isBlankScreen = false
+    @State private var isNextScreen = false
     @State var leftName = "Tracing"
     @State var rightName = "Line"
     @State var showPopUp = false
-    @State var setOffset: CGFloat = 1000
     @State var isButtonClicked = false
 
     
@@ -40,6 +40,7 @@ struct PracticeView: View {
                                     .underline()
                                 Text(content?[0][contentIdx].value ?? "")
                                     .font(.system(size: 60, weight: .semibold))
+                                    .lineLimit(2)
                             }
                             
                             Spacer()
@@ -84,21 +85,24 @@ struct PracticeView: View {
                             .opacity(isBlankScreen ? 0 : 1)
                             .frame(height: 55)
                             
-                            Button(action: {
-                                showPopUp.toggle()
-                                setOffset = 1000
-                            }) {
-                                ZStack {
+                            Image(systemName: "xmark")
+                                .font(.system(size: 24, weight: .heavy, design: .rounded))
+                                .foregroundColor(.white)
+                                .padding()
+                                .background {
                                     Image(.scratchBackground)
                                         .resizable()
                                         .frame(width: 68, height: 68)
-                                    Image(systemName: "xmark")
-                                        .font(.system(size: 36, weight: .heavy, design: .rounded))
-                                        .foregroundColor(.white)
+                                        .cornerRadius(.infinity)
+                                        .scaledToFill()
                                 }
-                            }
-                            .foregroundColor(.white)
-                            .cornerRadius(.infinity)
+                                .clipShape(Circle())
+                                .frame(maxWidth: 68, alignment: .topTrailing)
+                                .onTapGesture {
+                                    withAnimation {
+                                        showPopUp.toggle()
+                                    }
+                                }
                         }
                         .padding(29)
                         .frame(maxWidth: .infinity)
@@ -118,7 +122,6 @@ struct PracticeView: View {
                         ZStack(alignment: .top) {
                             // TRACING BACKGROUND
                             VStack(alignment: .leading) {
-                                //                            Text("effe_ves_en_")
                                 Text(content?[0][contentIdx].value ?? "")
                                     .multilineTextAlignment(.leading)
                                     .lineLimit(3)
@@ -195,28 +198,29 @@ struct PracticeView: View {
                         // BOTTOM COMPONENT
                         HStack (alignment: .center) {
                             Spacer()
-//                            NavigationLink(destination: PracticeResultView(vm: PracticeAnalyzeResultViewModel())) {
-                                Button(action: {
-                                    if (contentIdx < ((content?[0].count ?? 1) - 1)) {
-                                        isBlankScreen = false
-                                        contentIdx += 1
-                                    } else {
-                                        if isBlankScreen {
-                                        } else {
-                                            isBlankScreen = true
-                                        }
-                                    }
-                                }) {
-                                    HStack {
-                                        Text("Next")
-                                            .font(.system(size: 24, weight: .bold))
-                                        Image(systemName: "arrow.right")
-                                            .font(.system(size: 24, weight: .bold, design: .rounded))
-                                            .foregroundColor(.white)
+                            Button(action: {
+                                if ((contentIdx >= ((content?[0].count ?? 1) - 1)) && isBlankScreen) {
+                                    isNextScreen = true
+                                } else if (contentIdx < ((content?[0].count ?? 1) - 1)) {
+                                    isBlankScreen = false
+                                    isNextScreen = false
+                                    contentIdx += 1
+                                } else {
+                                    if !isBlankScreen {
+                                        isBlankScreen = true
+                                        isNextScreen = false
                                     }
                                 }
-                                .buttonStyle(PawPrintButtonStyle())
-//                            }
+                            }) {
+                                HStack {
+                                    Text("Next")
+                                        .font(.system(size: 24, weight: .bold))
+                                    Image(systemName: "arrow.right")
+                                        .font(.system(size: 24, weight: .bold, design: .rounded))
+                                        .foregroundColor(.white)
+                                }
+                            }
+                            .buttonStyle(PawPrintButtonStyle())
                         }
                         .frame(maxWidth: .infinity)
                         .frame(height: 90)
@@ -236,20 +240,18 @@ struct PracticeView: View {
                     }
                     
                     if showPopUp {
-                        PopUpConfirmationClosed(message: "Are you sure want to cancel this excercise?", showCloseButton: true, isPresented: $showPopUp)
+                        PopUpConfirmationClosed(
+                            message: "Are you sure want to cancel this excercise?",
+                            showCloseButton: true,
+                            isPresented: $showPopUp
+                        )
                             .ignoresSafeArea()
-                            .offset(x:0, y: setOffset)
-                            .onAppear{
-                                withAnimation(.spring()) {
-                                    setOffset = 0
-                                }
-                            }
                     }
                 }
                 
             }
             .navigationBarHidden(true)
-            .navigationDestination(isPresented: $isBlankScreen) {
+            .navigationDestination(isPresented: $isNextScreen) {
                 PracticeResultView()
             }
         }
@@ -257,5 +259,5 @@ struct PracticeView: View {
 }
 
 #Preview {
-    PracticeView()
+   PracticeView()
 }

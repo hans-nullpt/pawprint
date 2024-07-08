@@ -11,5 +11,5 @@ class HomeViewModel: ObservableObject {
     var lowerCaseGroup: [GroupLetterItem] = GroupLetterItem.lowerCaseItems
     var upperCaseGroup: [GroupLetterItem] = GroupLetterItem.upperCaseItems
     
-    @Published var tabSelection: Int = 0
+    @Published var tabSelection: Int = 1
 }
