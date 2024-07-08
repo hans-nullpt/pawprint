@@ -194,7 +194,7 @@ struct PracticeView: View {
 //                                .cornerRadius(12)
                             
                             DrawingCanvasView2(data: data) { data, image in
-                                vm.capturedImage = image.
+                                vm.capturedImage = image
                             }
 //                            DrawingCanvasView(vm: vm, data: data, id: id ?? UUID())
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
