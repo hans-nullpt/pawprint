@@ -33,8 +33,7 @@ struct GroupLetterSectionView: View {
                         if vm.tabSelection == 0 {
                             WhiteboardPracticeView(groupLetter: item)
                         } else {
-                            PracticeView(groupLetters: item.letters.joined(separator: ", "), content: item.sentences)
-                                .toolbar(.hidden, for: .tabBar)
+                            PracticeView(groupLetter: item)
                         }
                     } label: {
                         Text(item.letters.joined(separator: ", "))

@@ -10,7 +10,7 @@ import CoreData
 
 struct DrawingCanvasView: UIViewControllerRepresentable {
     @Environment(\.managedObjectContext) private var viewContext
-    @StateObject private var vm: PracticeAnalyzeResultViewModel = PracticeAnalyzeResultViewModel()
+    @StateObject private var vm: IpadPracticeViewModel = IpadPracticeViewModel()
     
     func updateUIViewController(_ uiViewController: DrawingCanvasViewController,context: Context) {
         uiViewController.drawingData = data
@@ -30,7 +30,7 @@ struct DrawingCanvasView: UIViewControllerRepresentable {
             print("check data", data)
             print("check image", image)
             
-            vm.didReceivePracticeData(data: PracticeResult(groupLetter: groupLetter, imageResult: image, textResult: ""))
+            vm.didReceivePracticeData(data: data, image: image)
 //            let request: NSFetchRequest<Drawing> = Drawing.fetchRequest()
 //            let predicate = NSPredicate(format: "id == %@", id as CVarArg)
 //            request.predicate = predicate

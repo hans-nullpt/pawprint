@@ -9,18 +9,28 @@ import Foundation
 import UIKit
 import CoreMotion
 
-class PracticeAnalyzeResultViewModel: ObservableObject {
-    @Published var groupLetter: String = ""
-    @Published var imageResult: UIImage?
-    @Published var textResult: String = ""
+class IpadPracticeViewModel: ObservableObject {
+//    @Published var groupLetter: String = ""
+//    @Published var imageResult: UIImage?
+//    @Published var textResult: String = ""
     @Published var gravityValue: String = ""
     @Published var isSurfacePositionNotValid: Bool = true
+    @Published var capturedImage: UIImage?
+    @Published var contentIndex: Int = 0
+    @Published var sentence: String = ""
+    @Published var sentences: [PracticeSentence] = []
+    @Published var isBlankScreen: Bool = false
+    @Published var isNextScreen: Bool = false
+    @Published var data: GroupLetterItem?
+    
     
     // The instance of CMMotionManager responsible for handling sensor updates
     private let motionManager = CMMotionManager()
     
     // Properties to hold the sensor values
     private var gravity: CMAcceleration = CMAcceleration()
+    
+    var delegate: OCRDelegate?
     
     init() {
         // Set the update interval to any time that you want
@@ -29,6 +39,35 @@ class PracticeAnalyzeResultViewModel: ObservableObject {
         motionManager.gyroUpdateInterval = 1.0 / 20.0
         
         startFetchingSensorData()
+    }
+    
+    func getRandomSentence(data: GroupLetterItem) {
+        self.data = data
+        if let sentences = data.sentences.randomElement() {
+            self.sentences = sentences
+            
+            nextStep()
+        }
+    }
+    
+    func nextStep() {
+        
+        if contentIndex < self.sentences.count {
+            isBlankScreen = false
+            
+            self.sentence = sentences[contentIndex].value
+            
+            contentIndex += 1
+        } else {
+            isBlankScreen = true
+        }                           
+    }
+    
+    func sendData() {
+        if let image = self.capturedImage, let groupLetter = self.data {
+            let handwritinData = HandwritingData(image: image, scannedText: "", content: self.sentence, groupLetter: groupLetter)
+            delegate?.didReceiveOcrData(data: handwritinData)
+        }
     }
     
     private func startFetchingSensorData() {
@@ -69,27 +108,28 @@ class PracticeAnalyzeResultViewModel: ObservableObject {
         }
     }
     
-    func didReceivePracticeData(data: PracticeResult) {
-        groupLetter = data.groupLetter ?? ""
-        imageResult = data.imageResult
-        textResult = data.textResult ?? ""
-        
-        print("check group letter", groupLetter)
+    func didReceivePracticeData(data: Data, image: UIImage) {
+        capturedImage = image
+//        groupLetter = data.groupLetter ?? ""
+//        imageResult = data.imageResult
+//        textResult = data.textResult ?? ""
+//        
+//        print("check group letter", groupLetter)
     }
-    
-    func getResult() -> PracticeResult {
-        return PracticeResult(groupLetter: groupLetter, imageResult: imageResult, textResult: textResult)
-    }
-    
-    func getGroupLetter() -> String {
-        return groupLetter
-    }
-    
-    func getImage() -> UIImage {
-        return imageResult ?? UIImage()
-    }
-    
-    func getTextResult() -> String {
-        return textResult
-    }
+//    
+//    func getResult() -> PracticeResult {
+//        return PracticeResult(groupLetter: groupLetter, imageResult: imageResult, textResult: textResult)
+//    }
+//    
+//    func getGroupLetter() -> String {
+//        return groupLetter
+//    }
+//    
+//    func getImage() -> UIImage {
+//        return imageResult ?? UIImage()
+//    }
+//    
+//    func getTextResult() -> String {
+//        return textResult
+//    }
 }
