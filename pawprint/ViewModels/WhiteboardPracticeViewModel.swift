@@ -79,10 +79,7 @@ class WhiteboardPracticeViewModel: ObservableObject {
         }
         
         /// Stop the voice over
-        if speechSynthesizer.isSpeaking {
-            stopVoiceOver()
-        }
-        
+        self.stopPractice()
         self.showTimesUpPopup.toggle()
     }
     
