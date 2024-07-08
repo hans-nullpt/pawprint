@@ -162,7 +162,7 @@ struct HandwritingAssessmentResultView: View {
                         .border(.black)
                 }
             }
-            .onDisappear {
+            .onAppear {
                 
                 if let groupLetter = vm.groupLetter {
                     
@@ -172,7 +172,7 @@ struct HandwritingAssessmentResultView: View {
                         type: groupLetter.type.rawValue,
                         readibilityPercentage: vm.readabilityPercentage,
                         timestamp: Date.now,
-                        mode: .whiteboard
+                        mode: vm.mode
                     )
                     
                     print("Saving the data")
