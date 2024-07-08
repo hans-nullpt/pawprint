@@ -89,8 +89,7 @@ struct DeviceHome: View {
                         }
                         .clipShape(Circle())
                         
-                        Button(action: {
-                        }) {
+                        NavigationLink(destination: HistoryView()) {
                             Text("History")
                         }
                         .buttonStyle(PawPrintButtonStyle())

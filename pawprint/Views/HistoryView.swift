@@ -6,35 +6,51 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct HistoryView: View {
     
     var body: some View {
         TabView {
-            FirstTab()
+            HistoryListView(device: .whiteboard)
                 .tabItem {
                     Label("Whiteboard", systemImage: "pencil.and.scribble")
                 }
             
-            FirstTab()
+            HistoryListView(device: .ipad)
                 .tabItem {
                     Label("iPad", systemImage: "applepencil.and.scribble")
                 }
         }
         .accentColor(.black)
+        .navigationBarBackButtonHidden()
+        .toolbar(.hidden, for: .tabBar)
+        
     }
     
 }
 
-struct FirstTab: View {
+struct HistoryListView: View {
+    @Query var histories: [HandwritingHistory]
+    
+    var device: PracticeModeType
+    
+    @Environment(\.dismiss) private var dismiss
+    
+    init(device: PracticeModeType) {
+        self.device = device
+        
+        _histories = Query(filter: #Predicate<HandwritingHistory> { data in
+            data.mode == device.rawValue
+        }, sort: \HandwritingHistory.timestamp, order: .reverse)
+    }
+    
     var body: some View {
-        ZStack {
-            Color("AppBackgroundColor")
-                .ignoresSafeArea(.all)
-            Image(.lineBg2)
+        NavigationStack {
             VStack(alignment: .center) {
                 HStack {
                     Button(action: {
+                        dismiss()
                     }) {
                         HStack {
                             Image(systemName: "arrow.backward")
@@ -43,67 +59,75 @@ struct FirstTab: View {
                     }
                     .buttonStyle(PawPrintButtonStyle())
                     Spacer()
-                }.offset(x: 40, y: 0)
+                }.offset(x: 40, y: 32)
                 
                 ZStack (alignment: .center){
                     Image("HistoryCircle")
                         .resizable()
-                        .frame(width: 300, height: 100)
+                        .scaledToFit()
+                        .frame(width: 300)
                     
                     VStack {
                         Text("History")
                             .bold()
                             .font(.system(size: 40))
-                        Text("on iPad")
+                        Text("on \(device.rawValue)")
                     }
                 }
-                    
+                
                 ZStack {
-                    Image("HistoryWhiteboard")
+                    Image(.historyWhiteboard)
                         .offset(x: -30, y: -10)
                     
-                    ScrollView (showsIndicators: false){
-                        VStack(alignment: .leading) {
-                            ForEach(1..<10) { index in
-                                VStack {
-                                    HStack {
-                                        VStack (alignment: .leading) {
-                                            Text("a,c,d,g,o,q")
+                    if histories.isEmpty {
+                        Text("It look likes you does not have practice yet. Let's get started!")
+                            .font(.system(size: 60))
+                            .fontWeight(.medium)
+                            .foregroundStyle(.black.opacity(0.4))
+                            .frame(maxWidth: 800)
+                            .multilineTextAlignment(.center)
+                    } else {
+                        List {
+                            ForEach(histories, id: \.id) { data in
+                                HStack {
+                                    VStack (alignment: .leading) {
+                                        Text(data.letters)
+                                            .fontWeight(.heavy)
+                                            .font(.system(size: 40))
+                                        Text(data.type)
+                                            .foregroundColor(Color("darkgray"))
+                                            .font(.system(size: 18))
+                                    }
+                                    Spacer()
+                                    
+                                    VStack (alignment: .trailing){
+                                        HStack {
+                                            Text("\(String(format: "%.f", data.readibilityPercentage))%")
                                                 .fontWeight(.heavy)
                                                 .font(.system(size: 40))
-                                            Text("Lowercase")
-                                                .foregroundColor(Color("darkgray"))
-                                                .font(.system(size: 18))
+                                            Text("Readability")
+                                                .font(.system(size: 36))
                                         }
-                                        Spacer()
-                                        
-                                        VStack (alignment: .trailing){
-                                            HStack {
-                                                Text("80%")
-                                                    .fontWeight(.heavy)
-                                                    .font(.system(size: 40))
-                                                Text("Readability")
-                                                    .font(.system(size: 36))
-                                            }
-                                            Text("Tue, 2 July 2024")
-                                                .foregroundColor(Color("darkgray"))
-                                                .font(.system(size: 18))
-                                        }
+                                        Text(Date(), style: .date)
+                                            .foregroundColor(Color("darkgray"))
+                                            .font(.system(size: 18))
                                     }
-                                    .padding(.vertical, 20)
-                                    .frame(width: 800)
-                    
-                                    Divider()
-                                        .frame(width: 800)
                                 }
+                                .listRowBackground(Color.appBackground)
                             }
                         }
+                        .listStyle(.plain)
+                        .frame(maxWidth: 800, maxHeight: 520)
                     }
-                    .frame(height: 520)
-                    .offset(x: 0, y: 0)
                 }
+                
+              
             }
-            
+            .background {
+                Color("AppBackgroundColor")
+                    .ignoresSafeArea(.all)
+                Image(.lineBg2)
+            }
         }
     }
 }

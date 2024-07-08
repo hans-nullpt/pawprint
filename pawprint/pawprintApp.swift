@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct pawprintApp: App {
@@ -15,6 +16,9 @@ struct pawprintApp: App {
                 .environmentObject(HandwritingAnalyzeResultViewModel())
                 .environmentObject(WhiteboardPracticeViewModel())
                 .environmentObject(SoundViewModel.musicInstance)
+                .modelContainer(for: [
+                    HandwritingHistory.self
+                ])
         }
     }
 }

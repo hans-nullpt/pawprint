@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum PracticeModeType {
-    case ipad
-    case whiteboard
+enum PracticeModeType: String, Codable {
+    case ipad = "iPad"
+    case whiteboard = "Whiteboard"
 }
