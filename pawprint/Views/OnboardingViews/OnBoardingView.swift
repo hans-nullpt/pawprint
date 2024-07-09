@@ -14,7 +14,7 @@ struct Post : Identifiable{
     let label: String
 }
 
-struct OnBoardingView: View {
+struct IpadOnBoardingView: View {
 //    init() {
 //        UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(Color("KRedColor"))
 //        UIPageControl.appearance().pageIndicatorTintColor = UIColor(Color("gray"))
@@ -22,9 +22,9 @@ struct OnBoardingView: View {
     
     @State private var selectedTab: Int = 0
     @State private var showClosePopup: Bool = false
-    @State var groupLetters: GroupLetterItem
-    @State var content: [[PracticeSentence]]?
+    var groupLetter: GroupLetterItem
     @State var goToPracticeView: Bool = false
+    @StateObject private var vm: IpadPracticeViewModel = IpadPracticeViewModel()
     let tabList = [
         Post(tag: 0, title: "onboard1", label: "First"),
         Post(tag: 1, title: "onboard2", label: "Second"),
@@ -112,13 +112,21 @@ struct OnBoardingView: View {
             .accentColor(.red)
         .tabViewStyle(PageTabViewStyle())
         }
+        .onAppear {
+            vm.data = groupLetter
+        }
+        .frame(maxHeight: .infinity)
+        .navigationBarBackButtonHidden()
+        .navigationBarHidden(true)
+        .toolbar(.hidden, for: .tabBar)
+        .environmentObject(vm)
         .navigationDestination(isPresented: $goToPracticeView) {
-            PracticeView(groupLetter: groupLetters)
+            PracticeView(vm: self.vm)
         }
     }
 }
 
 
 //#Preview {
-//    OnBoardingView()
+//    IpadOnBoardingView()
 //}

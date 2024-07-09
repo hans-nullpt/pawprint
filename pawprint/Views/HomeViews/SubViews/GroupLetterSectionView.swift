@@ -33,7 +33,7 @@ struct GroupLetterSectionView: View {
                         if vm.tabSelection == 0 {
                             WhiteboardPracticeView(groupLetter: item)
                         } else {
-                            OnBoardingView(groupLetters: item, goToPracticeView: false)
+                            IpadOnBoardingView(groupLetter: item, goToPracticeView: false)
 //                            PracticeView(groupLetter: item)
                         }
                     } label: {
