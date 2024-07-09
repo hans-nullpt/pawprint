@@ -33,8 +33,10 @@ struct GroupLetterSectionView: View {
                         if vm.tabSelection == 0 {
                             WhiteboardPracticeView(groupLetter: item)
                         } else {
-                            PracticeView(groupLetters: item.letters.joined(separator: ", "), content: item.sentences)
+                            OnBoardingView(groupLetters: item.letters.joined(separator: ", "), content: item.sentences, goToPracticeView: false)
+//                            PracticeView(groupLetters: item.letters.joined(separator: ", "), content: item.sentences)
                                 .toolbar(.hidden, for: .tabBar)
+                                .navigationBarBackButtonHidden()
                         }
                     } label: {
                         Text(item.letters.joined(separator: ", "))
@@ -48,10 +50,10 @@ struct GroupLetterSectionView: View {
     }
 }
 
-#Preview {
-    GroupLetterSectionView(
-        title: "Lowercase",
-        items: GroupLetterItem.lowerCaseItems
-    )
-    .environmentObject(HomeViewModel())
-}
+//#Preview {
+//    GroupLetterSectionView(
+//        title: "Lowercase",
+//        items: GroupLetterItem.lowerCaseItems
+//    )
+//    .environmentObject(HomeViewModel())
+//}

@@ -12,6 +12,7 @@ struct pawprintApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(PracticeAnalyzeResultViewModel())
                 .environmentObject(HandwritingAnalyzeResultViewModel())
                 .environmentObject(WhiteboardPracticeViewModel())
                 .environmentObject(SoundViewModel.musicInstance)

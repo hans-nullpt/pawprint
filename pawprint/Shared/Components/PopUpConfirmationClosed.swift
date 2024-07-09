@@ -11,6 +11,7 @@ struct PopUpConfirmationClosed: View {
     @Environment(\.dismiss) private var dismiss
     let message: String
     let showCloseButton: Bool
+    @State var goToMainScreen: Bool = false
     @Binding var isPresented: Bool
     
     init(message: String, showCloseButton: Bool = false, isPresented: Binding<Bool>) {
@@ -31,8 +32,8 @@ struct PopUpConfirmationClosed: View {
                     
                     HStack(spacing: 120) {
                         Button(action: {
-                            isPresented.toggle()
-                            dismiss()
+                            goToMainScreen.toggle()
+//                            dismiss()
                         }) {
                             Text("Yes")
                                 .font(.system(size: 30, weight: .bold))
@@ -87,10 +88,13 @@ struct PopUpConfirmationClosed: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.black.opacity(0.6))
-                
+        .toolbar(.hidden, for: .tabBar)
+        .navigationDestination(isPresented: $goToMainScreen) {
+            HomeView()
+        }
     }
 }
 
-#Preview {
-    PopUpConfirmationClosed(message: "Are you sure want to cancel this excercise?", showCloseButton: true, isPresented: .constant(false))
-}
+//#Preview {
+//    PopUpConfirmationClosed(message: "Are you sure want to cancel this excercise?", showCloseButton: true, isPresented: .constant(false))
+//}

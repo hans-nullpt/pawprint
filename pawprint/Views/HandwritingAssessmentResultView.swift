@@ -163,6 +163,6 @@ struct HandwritingAssessmentResultView: View {
     }
 }
 
-#Preview {
-    HandwritingAssessmentResultView(vm: HandwritingAnalyzeResultViewModel())
-}
+//#Preview {
+//    HandwritingAssessmentResultView(vm: HandwritingAnalyzeResultViewModel())
+//}

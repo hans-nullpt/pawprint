@@ -14,23 +14,26 @@ struct HomeView: View {
     @State private var tab: Int = 0
     
     var body: some View {
-        TabView(selection: $vm.tabSelection) {
-            DeviceHome(device: .whiteboard)
-                .tabItem {
-                    
-                    Label("Whiteboard", systemImage: "pencil.and.scribble")
-                    
-                }.tag(0)
-            
-            DeviceHome(device: .ipad)
-                .tabItem {
-                    
-                    Label("iPad", systemImage: "applepencil.and.scribble")
-                    
-                }.tag(1)
+        NavigationStack {
+            TabView(selection: $vm.tabSelection) {
+                DeviceHome(device: .whiteboard)
+                    .tabItem {
+                        
+                        Label("Whiteboard", systemImage: "pencil.and.scribble")
+                        
+                    }.tag(0)
+                
+                DeviceHome(device: .ipad)
+                    .tabItem {
+                        
+                        Label("iPad", systemImage: "applepencil.and.scribble")
+                        
+                    }.tag(1)
+            }
+            .accentColor(.black)
+            .environmentObject(vm)
         }
-        .accentColor(.black)
-        .environmentObject(vm)
+        .navigationBarHidden(true)
     }
 }
 
@@ -43,7 +46,7 @@ struct DeviceHome: View {
     @AppStorage("background_music") private var isSoundActive: Bool = false
     
     var body: some View {
-        NavigationStack {
+//        NavigationStack {
             VStack (alignment: .leading) {
                 HStack {
                     if device == .ipad {
@@ -131,19 +134,24 @@ struct DeviceHome: View {
                 Color(.appBackground).ignoresSafeArea()
                 Image(.lineBg).ignoresSafeArea()
             }
-        }
-        .navigationBarHidden(true)
-        .onAppear {
-            if isSoundActive {
-                soundVm.playSound(sound: .pawprintsound)
+            .onAppear {
+                if isSoundActive {
+                    soundVm.playSound(sound: .pawprintsound)
+                }
             }
-        }
+//        }
+//        .navigationBarHidden(true)
+//        .onAppear {
+//            if isSoundActive {
+//                soundVm.playSound(sound: .pawprintsound)
+//            }
+//        }
     }
 }
 
 
-#Preview {
-    HomeView()
-        .environmentObject(HomeViewModel())
-        .environmentObject(SoundViewModel.musicInstance)
-}
+//#Preview {
+//    HomeView()
+//        .environmentObject(HomeViewModel())
+//        .environmentObject(SoundViewModel.musicInstance)
+//}

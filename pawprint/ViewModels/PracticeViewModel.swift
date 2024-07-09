@@ -10,6 +10,8 @@ import UIKit
 import CoreMotion
 
 class PracticeAnalyzeResultViewModel: ObservableObject {
+    var delegate: CanvasDelegate?
+    
     @Published var groupLetter: String = ""
     @Published var imageResult: UIImage?
     @Published var textResult: String = ""
@@ -70,26 +72,16 @@ class PracticeAnalyzeResultViewModel: ObservableObject {
     }
     
     func didReceivePracticeData(data: PracticeResult) {
-        groupLetter = data.groupLetter ?? ""
-        imageResult = data.imageResult
-        textResult = data.textResult ?? ""
+        self.groupLetter = data.groupLetter ?? ""
+        self.imageResult = data.imageResult
+        self.textResult = data.textResult ?? ""
         
         print("check group letter", groupLetter)
+        
+        self.delegate?.setPracticeData(data: data)
     }
     
     func getResult() -> PracticeResult {
         return PracticeResult(groupLetter: groupLetter, imageResult: imageResult, textResult: textResult)
-    }
-    
-    func getGroupLetter() -> String {
-        return groupLetter
-    }
-    
-    func getImage() -> UIImage {
-        return imageResult ?? UIImage()
-    }
-    
-    func getTextResult() -> String {
-        return textResult
     }
 }

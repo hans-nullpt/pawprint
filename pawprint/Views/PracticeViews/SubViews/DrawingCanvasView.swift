@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import CoreData
 
 struct DrawingCanvasView: UIViewControllerRepresentable {
     @Environment(\.managedObjectContext) private var viewContext

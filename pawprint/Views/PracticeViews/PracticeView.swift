@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+protocol CanvasDelegate {
+    func setPracticeData(data: PracticeResult)
+}
+
 struct PracticeView: View {
     @Environment(\.managedObjectContext) var viewContext
     @Environment(\.dismiss) private var dismiss
@@ -199,6 +203,7 @@ struct PracticeView: View {
                         HStack (alignment: .center) {
                             Spacer()
                             Button(action: {
+                                print("check datanya", vm.groupLetter)
                                 if ((contentIdx >= ((content?[0].count ?? 1) - 1)) && isBlankScreen) {
                                     isNextScreen = true
                                 } else if (contentIdx < ((content?[0].count ?? 1) - 1)) {
@@ -252,12 +257,23 @@ struct PracticeView: View {
             }
             .navigationBarHidden(true)
             .navigationDestination(isPresented: $isNextScreen) {
-                PracticeResultView()
+                PracticeResultView(vm: vm)
+            }
+            .onAppear {
+                self.vm.delegate = self
             }
         }
     }
 }
 
-#Preview {
-   PracticeView()
+extension PracticeView: CanvasDelegate {
+    func setPracticeData(data: PracticeResult) {
+        print("masuk sini nihhh", data.groupLetter ?? "-")
+    }
+    
+    
 }
+
+//#Preview {
+//   PracticeView()
+//}

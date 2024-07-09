@@ -80,9 +80,9 @@ struct CustomCameraView: View {
     }
 }
 
-#Preview {
-    CustomCameraView(
-        groupLetter: GroupLetterItem.lowerCaseItems.first!,
-        selectedContent: "Ini test content"
-    )
-}
+//#Preview {
+//    CustomCameraView(
+//        groupLetter: GroupLetterItem.lowerCaseItems.first!,
+//        selectedContent: "Ini test content"
+//    )
+//}

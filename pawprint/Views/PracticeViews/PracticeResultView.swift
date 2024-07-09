@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PracticeResultView: View {
-    @StateObject private var vm: PracticeAnalyzeResultViewModel = PracticeAnalyzeResultViewModel()
+    @StateObject  var vm: PracticeAnalyzeResultViewModel = PracticeAnalyzeResultViewModel()
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -109,6 +109,6 @@ struct PracticeResultView: View {
     }
 }
 
-#Preview {
-    PracticeResultView()
-}
+//#Preview {
+//    PracticeResultView()
+//}
