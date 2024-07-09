@@ -73,7 +73,7 @@ struct IpadOnBoardingView: View {
                                     }
                                 }) {
                                     HStack {
-                                        Text(item.tag == (tabList.count - 1) ? "Ready" : "Skip")
+                                        Text(item.tag == (tabList.count - 1) ? "Ready" : "Next")
                                             .frame(width: 182, height: 40)
                                     }
                                 }
@@ -85,7 +85,6 @@ struct IpadOnBoardingView: View {
                         if showClosePopup {
                             PopUpConfirmationClosed(
                                 message: "Are you sure want to cancel this excercise?",
-                                showCloseButton: true,
                                 isPresented: $showClosePopup
                             )
                                 .ignoresSafeArea()
