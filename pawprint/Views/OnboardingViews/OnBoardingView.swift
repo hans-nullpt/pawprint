@@ -60,15 +60,15 @@ struct IpadOnBoardingView: View {
                                 }
                             Spacer()
                             Button(action: {
-                                    if (currentIndex < (tabList.count - 1)) {
-                                        withAnimation(.linear) {
-                                            currentIndex += 1
-                                        }
-                                    } else {
-                                        withAnimation {
-                                            goToPracticeView = true
-                                        }
+                                if (currentIndex < (tabList.count - 1)) {
+                                    withAnimation(.linear) {
+                                        currentIndex += 1
                                     }
+                                } else {
+                                    withAnimation {
+                                        goToPracticeView = true
+                                    }
+                                }
                             }) {
                                 HStack {
                                     Text(tabList[currentIndex].tag == (tabList.count - 1) ? "Start" : "Next")
@@ -121,6 +121,94 @@ struct IpadOnBoardingView: View {
     }
 }
 
+struct IpadPracticeOnboardingView: View {
+    @StateObject private var vm: IpadPracticeViewModel = IpadPracticeViewModel()
+    @State private var showClosePopup: Bool = false
+    @State private var showPracitcePage: Bool = false
+    @State private var currentIndex: Int = 0
+    
+    var groupLetter: GroupLetterItem
+    
+    let images = [
+        "onboard1",
+        "onboard2",
+        "onboard3"
+    ]
+    
+    var body: some View {
+        NavigationStack {
+            ZStack(alignment: .topTrailing) {
+                VStack (alignment: .trailing) {
+                    Image(images[self.currentIndex])
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxHeight: 800)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                    
+                    Button(action: {
+                        withAnimation {
+                            if currentIndex < images.count - 1 {
+                                currentIndex += 1
+                            } else {
+                                showPracitcePage.toggle()
+                            }
+                        }
+                    }) {
+                        HStack {
+                            Text(currentIndex == images.count - 1 ? "Start" : "Next")
+                            Image(systemName: currentIndex == images.count - 1 ? "pencil.and.scribble" : "arrow.right")
+                        }
+                    }
+                    .buttonStyle(PawPrintButtonStyle())
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                }
+                .padding(64)
+                
+                Image(systemName: "xmark")
+                    .font(.system(size: 24, weight: .heavy, design: .rounded))
+                    .foregroundColor(.white)
+                    .padding()
+                    .background {
+                        Image(.scratchBackground)
+                            .resizable()
+                            .scaledToFill()
+                    }
+                    .clipShape(Circle())
+                    .frame(maxWidth: .infinity, alignment: .topTrailing)
+                    .offset(x: -64, y: 64)
+                    .onTapGesture {
+                        withAnimation {
+                            showClosePopup.toggle()
+                        }
+                    }
+                
+                if showClosePopup {
+                    PopUpConfirmationClosed(
+                        message: "are you sure want to cancel this excercise? ",
+                        isPresented: $showClosePopup
+                    )
+                }
+            }
+            .navigationBarBackButtonHidden()
+            .navigationBarHidden(true)
+            .toolbar(.hidden, for: .tabBar)
+            .background {
+                Color(.appBackground).ignoresSafeArea()
+                Image(.lineBg)
+            }
+            .navigationDestination(isPresented: $showPracitcePage) {
+                PracticeView(vm: vm)
+            }
+            .onAppear {
+                self.vm.data = groupLetter
+            }
+        }
+    }
+}
+
+#Preview {
+    IpadPracticeOnboardingView(groupLetter: GroupLetterItem.lowerCaseItems.first!)
+}
 
 //#Preview {
 //    IpadOnBoardingView()
