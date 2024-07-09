@@ -6,24 +6,25 @@
 //
 
 import SwiftUI
-
+import SwiftData
 
 struct HomeView: View {
     
     @StateObject private var vm: HomeViewModel = HomeViewModel()
     @State private var tab: Int = 0
+    @State private var showHistory: Bool = false
     
     var body: some View {
         NavigationStack {
             TabView(selection: $vm.tabSelection) {
-                DeviceHome(device: .whiteboard)
+                DeviceHome(device: .whiteboard, showHistory: $showHistory)
                     .tabItem {
                         
                         Label("Whiteboard", systemImage: "pencil.and.scribble")
                         
                     }.tag(0)
                 
-                DeviceHome(device: .ipad)
+                DeviceHome(device: .ipad, showHistory: $showHistory)
                     .tabItem {
                         
                         Label("iPad", systemImage: "applepencil.and.scribble")
@@ -32,6 +33,9 @@ struct HomeView: View {
             }
             .accentColor(.black)
             .environmentObject(vm)
+            .navigationDestination(isPresented: $showHistory) {
+                HistoryView()
+            }
         }
         .navigationBarHidden(true)
     }
@@ -40,10 +44,21 @@ struct HomeView: View {
 struct DeviceHome: View {
     var device: PracticeModeType
     
+    @Query var histories: [HandwritingHistory]
+    @Binding var showHistory: Bool
     @EnvironmentObject private var vm: HomeViewModel
     @EnvironmentObject private var soundVm: SoundViewModel
     
     @AppStorage("background_music") private var isSoundActive: Bool = false
+    
+    init(device: PracticeModeType, showHistory: Binding<Bool>) {
+        self.device = device
+        self._showHistory = showHistory
+        
+        _histories = Query(filter: #Predicate<HandwritingHistory> { data in
+            data.mode == device.rawValue
+        }, sort: \HandwritingHistory.timestamp, order: .reverse)
+    }
     
     var body: some View {
 //        NavigationStack {
@@ -93,6 +108,7 @@ struct DeviceHome: View {
                         .clipShape(Circle())
                         
                         Button(action: {
+                            showHistory.toggle()
                         }) {
                             Text("History")
                         }
@@ -101,7 +117,7 @@ struct DeviceHome: View {
                     
                 }
                 Spacer()
-                HomeResultView()
+                HomeResultView(data: histories.first)
                     .background {
                         Image(.letspractice)
                             .offset(x: -90)
