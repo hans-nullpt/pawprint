@@ -61,7 +61,7 @@ class IpadPracticeViewModel: ObservableObject {
     }
     
     func nextStep() {
-        
+        self.isPracticeStarted = false
         if contentIndex < self.sentences.count {
             isBlankScreen = false
             
@@ -73,12 +73,13 @@ class IpadPracticeViewModel: ObservableObject {
         }
         
         self.intervalTime = getTimeInterval()
-        startTimer()
+        self.remainingTime = getTimeInterval()
     }
     
      func startTimer() {
         timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
         remainingTime = intervalTime
+        isPracticeStarted = true
     }
     
     var hasCountdownCompleted: Bool {
@@ -96,6 +97,11 @@ class IpadPracticeViewModel: ObservableObject {
     }
     
     func updateTimer() {
+        
+        guard isPracticeStarted else {
+            return
+        }
+        
         guard hasCountdownCompleted else {
             self.remainingTime -= 1
             return
@@ -104,10 +110,12 @@ class IpadPracticeViewModel: ObservableObject {
         /// Stop the voice over
         self.stopTimer()
         self.showTimesUpPopup.toggle()
+        
     }
     
     func stopTimer() {
         self.timer.upstream.connect().cancel()
+        isPracticeStarted = false
     }
     
     func sendData() {

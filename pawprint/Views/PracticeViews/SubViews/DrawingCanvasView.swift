@@ -11,7 +11,8 @@ import PencilKit
 
 struct DrawingCanvasView2: UIViewRepresentable {
     
-    var completion: (Data, UIImage, CGRect) -> ()
+    var canvasViewDrawingDidChange: (Data, UIImage, CGRect) -> ()
+    var canvasViewDidBeginUsingTool: () -> ()
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
         if let drawing = try? PKDrawing(data: data) {
@@ -31,18 +32,7 @@ struct DrawingCanvasView2: UIViewRepresentable {
         
         return canvasView
     }()
-    let canvasView2: PKCanvasView = {
-        let canvasView = PKCanvasView()
-        canvasView.drawingPolicy = .pencilOnly
-        canvasView.isUserInteractionEnabled = true
-        canvasView.backgroundColor = .clear
-        canvasView.minimumZoomScale = 1
-        canvasView.maximumZoomScale = 1
-        canvasView.translatesAutoresizingMaskIntoConstraints = false
-        canvasView.becomeFirstResponder()
-        
-        return canvasView
-    }()
+    
     let canvasViewId = UUID().uuidString
     var data: Data = Data()
     
@@ -65,7 +55,7 @@ struct DrawingCanvasView2: UIViewRepresentable {
     }
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(canvasView: canvasView, canvasViewId: canvasViewId, canvasViewDrawingDidChange: completion)
+        Coordinator(canvasView: canvasView, canvasViewId: canvasViewId, canvasViewDrawingDidChange: canvasViewDrawingDidChange, canvasViewDidBeginUsingTool: canvasViewDidBeginUsingTool)
     }
 }
 
@@ -138,12 +128,14 @@ class Coordinator: NSObject, PKCanvasViewDelegate, UIIndirectScribbleInteraction
     var hiddentTextField: UITextField?
     var drawingTool = PKInkingTool(.pen, color: .black, width: 30)
     var canvasViewDrawingDidChange: (Data, UIImage, CGRect) -> ()
+    var canvasViewDidBeginUsingTool: () -> ()
     
-    init(canvasView: PKCanvasView, canvasViewId: String, hiddentTextField: UITextField? = nil, canvasViewDrawingDidChange: @escaping (Data, UIImage, CGRect) -> ()) {
+    init(canvasView: PKCanvasView, canvasViewId: String, hiddentTextField: UITextField? = nil, canvasViewDrawingDidChange: @escaping (Data, UIImage, CGRect) -> (), canvasViewDidBeginUsingTool: @escaping () -> ()) {
         self.canvasView = canvasView
         self.canvasViewId = canvasViewId
         self.hiddentTextField = hiddentTextField
         self.canvasViewDrawingDidChange = canvasViewDrawingDidChange
+        self.canvasViewDidBeginUsingTool = canvasViewDidBeginUsingTool
         
         super.init()
     }
@@ -219,7 +211,7 @@ class Coordinator: NSObject, PKCanvasViewDelegate, UIIndirectScribbleInteraction
     }
     
     func canvasViewDidBeginUsingTool(_ canvasView: PKCanvasView) {
-//        print("canvasViewDidBeginUsingTool")
+        canvasViewDidBeginUsingTool()
     }
 }
 

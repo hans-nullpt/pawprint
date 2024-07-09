@@ -193,13 +193,17 @@ struct PracticeView: View {
 ////                                .navigationBarTitle(title ?? "Untitled",displayMode: .inline)
 //                                .cornerRadius(12)
                             
-                            DrawingCanvasView2(completion:  { data, image, rect in
+                            DrawingCanvasView2(canvasViewDrawingDidChange: { data, image, rect in
                                 vm.imageRect = rect
                                 vm.capturedImage = image
                                 
-//                                vm.recognizeText(image: image) { scan in
-//                                    print("PPPP: ", scan)
-//                                }
+                                //                                vm.recognizeText(image: image) { scan in
+                                //                                    print("PPPP: ", scan)
+                                //                                }
+                            }, canvasViewDidBeginUsingTool: {
+                                if !vm.isPracticeStarted {
+                                    vm.startTimer()
+                                }
                             }, data: data)
 //                            DrawingCanvasView(vm: vm, data: data, id: id ?? UUID())
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -263,7 +267,7 @@ struct PracticeView: View {
                         PopUpTimesUpView(
                             isPresented: $vm.showTimesUpPopup
                         ) {
-                            vm.startTimer()
+//                            vm.startTimer()
                         }
                     }
                 }
