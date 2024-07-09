@@ -15,12 +15,8 @@ struct Post : Identifiable{
 }
 
 struct IpadOnBoardingView: View {
-//    init() {
-//        UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(Color("KRedColor"))
-//        UIPageControl.appearance().pageIndicatorTintColor = UIColor(Color("gray"))
-//    }
     
-    @State private var selectedTab: Int = 0
+    @State private var currentIndex: Int = 0
     @State private var showClosePopup: Bool = false
     var groupLetter: GroupLetterItem
     @State var goToPracticeView: Bool = false
@@ -32,96 +28,96 @@ struct IpadOnBoardingView: View {
     ]
     
     var body: some View {
-        ZStack {
-            Color("AppBackgroundColor")
-                .ignoresSafeArea()
-            Image("line_bg")
-            TabView(selection: $selectedTab) {
-                ForEach(tabList) { item in
-                    ZStack(alignment: .center) {
-                        ZStack {
-                            Image(item.title)
-                                .resizable()
-                                .frame(maxWidth: item.label == "First" ? 1200 : 1000, maxHeight: item.label == "First" ? .infinity : 800)
-                                .offset(y: item.label == "First" ? 0 : -60)
-                            
-                            VStack (alignment: .trailing) {
-                                Image(systemName: "xmark")
-                                    .font(.system(size: 24, weight: .heavy, design: .rounded))
-                                    .foregroundColor(.white)
-                                    .padding()
-                                    .background {
-                                        Image(.scratchBackground)
-                                            .resizable()
-                                            .scaledToFill()
-                                    }
-                                    .clipShape(Circle())
-                                    .frame(maxWidth: .infinity, alignment: .topTrailing)
-                                    .onTapGesture {
-                                        withAnimation {
-                                            showClosePopup.toggle()
-                                        }
-                                    }
-                                Spacer()
-                                Button(action: {
+        NavigationStack {
+            ZStack {
+                Color("AppBackgroundColor")
+                    .ignoresSafeArea()
+                Image("line_bg")
+                
+                ZStack(alignment: .center) {
+                    ZStack {
+                        Image(tabList[currentIndex].title)
+                            .resizable()
+                            .frame(maxWidth: tabList[currentIndex].label == "First" ? 1200 : 1000, maxHeight: tabList[currentIndex].label == "First" ? .infinity : 800)
+                            .offset(y: tabList[currentIndex].label == "First" ? 0 : -60)
+                        
+                        VStack (alignment: .trailing) {
+                            Image(systemName: "xmark")
+                                .font(.system(size: 24, weight: .heavy, design: .rounded))
+                                .foregroundColor(.white)
+                                .padding()
+                                .background {
+                                    Image(.scratchBackground)
+                                        .resizable()
+                                        .scaledToFill()
+                                }
+                                .clipShape(Circle())
+                                .frame(maxWidth: .infinity, alignment: .topTrailing)
+                                .onTapGesture {
                                     withAnimation {
-                                        if (selectedTab < (tabList.count - 1)) {
-                                            selectedTab += 1
-                                        } else {
+                                        showClosePopup.toggle()
+                                    }
+                                }
+                            Spacer()
+                            Button(action: {
+                                    if (currentIndex < (tabList.count - 1)) {
+                                        withAnimation(.linear) {
+                                            currentIndex += 1
+                                        }
+                                    } else {
+                                        withAnimation {
                                             goToPracticeView = true
                                         }
                                     }
-                                }) {
-                                    HStack {
-                                        Text(item.tag == (tabList.count - 1) ? "Ready" : "Next")
-                                            .frame(width: 182, height: 40)
-                                    }
+                            }) {
+                                HStack {
+                                    Text(tabList[currentIndex].tag == (tabList.count - 1) ? "Start" : "Next")
+                                    
+                                    Image(systemName: tabList[currentIndex].tag == (tabList.count - 1) ? "pencil.and.scribble" : "arrow.right")
                                 }
-                                .buttonStyle(PawPrintButtonStyle())
-                                .frame(maxWidth: .infinity, alignment: .trailing)
                             }
-                        }.padding(52)
-                        
-                        if showClosePopup {
-                            PopUpConfirmationClosed(
-                                message: "Are you sure want to cancel this excercise?",
-                                isPresented: $showClosePopup
-                            )
-                                .ignoresSafeArea()
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .buttonStyle(PawPrintButtonStyle())
+                            .frame(maxWidth: .infinity, alignment: .trailing)
                         }
+                    }.padding(52)
+                    
+                    if showClosePopup {
+                        PopUpConfirmationClosed(
+                            message: "Are you sure want to cancel this excercise?",
+                            isPresented: $showClosePopup
+                        )
+                        .ignoresSafeArea()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
-                        .navigationBarBackButtonHidden()
-                        .navigationBarHidden(true)
-                        .toolbar(.hidden, for: .tabBar)
-                        .background {
-                            Color(.appBackground).ignoresSafeArea()
-                            Image(.lineBg)
-                        }
-                        .tabItem {
-                            Label(item.label, systemImage: "circle")
-                        }
-                        .tag(item.tag)
                 }
+                .navigationBarBackButtonHidden()
+                .navigationBarHidden(true)
+                .toolbar(.hidden, for: .tabBar)
+                .background {
+                    Color(.appBackground).ignoresSafeArea()
+                    Image(.lineBg)
+                }
+                .tabItem {
+                    Label(tabList[currentIndex].label, systemImage: "circle")
+                }
+                .tag(tabList[currentIndex].tag)
                 
-                
+                .padding(.top, -8)
+                .padding(.bottom, -8)
+                .accentColor(.red)
             }
-            .padding(.top, -8)
-            .padding(.bottom, -8)
-            .accentColor(.red)
-        .tabViewStyle(PageTabViewStyle())
+            .frame(maxHeight: .infinity)
+            .navigationDestination(isPresented: $goToPracticeView) {
+                PracticeView(vm: self.vm)
+            }
         }
-        .onAppear {
-            vm.data = groupLetter
-        }
-        .frame(maxHeight: .infinity)
         .navigationBarBackButtonHidden()
         .navigationBarHidden(true)
         .toolbar(.hidden, for: .tabBar)
-        .environmentObject(vm)
-        .navigationDestination(isPresented: $goToPracticeView) {
-            PracticeView(vm: self.vm)
+        .onAppear {
+            vm.data = groupLetter
         }
+        .environmentObject(vm)
     }
 }
 
