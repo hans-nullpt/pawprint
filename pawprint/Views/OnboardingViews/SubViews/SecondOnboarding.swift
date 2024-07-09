@@ -9,10 +9,15 @@ import SwiftUI
 
 struct SecondOnboarding: View {
     var body: some View {
-        ZStack {
+        ZStack(alignment: .topTrailing) {
             Image("onboard2")
+                .resizable()
+                .scaledToFit()
+                .frame(maxHeight: 700)
                 .offset(x: -10, y: -10)
+                .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
         }
+        .frame(maxHeight: .infinity)
     }
 }
 

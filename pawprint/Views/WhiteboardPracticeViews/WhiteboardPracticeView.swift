@@ -19,7 +19,6 @@ struct WhiteboardPracticeView: View {
                     vm.data = groupLetter
                 }
         }
-        .environmentObject(vm)
     }
 }
 

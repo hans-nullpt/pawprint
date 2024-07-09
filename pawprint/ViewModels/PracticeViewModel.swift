@@ -52,9 +52,8 @@ class IpadPracticeViewModel: ObservableObject {
         startFetchingSensorData()
     }
     
-    func getRandomSentence(data: GroupLetterItem) {
-        self.data = data
-        if let sentences = data.sentences.randomElement() {
+    func getRandomSentence() {
+        if let sentences = data?.sentences.randomElement() {
             self.sentences = sentences
             
             nextStep()
