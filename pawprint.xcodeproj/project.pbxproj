@@ -18,9 +18,6 @@
 		7960B39D2C32605300F32B06 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7960B39C2C32605300F32B06 /* OnBoardingView.swift */; };
 		799B94752C387B1E00FC2341 /* HomeFirstTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799B94742C387B1E00FC2341 /* HomeFirstTimeView.swift */; };
 		799B94792C3891B300FC2341 /* PopUpPositioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799B94782C3891B300FC2341 /* PopUpPositioning.swift */; };
-		79C2A1D42C330CAB007D16D3 /* FirstOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C2A1D32C330CAB007D16D3 /* FirstOnboarding.swift */; };
-		79C2A1D62C330D43007D16D3 /* SecondOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C2A1D52C330D43007D16D3 /* SecondOnboarding.swift */; };
-		79C2A1D82C330D65007D16D3 /* ThirdOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C2A1D72C330D65007D16D3 /* ThirdOnboarding.swift */; };
 		79DCF5082C35C1D400C5A16D /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DCF5072C35C1D400C5A16D /* HistoryView.swift */; };
 		79DCF5122C36F16000C5A16D /* WhiteboardPracticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79DCF5112C36F16000C5A16D /* WhiteboardPracticeView.swift */; };
 		E7436F042C342A8300C3635F /* PopUpConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7436F032C342A8300C3635F /* PopUpConfirmation.swift */; };
@@ -68,9 +65,6 @@
 		7960B39C2C32605300F32B06 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		799B94742C387B1E00FC2341 /* HomeFirstTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFirstTimeView.swift; sourceTree = "<group>"; };
 		799B94782C3891B300FC2341 /* PopUpPositioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpPositioning.swift; sourceTree = "<group>"; };
-		79C2A1D32C330CAB007D16D3 /* FirstOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstOnboarding.swift; sourceTree = "<group>"; };
-		79C2A1D52C330D43007D16D3 /* SecondOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondOnboarding.swift; sourceTree = "<group>"; };
-		79C2A1D72C330D65007D16D3 /* ThirdOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdOnboarding.swift; sourceTree = "<group>"; };
 		79DCF5072C35C1D400C5A16D /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		79DCF5112C36F16000C5A16D /* WhiteboardPracticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteboardPracticeView.swift; sourceTree = "<group>"; };
 		E7436F032C342A8300C3635F /* PopUpConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpConfirmation.swift; sourceTree = "<group>"; };
@@ -223,19 +217,8 @@
 			isa = PBXGroup;
 			children = (
 				7960B39C2C32605300F32B06 /* OnBoardingView.swift */,
-				E77E07092C3674B80036E9AC /* SubViews */,
 			);
 			path = OnboardingViews;
-			sourceTree = "<group>";
-		};
-		E77E07092C3674B80036E9AC /* SubViews */ = {
-			isa = PBXGroup;
-			children = (
-				79C2A1D32C330CAB007D16D3 /* FirstOnboarding.swift */,
-				79C2A1D52C330D43007D16D3 /* SecondOnboarding.swift */,
-				79C2A1D72C330D65007D16D3 /* ThirdOnboarding.swift */,
-			);
-			path = SubViews;
 			sourceTree = "<group>";
 		};
 		E77E070A2C3674D30036E9AC /* Shared */ = {
@@ -431,7 +414,6 @@
 				E77062122C38FA6B003C33BE /* TimeIntervalExtension.swift in Sources */,
 				79DCF5082C35C1D400C5A16D /* HistoryView.swift in Sources */,
 				E770621A2C39ACD1003C33BE /* DataScannerView.swift in Sources */,
-				79C2A1D82C330D65007D16D3 /* ThirdOnboarding.swift in Sources */,
 				E77062232C3AB973003C33BE /* HandwritingHistory.swift in Sources */,
 				4BB4890A2C33F33000AF3ED1 /* PracticeView.swift in Sources */,
 				E77E07122C3678B80036E9AC /* GroupLetter.swift in Sources */,
@@ -446,8 +428,6 @@
 				E7B00C5D2C33E36900FAEF87 /* CameraHandler.swift in Sources */,
 				E7B00C552C328EF800FAEF87 /* HandwritingAssessmentResultView.swift in Sources */,
 				799B94792C3891B300FC2341 /* PopUpPositioning.swift in Sources */,
-				79C2A1D42C330CAB007D16D3 /* FirstOnboarding.swift in Sources */,
-				79C2A1D62C330D43007D16D3 /* SecondOnboarding.swift in Sources */,
 				E763DBA12C2AFEF80087EA5B /* pawprintApp.swift in Sources */,
 				E77062092C38D786003C33BE /* PracticeMode.swift in Sources */,
 				4B347BC22C38A78F00F09961 /* PracticeResultView.swift in Sources */,
@@ -593,7 +573,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"pawprint/Preview Content\"";
-				DEVELOPMENT_TEAM = 57BYB3NG56;
+				DEVELOPMENT_TEAM = WHG3N2U8WV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "pawprint need access to use camera";
@@ -629,7 +609,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"pawprint/Preview Content\"";
-				DEVELOPMENT_TEAM = 57BYB3NG56;
+				DEVELOPMENT_TEAM = WHG3N2U8WV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "pawprint need access to use camera";

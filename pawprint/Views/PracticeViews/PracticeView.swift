@@ -204,7 +204,7 @@ struct PracticeView: View {
                                 if !vm.isPracticeStarted {
                                     vm.startTimer()
                                 }
-                            }, data: data)
+                            }, data: $data)
 //                            DrawingCanvasView(vm: vm, data: data, id: id ?? UUID())
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                         }
@@ -294,6 +294,6 @@ struct PracticeView: View {
     }
 }
 
-#Preview {
-    PracticeView(groupLetter: GroupLetterItem.lowerCaseItems.first!)
-}
+//#Preview {
+//    PracticeView(groupLetter: GroupLetterItem.lowerCaseItems.first!)
+//}
