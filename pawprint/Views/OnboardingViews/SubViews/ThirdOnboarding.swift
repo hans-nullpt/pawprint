@@ -10,7 +10,7 @@ import SwiftUI
 struct ThirdOnboarding: View {
     @EnvironmentObject var vm: IpadPracticeViewModel
     
-    @State var showNextPage: Bool = false
+    @Binding var showNextPage: Bool
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
@@ -37,12 +37,9 @@ struct ThirdOnboarding: View {
             }
         }
         .frame(maxHeight: .infinity)
-        .navigationDestination(isPresented: $showNextPage) {
-            PracticeView(vm: self.vm)
-        }
     }
 }
 
 #Preview {
-    ThirdOnboarding()
+    ThirdOnboarding(showNextPage: .constant(false))
 }

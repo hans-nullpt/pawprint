@@ -12,6 +12,7 @@ struct IpadOnBoardingView: View {
     var groupLetter: GroupLetterItem
     
     @State var showClosePopUp: Bool = false
+    @State var showPracticePage: Bool = false
     @StateObject private var vm: IpadPracticeViewModel = IpadPracticeViewModel()
     
     init(groupLetter: GroupLetterItem) {
@@ -33,7 +34,7 @@ struct IpadOnBoardingView: View {
                     .tabItem {
                         Label("Second", systemImage: "circle")
                     }
-                ThirdOnboarding()
+                ThirdOnboarding(showNextPage: $showPracticePage)
                     .tabItem {
                         Label("Third", systemImage: "circle")
                     }
@@ -75,6 +76,9 @@ struct IpadOnBoardingView: View {
         .navigationBarHidden(true)
         .toolbar(.hidden, for: .tabBar)
         .environmentObject(vm)
+        .navigationDestination(isPresented: $showPracticePage) {
+            PracticeView(vm: self.vm)
+        }
     }
 }
 
