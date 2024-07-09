@@ -15,9 +15,13 @@ struct DrawingCanvasView2: UIViewRepresentable {
     var canvasViewDidBeginUsingTool: () -> ()
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
-        if let drawing = try? PKDrawing(data: data) {
-            canvasView.drawing = drawing
+       
+        if data.isEmpty {
+            print("PKDrawing: ", data)
+            canvasView.drawing = PKDrawing()
         }
+        
+        canvasView.drawing = PKDrawing()
     }
     
     let canvasView: PKCanvasView = {
@@ -34,17 +38,24 @@ struct DrawingCanvasView2: UIViewRepresentable {
     }()
     
     let canvasViewId = UUID().uuidString
-    var data: Data = Data()
+    @Binding var data: Data
     
     func makeUIView(context: Context) -> some UIView {
         canvasView.delegate = context.coordinator
         canvasView.tool = context.coordinator.drawingTool
         
-        let interaction = UIIndirectScribbleInteraction(delegate: context.coordinator)
+//        let interaction = UIIndirectScribbleInteraction(delegate: context.coordinator)
 //        canvasView.addInteraction(interaction)
         
 //        canvasView.addInteraction(interaction)
         context.coordinator.setupHiddenTextField(in: canvasView)
+        
+        if let window = UIApplication.shared.windows.first {
+            let toolPicker = PKToolPicker.shared(for: window)
+            toolPicker?.setVisible(true, forFirstResponder: canvasView)
+            toolPicker?.addObserver(canvasView)
+            canvasView.becomeFirstResponder()
+        }
         
         if let drawing = try? PKDrawing(data: data) {
             canvasView.drawing = drawing
