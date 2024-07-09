@@ -109,7 +109,7 @@ struct PracticeView: View {
                         
                         // TIMER COMPONENT
                         VStack (alignment: .center) {
-                            Text("00:07")
+                            Text(vm.remainingTime.countdownTimer)
                                 .font(.system(size: 36, weight: .bold))
                                 .foregroundColor(.black)
                         }
@@ -258,6 +258,14 @@ struct PracticeView: View {
                         )
                         .ignoresSafeArea()
                     }
+                    
+                    if vm.showTimesUpPopup {
+                        PopUpTimesUpView(
+                            isPresented: $vm.showTimesUpPopup
+                        ) {
+                            vm.startTimer()
+                        }
+                    }
                 }
                 
             }
@@ -269,6 +277,14 @@ struct PracticeView: View {
             .navigationBarHidden(true)
             .navigationDestination(isPresented: $vm.isNextScreen) {
                 HandwritingAssessmentResultView(vm: resultVm)
+            }
+            .onDisappear {
+                vm.stopTimer()
+            }
+            .onReceive(vm.timer) { _ in
+                withAnimation {
+                    vm.updateTimer()
+                }
             }
         }
     }

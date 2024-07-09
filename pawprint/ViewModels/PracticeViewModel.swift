@@ -10,6 +10,7 @@ import UIKit
 import CoreMotion
 import Vision
 import SwiftUI
+import Combine
 
 class IpadPracticeViewModel: ObservableObject {
     //    @Published var groupLetter: String = ""
@@ -25,7 +26,12 @@ class IpadPracticeViewModel: ObservableObject {
     @Published var isBlankScreen: Bool = false
     @Published var isNextScreen: Bool = false
     @Published var data: GroupLetterItem?
-    @Published var scannedText: String = ""
+    @Published var scannedText: String = ""    
+    @Published var intervalTime: TimeInterval = 0
+    @Published var remainingTime: TimeInterval = 0
+    @Published var isPracticeStarted: Bool = false
+    @Published var timer: Publishers.Autoconnect<Timer.TimerPublisher> = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    @Published var showTimesUpPopup: Bool = false
     
     
     // The instance of CMMotionManager responsible for handling sensor updates
@@ -65,6 +71,43 @@ class IpadPracticeViewModel: ObservableObject {
         } else {
             isBlankScreen = true
         }
+        
+        self.intervalTime = getTimeInterval()
+        startTimer()
+    }
+    
+     func startTimer() {
+        timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+        remainingTime = intervalTime
+    }
+    
+    var hasCountdownCompleted: Bool {
+        remainingTime < 1
+    }
+    
+    private func getTimeInterval() -> TimeInterval {
+        guard !self.sentence.isEmpty else {
+            return 0
+        }
+        
+        let letterCount = self.sentence.count * 2
+        
+        return Double(letterCount)
+    }
+    
+    func updateTimer() {
+        guard hasCountdownCompleted else {
+            self.remainingTime -= 1
+            return
+        }
+        
+        /// Stop the voice over
+        self.stopTimer()
+        self.showTimesUpPopup.toggle()
+    }
+    
+    func stopTimer() {
+        self.timer.upstream.connect().cancel()
     }
     
     func sendData() {
