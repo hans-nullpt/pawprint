@@ -13,8 +13,6 @@ struct PracticeView: View {
     @StateObject private var vm: IpadPracticeViewModel = IpadPracticeViewModel()
     @StateObject private var resultVm: HandwritingAnalyzeResultViewModel = HandwritingAnalyzeResultViewModel()
     
-    @State var id:UUID?
-    @State var data:Data = Data()
     @State var groupLetter: GroupLetterItem
     
     @State private var isTracingMode = false
@@ -196,6 +194,7 @@ struct PracticeView: View {
                             DrawingCanvasView2(canvasViewDrawingDidChange: { data, image, rect in
                                 vm.imageRect = rect
                                 vm.capturedImage = image
+                                vm.drawingData = data
                                 
                                 //                                vm.recognizeText(image: image) { scan in
                                 //                                    print("PPPP: ", scan)
@@ -204,7 +203,9 @@ struct PracticeView: View {
                                 if !vm.isPracticeStarted {
                                     vm.startTimer()
                                 }
-                            }, data: data)
+                            }, 
+                                               data: $vm.drawingData
+                            )
 //                            DrawingCanvasView(vm: vm, data: data, id: id ?? UUID())
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                         }

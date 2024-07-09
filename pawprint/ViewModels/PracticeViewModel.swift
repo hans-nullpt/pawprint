@@ -32,6 +32,7 @@ class IpadPracticeViewModel: ObservableObject {
     @Published var isPracticeStarted: Bool = false
     @Published var timer: Publishers.Autoconnect<Timer.TimerPublisher> = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @Published var showTimesUpPopup: Bool = false
+    @Published var drawingData: Data = Data()
     
     
     // The instance of CMMotionManager responsible for handling sensor updates
@@ -71,7 +72,7 @@ class IpadPracticeViewModel: ObservableObject {
         } else {
             isBlankScreen = true
         }
-        
+        self.drawingData = Data()
         self.intervalTime = getTimeInterval()
         self.remainingTime = getTimeInterval()
     }

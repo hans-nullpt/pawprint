@@ -11,6 +11,8 @@ import PencilKit
 
 struct DrawingCanvasView2: UIViewRepresentable {
     
+    typealias UIViewType = PKCanvasView
+    
     var canvasViewDrawingDidChange: (Data, UIImage, CGRect) -> ()
     var canvasViewDidBeginUsingTool: () -> ()
     
@@ -18,10 +20,10 @@ struct DrawingCanvasView2: UIViewRepresentable {
        
         if data.isEmpty {
             print("PKDrawing: ", data)
-            canvasView.drawing = PKDrawing()
+            uiView.drawing = PKDrawing()
         }
         
-        canvasView.drawing = PKDrawing()
+        
     }
     
     let canvasView: PKCanvasView = {
@@ -33,6 +35,7 @@ struct DrawingCanvasView2: UIViewRepresentable {
         canvasView.maximumZoomScale = 1
         canvasView.translatesAutoresizingMaskIntoConstraints = false
         canvasView.becomeFirstResponder()
+        canvasView.isOpaque = false
         
         return canvasView
     }()
@@ -40,7 +43,7 @@ struct DrawingCanvasView2: UIViewRepresentable {
     let canvasViewId = UUID().uuidString
     @Binding var data: Data
     
-    func makeUIView(context: Context) -> some UIView {
+    func makeUIView(context: Context) -> PKCanvasView {
         canvasView.delegate = context.coordinator
         canvasView.tool = context.coordinator.drawingTool
         
@@ -55,11 +58,20 @@ struct DrawingCanvasView2: UIViewRepresentable {
             toolPicker?.setVisible(true, forFirstResponder: canvasView)
             toolPicker?.addObserver(canvasView)
             toolPicker?.selectedTool = context.coordinator.drawingTool
-            canvasView.becomeFirstResponder()
         }
         
         if let drawing = try? PKDrawing(data: data) {
             canvasView.drawing = drawing
+        }
+        
+        DispatchQueue.main.async {
+            guard let superview = canvasView.superview else { return }
+            NSLayoutConstraint.activate([
+                canvasView.leadingAnchor.constraint(equalTo: superview.leadingAnchor),
+                canvasView.trailingAnchor.constraint(equalTo: superview.trailingAnchor),
+                canvasView.topAnchor.constraint(equalTo: superview.topAnchor),
+                canvasView.bottomAnchor.constraint(equalTo: superview.bottomAnchor)
+            ])
         }
         
         
@@ -225,6 +237,7 @@ class Coordinator: NSObject, PKCanvasViewDelegate, UIIndirectScribbleInteraction
     func canvasViewDidBeginUsingTool(_ canvasView: PKCanvasView) {
         canvasViewDidBeginUsingTool()
     }
+    
 }
 
 extension UIImage {
