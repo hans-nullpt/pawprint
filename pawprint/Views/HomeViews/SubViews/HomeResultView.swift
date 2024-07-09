@@ -27,6 +27,7 @@ struct HomeResultView: View {
                             .scaledToFill()
                     }
                 Text(data!.readibilityPercentage > 70 ? "Your progress seems great!" : "You need to practice again \nwith this letter group.")
+                    .multilineTextAlignment(.center)
                     .font(.system(size: 28))
                     .bold()
             }

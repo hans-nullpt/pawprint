@@ -80,7 +80,7 @@ struct HistoryListView: View {
                         .offset(x: -30, y: -10)
                     
                     if histories.isEmpty {
-                        Text("It look likes you does not have practice yet. Let's get started!")
+                        Text("It looks like you haven't practiced yet. Let's get started!")
                             .font(.system(size: 60))
                             .fontWeight(.medium)
                             .foregroundStyle(.black.opacity(0.4))

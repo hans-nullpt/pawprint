@@ -15,6 +15,7 @@ struct pawprintApp: App {
             ContentView()
                 .environmentObject(HandwritingAnalyzeResultViewModel())
                 .environmentObject(WhiteboardPracticeViewModel())
+//                .environmentObject(IpadPracticeViewModel())
                 .environmentObject(SoundViewModel.musicInstance)
                 .modelContainer(for: [
                     HandwritingHistory.self
