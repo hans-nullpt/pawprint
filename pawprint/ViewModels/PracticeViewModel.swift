@@ -90,6 +90,7 @@ class IpadPracticeViewModel: ObservableObject {
         self.canvasView.drawing = PKDrawing()
         self.intervalTime = getTimeInterval()
         self.remainingTime = getTimeInterval()
+        self.stopTimer()
     }
     
      func startTimer() {
