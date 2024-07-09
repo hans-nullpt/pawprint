@@ -103,6 +103,32 @@ struct HandwritingAssessmentResultView: View {
                                     .offset(x: 64, y: 64)
                             }
                         }
+                        .onAppear {
+                            
+                            if let groupLetter = vm.groupLetter {
+                                
+                                let data = HandwritingHistory(
+                                    sentence: vm.instructionSentence,
+                                    letters: groupLetter.letters.joined(separator: ", "),
+                                    type: groupLetter.type.rawValue,
+                                    readibilityPercentage: vm.readabilityPercentage,
+                                    timestamp: Date.now,
+                                    mode: vm.mode
+                                )
+                                
+                                print("Saving the data")
+                                
+                                context.insert(data)
+                                
+                                do {
+                                    try context.save()
+                                } catch {
+                                    print("Error: \(error.localizedDescription)")
+                                }
+                            }
+                            
+                            
+                        }
                     } else {
                         Text("Uh ohh! Paw can not analyze your handwriting")
                             .font(.system(size: 48))
@@ -161,32 +187,6 @@ struct HandwritingAssessmentResultView: View {
                         .scenePadding()
                         .border(.black)
                 }
-            }
-            .onAppear {
-                
-                if let groupLetter = vm.groupLetter {
-                    
-                    let data = HandwritingHistory(
-                        sentence: vm.instructionSentence,
-                        letters: groupLetter.letters.joined(separator: ", "),
-                        type: groupLetter.type.rawValue,
-                        readibilityPercentage: vm.readabilityPercentage,
-                        timestamp: Date.now,
-                        mode: vm.mode
-                    )
-                    
-                    print("Saving the data")
-                    
-                    context.insert(data)
-                    
-                    do {
-                        try context.save()
-                    } catch {
-                        print("Error: \(error.localizedDescription)")
-                    }
-                }
-                
-                
             }
         }
         
