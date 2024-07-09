@@ -54,6 +54,7 @@ struct DrawingCanvasView2: UIViewRepresentable {
             let toolPicker = PKToolPicker.shared(for: window)
             toolPicker?.setVisible(true, forFirstResponder: canvasView)
             toolPicker?.addObserver(canvasView)
+            toolPicker?.selectedTool = context.coordinator.drawingTool
             canvasView.becomeFirstResponder()
         }
         
