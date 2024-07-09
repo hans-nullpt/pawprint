@@ -11,6 +11,9 @@ import PencilKit
 
 struct DrawingCanvasView2: UIViewRepresentable {
     
+    let canvasViewId = UUID().uuidString
+    @ObservedObject var vm: IpadPracticeViewModel
+    
     typealias UIViewType = PKCanvasView
     
     var canvasViewDrawingDidChange: (Data, UIImage, CGRect) -> ()
@@ -18,32 +21,19 @@ struct DrawingCanvasView2: UIViewRepresentable {
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
        
-        if data.isEmpty {
-            print("PKDrawing: ", data)
-            uiView.drawing = PKDrawing()
-        }
-        
+//        if data.isEmpty {
+//            print("PKDrawing: ", data)
+//            uiView.drawing = PKDrawing()
+//        } else {
+//            if let drawing = try? PKDrawing(data: data) {
+//                uiView.drawing = PKDrawing()
+//            }
+//        }
         
     }
     
-    let canvasView: PKCanvasView = {
-       let canvasView = PKCanvasView()
-        canvasView.drawingPolicy = .pencilOnly
-        canvasView.isUserInteractionEnabled = true
-        canvasView.backgroundColor = .clear
-        canvasView.minimumZoomScale = 1
-        canvasView.maximumZoomScale = 1
-        canvasView.translatesAutoresizingMaskIntoConstraints = false
-        canvasView.becomeFirstResponder()
-        canvasView.isOpaque = false
-        
-        return canvasView
-    }()
-    
-    let canvasViewId = UUID().uuidString
-    @Binding var data: Data
-    
     func makeUIView(context: Context) -> PKCanvasView {
+        let canvasView = vm.canvasView
         canvasView.delegate = context.coordinator
         canvasView.tool = context.coordinator.drawingTool
         
@@ -60,9 +50,16 @@ struct DrawingCanvasView2: UIViewRepresentable {
             toolPicker?.selectedTool = context.coordinator.drawingTool
         }
         
-        if let drawing = try? PKDrawing(data: data) {
-            canvasView.drawing = drawing
-        }
+        print("makeUIView")
+        
+//        if data.isEmpty {
+//            print("PKDrawing: ", data)
+//            canvasView.drawing = PKDrawing()
+//        } else {
+//            if let drawing = try? PKDrawing(data: data) {
+//                canvasView.drawing = PKDrawing()
+//            }
+//        }
         
         DispatchQueue.main.async {
             guard let superview = canvasView.superview else { return }
@@ -79,71 +76,71 @@ struct DrawingCanvasView2: UIViewRepresentable {
     }
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(canvasView: canvasView, canvasViewId: canvasViewId, canvasViewDrawingDidChange: canvasViewDrawingDidChange, canvasViewDidBeginUsingTool: canvasViewDidBeginUsingTool)
+        Coordinator(canvasView: vm.canvasView, canvasViewId: canvasViewId, canvasViewDrawingDidChange: canvasViewDrawingDidChange, canvasViewDidBeginUsingTool: canvasViewDidBeginUsingTool)
     }
 }
 
-struct DrawingCanvasView: UIViewControllerRepresentable {
-    @Environment(\.managedObjectContext) private var viewContext
-    @ObservedObject var vm: IpadPracticeViewModel
-    
-    func updateUIViewController(_ uiViewController: DrawingCanvasViewController,context: Context) {
-        uiViewController.drawingData = data
-    }
-    typealias UIViewControllerType = DrawingCanvasViewController
-    
-    var data: Data
-    var id: UUID
-    
-    let viewController = DrawingCanvasViewController()
-
-    
-    func makeUIViewController(context: Context) -> DrawingCanvasViewController {
-        
-        viewController.drawingData = data
-        
-        
-        
-//        let indirectScribbleInteraction = UIIndirectScribbleInteraction(delegate: context.coordinator)
-//        viewController.canvas.delegate = context.coordinator
-//        viewController.canvas.isUserInteractionEnabled = true
-//        viewController.canvas.addInteraction(indirectScribbleInteraction)
-//        context.coordinator.setupHiddenTextField(in: viewController.canvas)
-        ///SAVE DATA WITH COREDATA
-        viewController.drawingChanged = { data, image in
-            print("check data", data)
-            print("check image", image)
-            
-            vm.didReceivePracticeData(data: data, image: image)
-//            let request: NSFetchRequest<Drawing> = Drawing.fetchRequest()
-//            let predicate = NSPredicate(format: "id == %@", id as CVarArg)
-//            request.predicate = predicate
-//            do{
-//                let result = try viewContext.fetch(request)
-//                let obj = result.first
-//                obj?.setValue(data, forKey: "canvasData")
-//                do{
-//                    try viewContext.save()
-//                }
-//                catch{
-//                    print(error)
-//                }
-//            }
-//            catch{
-//                print(error)
-//            }
-        }
-        return viewController
-    }
-    
-//    func makeCoordinator() -> Coordinator {
-//        Coordinator(canvasView: viewController.canvas, canvasViewId: viewController.canvasViewId) { data in
-//                print(
+//struct DrawingCanvasView: UIViewControllerRepresentable {
+//    @Environment(\.managedObjectContext) private var viewContext
+//    @ObservedObject var vm: IpadPracticeViewModel
+//    
+//    func updateUIViewController(_ uiViewController: DrawingCanvasViewController,context: Context) {
+//        uiViewController.drawingData = data
+//    }
+//    typealias UIViewControllerType = DrawingCanvasViewController
+//    
+//    var data: Data
+//    var id: UUID
+//    
+//    let viewController = DrawingCanvasViewController()
+//
+//    
+//    func makeUIViewController(context: Context) -> DrawingCanvasViewController {
+//        
+//        viewController.drawingData = data
+//        
+//        
+//        
+////        let indirectScribbleInteraction = UIIndirectScribbleInteraction(delegate: context.coordinator)
+////        viewController.canvas.delegate = context.coordinator
+////        viewController.canvas.isUserInteractionEnabled = true
+////        viewController.canvas.addInteraction(indirectScribbleInteraction)
+////        context.coordinator.setupHiddenTextField(in: viewController.canvas)
+//        ///SAVE DATA WITH COREDATA
+//        viewController.drawingChanged = { data, image in
+//            print("check data", data)
+//            print("check image", image)
+//            
+//            vm.didReceivePracticeData(data: data, image: image)
+////            let request: NSFetchRequest<Drawing> = Drawing.fetchRequest()
+////            let predicate = NSPredicate(format: "id == %@", id as CVarArg)
+////            request.predicate = predicate
+////            do{
+////                let result = try viewContext.fetch(request)
+////                let obj = result.first
+////                obj?.setValue(data, forKey: "canvasData")
+////                do{
+////                    try viewContext.save()
+////                }
+////                catch{
+////                    print(error)
+////                }
+////            }
+////            catch{
+////                print(error)
+////            }
 //        }
+//        return viewController
 //    }
 //    
-//    
-}
+////    func makeCoordinator() -> Coordinator {
+////        Coordinator(canvasView: viewController.canvas, canvasViewId: viewController.canvasViewId) { data in
+////                print(
+////        }
+////    }
+////    
+////    
+//}
 
 class Coordinator: NSObject, PKCanvasViewDelegate, UIIndirectScribbleInteractionDelegate {
     
@@ -219,7 +216,7 @@ class Coordinator: NSObject, PKCanvasViewDelegate, UIIndirectScribbleInteraction
 //                canvasViewDrawingDidChange(canvasView.drawing.dataRepresentation(), overlayedImage, rect)
 //            }
 //        }
-//        
+//
         canvasViewDrawingDidChange(canvasView.drawing.dataRepresentation(), image, rect)
     }
     
@@ -231,7 +228,7 @@ class Coordinator: NSObject, PKCanvasViewDelegate, UIIndirectScribbleInteraction
     
     func canvasViewDidFinishRendering(_ canvasView: PKCanvasView) {
 //        print(canvasView.drawing.dataRepresentation())
-//        print("canvasViewDidFinishRendering")
+        print("canvasViewDidFinishRendering")
     }
     
     func canvasViewDidBeginUsingTool(_ canvasView: PKCanvasView) {

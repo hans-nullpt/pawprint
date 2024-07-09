@@ -32,8 +32,8 @@ struct PopUpConfirmationClosed: View {
                     
                     HStack(spacing: 120) {
                         Button(action: {
-                            goToMainScreen.toggle()
-//                            dismiss()
+//                            goToMainScreen.toggle()
+                            dismiss()
                         }) {
                             Text("Yes")
                                 .font(.system(size: 30, weight: .bold))
@@ -89,9 +89,9 @@ struct PopUpConfirmationClosed: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.black.opacity(0.6))
         .toolbar(.hidden, for: .tabBar)
-        .navigationDestination(isPresented: $goToMainScreen) {
-            HomeView()
-        }
+//        .navigationDestination(isPresented: $goToMainScreen) {
+//            HomeView()
+//        }
                 
     }
 }

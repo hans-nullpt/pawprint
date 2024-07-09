@@ -191,21 +191,18 @@ struct PracticeView: View {
 ////                                .navigationBarTitle(title ?? "Untitled",displayMode: .inline)
 //                                .cornerRadius(12)
                             
-                            DrawingCanvasView2(canvasViewDrawingDidChange: { data, image, rect in
+                            DrawingCanvasView2(vm: vm) { data, image, rect in
                                 vm.imageRect = rect
                                 vm.capturedImage = image
                                 vm.drawingData = data
-                                
-                                //                                vm.recognizeText(image: image) { scan in
-                                //                                    print("PPPP: ", scan)
-                                //                                }
-                            }, canvasViewDidBeginUsingTool: {
+                            } canvasViewDidBeginUsingTool: {
                                 if !vm.isPracticeStarted {
                                     vm.startTimer()
                                 }
-                            }, 
-                                               data: $vm.drawingData
-                            )
+                            }
+
+                            
+                            
 //                            DrawingCanvasView(vm: vm, data: data, id: id ?? UUID())
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                         }
@@ -258,7 +255,7 @@ struct PracticeView: View {
                     if showPopUp {
                         PopUpConfirmationClosed(
                             message: "Are you sure want to cancel this excercise?",
-                            showCloseButton: true,
+//                            showCloseButton: true,
                             isPresented: $showPopUp
                         )
                         .ignoresSafeArea()
@@ -268,7 +265,7 @@ struct PracticeView: View {
                         PopUpTimesUpView(
                             isPresented: $vm.showTimesUpPopup
                         ) {
-//                            vm.startTimer()
+                            vm.retryPractice()
                         }
                     }
                 }

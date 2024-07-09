@@ -11,6 +11,7 @@ import CoreMotion
 import Vision
 import SwiftUI
 import Combine
+import PencilKit
 
 class IpadPracticeViewModel: ObservableObject {
     //    @Published var groupLetter: String = ""
@@ -33,6 +34,20 @@ class IpadPracticeViewModel: ObservableObject {
     @Published var timer: Publishers.Autoconnect<Timer.TimerPublisher> = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @Published var showTimesUpPopup: Bool = false
     @Published var drawingData: Data = Data()
+    
+    let canvasView: PKCanvasView = {
+        let canvasView = PKCanvasView()
+        canvasView.drawingPolicy = .pencilOnly
+        canvasView.isUserInteractionEnabled = true
+        canvasView.backgroundColor = .clear
+        canvasView.minimumZoomScale = 1
+        canvasView.maximumZoomScale = 1
+        canvasView.translatesAutoresizingMaskIntoConstraints = false
+        canvasView.becomeFirstResponder()
+        canvasView.isOpaque = false
+        
+        return canvasView
+    }()
     
     
     // The instance of CMMotionManager responsible for handling sensor updates
@@ -72,6 +87,7 @@ class IpadPracticeViewModel: ObservableObject {
             isBlankScreen = true
         }
         self.drawingData = Data()
+        self.canvasView.drawing = PKDrawing()
         self.intervalTime = getTimeInterval()
         self.remainingTime = getTimeInterval()
     }
@@ -84,6 +100,11 @@ class IpadPracticeViewModel: ObservableObject {
     
     var hasCountdownCompleted: Bool {
         remainingTime < 1
+    }
+    
+    func retryPractice() {
+        self.remainingTime = self.intervalTime
+        self.canvasView.drawing = PKDrawing()
     }
     
     private func getTimeInterval() -> TimeInterval {
