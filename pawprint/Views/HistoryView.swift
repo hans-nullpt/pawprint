@@ -65,7 +65,7 @@ struct HistoryListView: View {
                     Image("HistoryCircle")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 300)
+                        .frame(width: 200)
                     
                     VStack {
                         Text("History")
@@ -76,8 +76,13 @@ struct HistoryListView: View {
                 }
                 
                 ZStack {
-                    Image(.historyWhiteboard)
-                        .offset(x: -30, y: -10)
+                    GeometryReader { reader in
+                        Image(.historyWhiteboard)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(maxWidth: reader.size.width, maxHeight: reader.size.height * 1)
+                            .offset(x: -30, y: -10)
+                    }
                     
                     if histories.isEmpty {
                         Text("It looks like you haven't practiced yet. Let's get started!")

@@ -24,7 +24,7 @@ struct GroupLetterSectionView: View {
             Text(title)
                 .foregroundColor(Color("black"))
                 .bold()
-                .font(.system(size: 24))
+                .font(.title2)
             
             LazyVGrid(columns: columns, spacing: 14) {
                 ForEach(items, id: \.id) { item in

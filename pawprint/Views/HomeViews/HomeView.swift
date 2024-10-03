@@ -62,19 +62,20 @@ struct DeviceHome: View {
     
     var body: some View {
 //        NavigationStack {
+        GeometryReader { reader in
             VStack (alignment: .leading) {
                 HStack {
                     if device == .ipad {
                         Image(.iPadIcon)
                             .resizable()
                             .scaledToFit()
-                            .frame(height: 74)
+                            .frame(maxHeight: reader.size.width * 0.05)
                     }
                     else {
                         Image(.whiteboardIcon)
                             .resizable()
                             .scaledToFit()
-                            .frame(maxHeight: 74)
+                            .frame(maxHeight: reader.size.width * 0.05)
                     }
                     Spacer()
                     
@@ -92,15 +93,15 @@ struct DeviceHome: View {
                         } ) {
                             if isSoundActive {
                                 Image(systemName: "speaker.wave.2")
-                                    .font(.title)
+                                    .font(.title3)
                             } else {
                                 Image(systemName: "speaker.slash")
-                                    .font(.title)
+                                    .font(.title3)
                             }
-
+                            
                         }
                         .contentTransition(.symbolEffect(.replace))
-                        .frame(width: 64, height: 64)
+                        .frame(width: 56, height: 56)
                         .foregroundStyle(.white)
                         .background {
                             Image(.scratchBackground)
@@ -120,7 +121,10 @@ struct DeviceHome: View {
                 HomeResultView(data: histories.first)
                     .background {
                         Image(.letspractice)
-                            .offset(x: -90)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(height: reader.size.height * 0.3)
+                            .offset(x: -(reader.size.width * 0.05))
                     }
                     .frame(maxWidth: .infinity)
                 
@@ -129,7 +133,7 @@ struct DeviceHome: View {
                     Text("Choose group letter to start practicing!")
                         .foregroundColor(Color("black"))
                         .bold()
-                        .font(.system(size: 36))
+                        .font(.system(size: reader.size.width * 0.025))
                     
                     VStack(spacing: 32){
                         GroupLetterSectionView(
@@ -155,6 +159,7 @@ struct DeviceHome: View {
                     soundVm.playSound(sound: .pawprintsound)
                 }
             }
+        }
 //        }
 //        .navigationBarHidden(true)
 //        .onAppear {
@@ -166,8 +171,8 @@ struct DeviceHome: View {
 }
 
 
-//#Preview {
-//    HomeView()
-//        .environmentObject(HomeViewModel())
-//        .environmentObject(SoundViewModel.musicInstance)
-//}
+#Preview {
+    HomeView()
+        .environmentObject(HomeViewModel())
+        .environmentObject(SoundViewModel.musicInstance)
+}

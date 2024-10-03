@@ -27,7 +27,7 @@ struct PawPrintButtonStyle: ButtonStyle {
     
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .font(.system(size: 24).bold())
+            .font(.title3.bold())
             .padding(.vertical, 16)
             .padding(.horizontal, 32)
             .background {
