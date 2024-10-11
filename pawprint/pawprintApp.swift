@@ -6,12 +6,20 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct pawprintApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(HandwritingAnalyzeResultViewModel())
+                .environmentObject(WhiteboardPracticeViewModel())
+//                .environmentObject(IpadPracticeViewModel())
+                .environmentObject(SoundViewModel.musicInstance)
+                .modelContainer(for: [
+                    HandwritingHistory.self
+                ])
         }
     }
 }
